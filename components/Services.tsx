@@ -1,12 +1,18 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getServicesData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 
 const Services: React.FC = () => {
   const { t, language } = useLanguage();
-  const servicesData = getServicesData();
+  // Use useState to ensure data is loaded on client side
+  const [servicesData, setServicesData] = useState(() => getServicesData());
+  
+  useEffect(() => {
+    // Reload data when component mounts to get latest from localStorage
+    setServicesData(getServicesData());
+  }, []);
 
   const getDescription = (service: any) => {
     switch(language) {
