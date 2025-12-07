@@ -9,18 +9,24 @@ const AdminButton: React.FC = () => {
 
   // Sprawdź czy użytkownik jest zalogowany przy starcie
   useEffect(() => {
-    const auth = localStorage.getItem('adminAuth');
-    const authExpiry = localStorage.getItem('adminAuthExpiry');
+    if (typeof window === 'undefined') return;
     
-    if (auth === 'true' && authExpiry) {
-      const expiryTime = parseInt(authExpiry);
-      if (Date.now() < expiryTime) {
-        setIsAuthenticated(true);
-      } else {
-        // Sesja wygasła
-        localStorage.removeItem('adminAuth');
-        localStorage.removeItem('adminAuthExpiry');
+    try {
+      const auth = localStorage.getItem('adminAuth');
+      const authExpiry = localStorage.getItem('adminAuthExpiry');
+      
+      if (auth === 'true' && authExpiry) {
+        const expiryTime = parseInt(authExpiry);
+        if (Date.now() < expiryTime) {
+          setIsAuthenticated(true);
+        } else {
+          // Sesja wygasła
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminAuthExpiry');
+        }
       }
+    } catch (e) {
+      console.error('Error checking admin auth:', e);
     }
   }, []);
 
@@ -53,13 +59,25 @@ const AdminButton: React.FC = () => {
     setIsAuthenticated(true);
     setShowLogin(false);
     // Sesja ważna przez 24 godziny
-    localStorage.setItem('adminAuthExpiry', (Date.now() + 24 * 60 * 60 * 1000).toString());
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('adminAuthExpiry', (Date.now() + 24 * 60 * 60 * 1000).toString());
+      }
+    } catch (e) {
+      console.error('Error setting auth expiry:', e);
+    }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('adminAuth');
-    localStorage.removeItem('adminAuthExpiry');
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('adminAuth');
+        localStorage.removeItem('adminAuthExpiry');
+      }
+    } catch (e) {
+      console.error('Error removing auth:', e);
+    }
   };
 
   if (isAuthenticated) {

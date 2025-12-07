@@ -37,18 +37,33 @@ const restoreIcons = (services: any[]) => {
 
 // Funkcja do ładowania danych - najpierw z localStorage, potem z constants
 export const loadAdminData = (): AdminData => {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored);
-      // Przywróć ikony z nazw stringowych
-      if (parsed.services) {
-        parsed.services = restoreIcons(parsed.services);
+  // Sprawdź czy jesteśmy w przeglądarce (nie podczas SSR)
+  if (typeof window === 'undefined') {
+    return {
+      services: SERVICES_DATA,
+      testimonials: TESTIMONIALS_DATA,
+      faq: FAQ_DATA,
+      gallery: GALLERY_IMAGES,
+      contact: CONTACT_INFO,
+    };
+  }
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        // Przywróć ikony z nazw stringowych
+        if (parsed.services) {
+          parsed.services = restoreIcons(parsed.services);
+        }
+        return parsed;
+      } catch (e) {
+        console.error('Error parsing stored admin data:', e);
       }
-      return parsed;
-    } catch (e) {
-      console.error('Error parsing stored admin data:', e);
     }
+  } catch (e) {
+    console.error('Error accessing localStorage:', e);
   }
   
   // Domyślne dane z constants
@@ -82,10 +97,18 @@ export const useAdminData = () => {
 
   // Zapisz dane do localStorage
   const saveData = (newData: AdminData) => {
-    const dataToStore = prepareDataForStorage(newData);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToStore));
-    setData(newData);
-    setHasChanges(false);
+    try {
+      if (typeof window !== 'undefined') {
+        const dataToStore = prepareDataForStorage(newData);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToStore));
+      }
+      setData(newData);
+      setHasChanges(false);
+    } catch (e) {
+      console.error('Error saving to localStorage:', e);
+      setData(newData);
+      setHasChanges(false);
+    }
   };
 
   // Aktualizuj konkretną sekcję
