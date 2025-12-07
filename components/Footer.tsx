@@ -1,10 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Facebook } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 import BookingModal from './BookingModal';
+import PrivacyPolicy from './PrivacyPolicy';
 
 // Custom WhatsApp Icon Component for brand consistency
 const WhatsAppIcon = () => (
@@ -16,6 +17,15 @@ const WhatsAppIcon = () => (
 const Footer: React.FC = () => {
   const { t } = useLanguage();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenPrivacy = () => {
+      setIsPrivacyOpen(true);
+    };
+    window.addEventListener('openPrivacyPolicy', handleOpenPrivacy);
+    return () => window.removeEventListener('openPrivacyPolicy', handleOpenPrivacy);
+  }, []);
 
   // Format phone number for WhatsApp link (remove spaces and +)
   const waNumber = CONTACT_INFO.phoneDe.replace(/[^0-9]/g, '');
@@ -23,6 +33,7 @@ const Footer: React.FC = () => {
   return (
     <footer id="contact" className="relative pt-10 pb-10 overflow-hidden mt-10">
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      <PrivacyPolicy isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
 
       <div className="absolute inset-0 bg-black/30 backdrop-blur-xl border-t border-white/10"></div>
       
@@ -148,10 +159,30 @@ const Footer: React.FC = () => {
 
         {/* Footer Bottom */}
         <RevealOnScroll direction="up" delay={400}>
-          <div className="border-t border-white/10 pt-8 text-center">
-            <p className="text-white/30 text-xs md:text-sm font-light tracking-wider">
-              &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
-            </p>
+          <div className="border-t border-white/10 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-white/30 text-xs md:text-sm font-light tracking-wider text-center md:text-left">
+                &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">
+                <button
+                  onClick={() => setIsPrivacyOpen(true)}
+                  className="text-white/50 hover:text-gold transition-colors underline"
+                >
+                  {t.privacy.title}
+                </button>
+                <span className="text-white/30">|</span>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('cookieConsent');
+                    window.location.reload();
+                  }}
+                  className="text-white/50 hover:text-gold transition-colors underline"
+                >
+                  {t.cookies.title}
+                </button>
+              </div>
+            </div>
           </div>
         </RevealOnScroll>
       </div>

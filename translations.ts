@@ -78,6 +78,18 @@ export const translations = {
     welcome: {
       title: "Bienvenido a su Santuario",
       enter: "Clic Aquí"
+    },
+    privacy: {
+      title: "Política de Privacidad",
+      close: "Cerrar"
+    },
+    cookies: {
+      title: "Política de Cookies",
+      description: "Utilizamos cookies para mejorar su experiencia en nuestro sitio web. Al continuar navegando, acepta nuestro uso de cookies según nuestra Política de Privacidad.",
+      accept: "Aceptar",
+      reject: "Rechazar",
+      learnMore: "Más información",
+      privacyPolicy: "Política de Privacidad"
     }
   },
   de: {
@@ -158,6 +170,18 @@ export const translations = {
     welcome: {
       title: "Willkommen in Ihrem Heiligtum",
       enter: "Hier Klicken"
+    },
+    privacy: {
+      title: "Datenschutzerklärung",
+      close: "Schließen"
+    },
+    cookies: {
+      title: "Cookie-Richtlinie",
+      description: "Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Durch weiteres Surfen stimmen Sie unserer Verwendung von Cookies gemäß unserer Datenschutzerklärung zu.",
+      accept: "Akzeptieren",
+      reject: "Ablehnen",
+      learnMore: "Mehr erfahren",
+      privacyPolicy: "Datenschutzerklärung"
     }
   },
   en: {
@@ -238,6 +262,18 @@ export const translations = {
     welcome: {
       title: "Welcome to your Sanctuary",
       enter: "Click Here"
+    },
+    privacy: {
+      title: "Privacy Policy",
+      close: "Close"
+    },
+    cookies: {
+      title: "Cookie Policy",
+      description: "We use cookies to improve your experience on our website. By continuing to browse, you accept our use of cookies according to our Privacy Policy.",
+      accept: "Accept",
+      reject: "Reject",
+      learnMore: "Learn More",
+      privacyPolicy: "Privacy Policy"
     }
   }
 };

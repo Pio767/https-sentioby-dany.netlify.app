@@ -9,6 +9,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import AudioPlayer from './components/AudioPlayer';
 import WelcomeScreen from './components/WelcomeScreen';
+import CookieBanner from './components/CookieBanner';
 import { LanguageProvider } from './LanguageContext';
 
 const App: React.FC = () => {
@@ -55,6 +56,9 @@ const App: React.FC = () => {
         
         {/* Audio Player: Will auto-start when the user clicks "Enter" on the WelcomeScreen */}
         <AudioPlayer />
+        
+        {/* Cookie Banner - GDPR Compliance */}
+        <CookieBanner />
       </div>
     </LanguageProvider>
   );
