@@ -1,114 +1,162 @@
-import React from 'react';
-import { MapPin, Phone, Mail, Facebook, MessageCircle } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+import React, { useState } from 'react';
+import { MapPin, Phone, Mail, Facebook } from 'lucide-react';
+import { CONTACT_INFO } from '../constants';
+import RevealOnScroll from './RevealOnScroll';
+import { useLanguage } from '../LanguageContext';
+import BookingModal from './BookingModal';
+
+// Custom WhatsApp Icon Component for brand consistency
+const WhatsAppIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 md:w-[18px] md:h-[18px]">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+);
+
+const Footer: React.FC = () => {
+  const { t } = useLanguage();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  // Format phone number for WhatsApp link (remove spaces and +)
+  const waNumber = CONTACT_INFO.phoneDe.replace(/[^0-9]/g, '');
+
   return (
-    <footer id="contact" className="relative bg-royal-dark border-t border-white/10 pt-20 pb-10 overflow-hidden">
-      {/* Subtle Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#1a002e] to-royal pointer-events-none"></div>
+    <footer id="contact" className="relative pt-10 pb-10 overflow-hidden mt-10">
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
 
-      <div className="container relative z-10 mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-xl border-t border-white/10"></div>
+      
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
+      <div className="absolute bottom-[-10%] right-[-5%] w-[300px] h-[300px] bg-magenta/20 rounded-full blur-[80px] pointer-events-none"></div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        
+        <RevealOnScroll direction="zoom" duration={1500}>
+          <div className="w-full h-56 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-gold/30 mb-12 md:mb-16 grayscale hover:grayscale-0 transition-all duration-700 relative group">
+            <div className="absolute inset-0 bg-royal/20 pointer-events-none group-hover:opacity-0 transition-opacity z-10"></div>
+            <iframe 
+              src="https://maps.google.com/maps?q=Sentio+by+Dany+Benissa&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%" 
+              height="100%" 
+              style={{border:0}} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Sentio by Dany Location"
+            ></iframe>
+          </div>
+        </RevealOnScroll>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 mb-12 items-start">
           
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="font-serif text-3xl text-white mb-2">Visit Us</h3>
-              <p className="text-magenta-light uppercase tracking-widest text-sm font-semibold">SeRenDipity Studio</p>
-            </div>
-
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 rounded-full bg-white/5 border border-white/10 group-hover:border-magenta/50 group-hover:bg-magenta/10 transition-colors">
-                  <MapPin className="w-5 h-5 text-gold group-hover:text-magenta transition-colors" />
-                </div>
-                <div>
-                  <p className="text-white font-medium mb-1">Address</p>
-                  <p className="text-white/70 font-light">Carrer Mossen Francisco Cabrera 5<br/>03720 Benissa, Alicante</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 rounded-full bg-white/5 border border-white/10 group-hover:border-magenta/50 group-hover:bg-magenta/10 transition-colors">
-                  <Phone className="w-5 h-5 text-gold group-hover:text-magenta transition-colors" />
-                </div>
-                <div>
-                  <p className="text-white font-medium mb-1">Phone / WhatsApp</p>
-                  <div className="flex flex-col gap-1">
-                    <a href="tel:+34711079714" className="text-white/70 hover:text-gold transition-colors font-light">+34 711 079 714</a>
-                    <a href="tel:+491736292133" className="text-white/70 hover:text-gold transition-colors font-light">+49 173 62 92 133</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 rounded-full bg-white/5 border border-white/10 group-hover:border-magenta/50 group-hover:bg-magenta/10 transition-colors">
-                  <Mail className="w-5 h-5 text-gold group-hover:text-magenta transition-colors" />
-                </div>
-                <div>
-                  <p className="text-white font-medium mb-1">Email</p>
-                  <a href="mailto:sentio.wohlfuehlen@gmail.com" className="text-white/70 hover:text-gold transition-colors font-light">
-                    sentio.wohlfuehlen@gmail.com
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-6">
-               <a 
-                href="#" 
-                className="inline-flex items-center gap-2 text-white hover:text-blue-400 transition-colors"
-              >
-                 <Facebook className="w-6 h-6" />
-                 <span className="text-sm uppercase tracking-widest hover:underline">Follow on Facebook</span>
-               </a>
-            </div>
-          </div>
-
-          {/* Booking Note / Map Container */}
-          <div className="flex flex-col justify-between glass-card p-8 rounded-xl border-white/10">
-             <div className="space-y-6">
-                <h3 className="font-serif text-2xl text-white">Appointments</h3>
-                <p className="text-white/80 font-light leading-relaxed">
-                  Treatments are available by appointment only to ensure your privacy and tranquility.
-                </p>
-                
-                <div className="bg-royal/60 p-6 rounded-lg border border-gold/20">
-                  <div className="flex items-center gap-3 mb-2">
-                    <MessageCircle className="w-5 h-5 text-magenta" />
-                    <span className="text-magenta font-medium uppercase text-sm tracking-wider">Booking Info</span>
-                  </div>
-                  <p className="text-white italic font-serif text-lg">
-                    "Booking by Ramona or by Dany"
-                  </p>
-                </div>
-             </div>
-
-             {/* Google Map Embed - Specific Business Location */}
-             <div className="mt-8 h-64 w-full bg-royal rounded-lg overflow-hidden shadow-lg border border-white/10 relative group">
-                <iframe 
-                    width="100%" 
-                    height="100%" 
-                    frameBorder="0" 
-                    scrolling="no" 
-                    marginHeight={0} 
-                    marginWidth={0} 
-                    src="https://maps.google.com/maps?q=38.71384,0.04473+(Sentio%20by%20Dany)&z=16&output=embed"
-                    title="Sentio by Dany Location"
-                    className="w-full h-full filter grayscale-[30%] hover:grayscale-0 transition-all duration-700 opacity-90 hover:opacity-100"
+          {/* Brand Section */}
+          <RevealOnScroll direction="up" delay={100}>
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
+                SENTIO <span className="text-gold text-xs md:text-sm font-sans tracking-widest uppercase font-normal">by Dany</span>
+              </h2>
+              <p className="text-white/70 mb-6 leading-relaxed font-light text-sm md:text-base">
+                {t.footer.brandDesc}
+              </p>
+              <div className="flex justify-center md:justify-start">
+                <a 
+                  href="#" 
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-royal hover:border-gold transition-all duration-300 shadow-lg hover:shadow-gold/20"
+                  aria-label="Facebook"
                 >
-                </iframe>
-             </div>
+                  <Facebook size={18} />
+                </a>
+              </div>
+            </div>
+          </RevealOnScroll>
+
+          {/* Contact Details - Separated & Cleaned */}
+          <RevealOnScroll direction="up" delay={200}>
+            <div className="flex flex-col gap-6">
+              <h3 className="text-lg md:text-xl font-serif text-white text-center md:text-left border-b border-white/10 pb-2 inline-block md:block">{t.footer.contactTitle}</h3>
+              
+              <ul className="space-y-6">
+                {/* Address */}
+                <li className="flex items-start justify-center md:justify-start gap-4 group text-sm md:text-base">
+                  <div className="mt-1 p-2 rounded-full bg-white/5 group-hover:bg-gold/20 transition-colors text-gold shrink-0">
+                    <MapPin size={16} className="md:w-[18px] md:h-[18px]" />
+                  </div>
+                  <span className="text-gray-300 group-hover:text-white transition-colors text-center md:text-left max-w-[200px]">{CONTACT_INFO.address}</span>
+                </li>
+
+                {/* Phone 1: Spanish (Calls) */}
+                <li className="flex items-start justify-center md:justify-start gap-4 group text-sm md:text-base">
+                  <div className="mt-1 p-2 rounded-full bg-white/5 group-hover:bg-gold/20 transition-colors text-gold shrink-0">
+                    <Phone size={16} className="md:w-[18px] md:h-[18px]" />
+                  </div>
+                  <div className="flex flex-col text-center md:text-left">
+                    <span className="text-[10px] text-gold/70 uppercase tracking-wider mb-0.5">Llamadas / Anrufe (ES)</span>
+                    <a href={`tel:${CONTACT_INFO.phoneEs.replace(/\s/g, '')}`} className="text-white hover:text-gold transition-colors text-lg">{CONTACT_INFO.phoneEs}</a>
+                  </div>
+                </li>
+
+                {/* Phone 2: German (WhatsApp) */}
+                <li className="flex items-start justify-center md:justify-start gap-4 group text-sm md:text-base">
+                  <div className="mt-1 p-2 rounded-full bg-[#25D366]/10 border border-[#25D366]/20 group-hover:bg-[#25D366]/20 transition-colors text-[#25D366] shrink-0">
+                    <WhatsAppIcon />
+                  </div>
+                  <div className="flex flex-col text-center md:text-left">
+                    <span className="text-[10px] text-[#25D366]/70 uppercase tracking-wider mb-0.5">WhatsApp (DE/ES)</span>
+                    <a 
+                      href={`https://wa.me/${waNumber}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-white hover:text-[#25D366] transition-colors text-lg flex items-center gap-2 justify-center md:justify-start"
+                    >
+                      {CONTACT_INFO.phoneDe}
+                    </a>
+                  </div>
+                </li>
+
+                {/* Email */}
+                <li className="flex items-center justify-center md:justify-start gap-4 group text-sm md:text-base">
+                  <div className="p-2 rounded-full bg-white/5 group-hover:bg-gold/20 transition-colors text-gold shrink-0">
+                    <Mail size={16} className="md:w-[18px] md:h-[18px]" />
+                  </div>
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-gray-300 hover:text-gold transition-colors break-all">{CONTACT_INFO.email}</a>
+                </li>
+              </ul>
+            </div>
+          </RevealOnScroll>
+
+          {/* Booking & Note - Span across 2 cols on md if needed or stack */}
+          <RevealOnScroll direction="up" delay={300} className="md:col-span-2 lg:col-span-1">
+            <div className="flex flex-col items-center md:items-start">
+              <h3 className="text-lg md:text-xl font-serif text-white mb-6 border-b border-white/10 pb-2 w-full text-center md:text-left">{t.footer.appointmentsTitle}</h3>
+              
+              <div className="glass-panel p-6 md:p-8 rounded-2xl w-full border border-gold/20 bg-gradient-to-br from-white/5 to-transparent shadow-xl relative overflow-hidden">
+                 <div className="absolute -top-10 -right-10 w-20 h-20 bg-gold/10 rounded-full blur-xl"></div>
+                 
+                <p className="text-gold font-medium mb-3 uppercase tracking-wider text-[10px] md:text-xs">{t.footer.policyBadge}</p>
+                <p className="text-white italic font-serif text-base md:text-lg mb-6 text-center md:text-left leading-relaxed">"{t.footer.policyNote}"</p>
+                
+                <button 
+                  onClick={() => setIsBookingOpen(true)}
+                  className="inline-flex w-full items-center justify-center gap-2 py-4 text-center rounded-lg bg-gradient-to-r from-gold to-[#b38728] text-royal hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300 text-xs md:text-sm font-bold uppercase tracking-widest cursor-pointer"
+                >
+                  <span>{t.footer.bookAction}</span>
+                </button>
+              </div>
+            </div>
+          </RevealOnScroll>
+        </div>
+
+        {/* Footer Bottom */}
+        <RevealOnScroll direction="up" delay={400}>
+          <div className="border-t border-white/10 pt-8 text-center">
+            <p className="text-white/30 text-xs md:text-sm font-light tracking-wider">
+              &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
+            </p>
           </div>
-
-        </div>
-
-        <div className="text-center border-t border-white/10 pt-8">
-          <p className="text-white/40 text-xs font-light uppercase tracking-widest">
-            &copy; {new Date().getFullYear()} Sentio by Dany. All Rights Reserved.
-          </p>
-        </div>
+        </RevealOnScroll>
       </div>
     </footer>
   );
 };
+
+export default Footer;

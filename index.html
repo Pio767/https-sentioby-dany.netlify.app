@@ -1,51 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sentio by Dany | Wellness Studio</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
+    <title>Sentio by Dany | SeRenDipity Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Configuration -->
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              royal: '#240046',      // Deep base purple
-              'royal-light': '#5a189a', // Vibrant purple (interior wall)
-              magenta: '#db2777',    // Pink/Magenta (storefront sign)
-              'magenta-light': '#f9a8d4',
-              gold: '#ffb703',       // Warm candlelight gold
-              'gold-light': '#ffd60a',
+              royal: '#2E004F', // Deep Purple Background (Base)
+              
+              // FLYER INSPIRED PALETTE (VIBRANT)
+              gold: '#FFD700', // RESTORED LUMINOUS YELLOW GOLD
+              'classic-gold': '#FFD700', // Kept for specific metallic text usage
+              'gold-dark': '#B45309', // Darker amber for gradients
+              
+              'flyer-violet': '#8B5CF6', // Electric Vivid Violet
+              'flyer-pink': '#F43F5E', // Candle Rose/Red (Vivid Warmth)
+              'spanish-orange': '#F97316', // Warm terracotta/orange for Spanish Mood
+              
+              magenta: '#db2777', 
+              wine: '#C026D3',
+              'brand-pink': '#F0ABFC',
+              deepText: '#1a0b2e',
+              'royal-light': '#8B5CF6',
             },
             fontFamily: {
-              serif: ['"Playfair Display"', 'serif'],
-              sans: ['"Montserrat"', 'sans-serif'],
+              sans: ['Montserrat', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
             },
-            backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-              'hero-glow': 'conic-gradient(from 90deg at 50% 50%, #240046 0%, #5a189a 50%, #db2777 100%)',
+            transitionDuration: {
+              '700': '700ms',
+              '1000': '1000ms',
+              '2000': '2000ms',
             },
             animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'zoom-slow': 'zoom 20s infinite alternate',
-              'blob': 'blob 10s infinite',
               'fade-in-up': 'fadeInUp 1s ease-out forwards',
-              'luxurious-fade-up': 'luxuriousFadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-              'shimmer': 'shimmer 2s linear infinite',
+              'blob': 'blob 10s infinite',
+              'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'pulse-slower': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'shimmer': 'shimmer 3s linear infinite',
+              'luxury-shimmer': 'luxuryShimmer 6s ease-in-out infinite',
+              'micro-float': 'microFloat 6s ease-in-out infinite',
+              'breathe': 'breathe 8s ease-in-out infinite',
+              'grain': 'grain 8s steps(10) infinite',
+              'spin-slow': 'spin 12s linear infinite',
+              'spin-slower': 'spin 20s linear infinite',
+              'zoom-in-luxury': 'zoomInLuxury 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards',
+              'scale-up-luxury': 'scaleUpLuxury 1.5s ease-out forwards',
+              'heartbeat': 'heartbeat 3s ease-in-out infinite',
+              'slow-wave-overlay': 'slowWaveOverlay 15s ease-in-out infinite',
+              'gradient-xy': 'gradient-xy 6s ease infinite',
             },
             keyframes: {
-              zoom: {
-                '0%': { transform: 'scale(1)' },
-                '100%': { transform: 'scale(1.1)' },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              zoomInLuxury: {
+                '0%': { opacity: '0', transform: 'scale(0.85) translateY(40px)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+              },
+              scaleUpLuxury: {
+                '0%': { opacity: '0', transform: 'scale(0.95)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
               },
               blob: {
                 '0%': { transform: 'translate(0px, 0px) scale(1)' },
@@ -53,75 +73,120 @@
                 '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                 '100%': { transform: 'translate(0px, 0px) scale(1)' },
               },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(30px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
+              microFloat: {
+                '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                '50%': { transform: 'translateY(-8px) rotate(1deg)' },
               },
-              luxuriousFadeUp: {
-                '0%': { opacity: '0', transform: 'translateY(40px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
+              breathe: {
+                '0%, 100%': { transform: 'scale(1)', opacity: '0.4' },
+                '50%': { transform: 'scale(1.05)', opacity: '0.6' },
               },
               shimmer: {
-                '0%': { backgroundPosition: '-200% 0' },
-                '100%': { backgroundPosition: '200% 0' },
+                '0%': { backgroundPosition: '-1000px 0' },
+                '100%': { backgroundPosition: '1000px 0' }
+              },
+              luxuryShimmer: {
+                '0%, 100%': { borderColor: 'rgba(244, 63, 94, 0.3)' },
+                '50%': { borderColor: 'rgba(244, 63, 94, 0.8)' },
+              },
+              grain: {
+                '0%, 100%': { transform: 'translate(0, 0)' },
+                '10%': { transform: 'translate(-5%, -10%)' },
+                '20%': { transform: 'translate(-15%, 5%)' },
+                '30%': { transform: 'translate(7%, -25%)' },
+                '40%': { transform: 'translate(-5%, 25%)' },
+                '50%': { transform: 'translate(-15%, 10%)' },
+                '60%': { transform: 'translate(15%, 0%)' },
+                '70%': { transform: 'translate(0%, 15%)' },
+                '80%': { transform: 'translate(3%, 35%)' },
+                '90%': { transform: 'translate(-10%, 10%)' },
+              },
+              heartbeat: {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.03)' },
+              },
+              slowWaveOverlay: {
+                '0%, 100%': { opacity: '0.4' }, 
+                '50%': { opacity: '0.0' },      
+              },
+              'gradient-xy': {
+                  '0%, 100%': {
+                      'background-size': '200% 200%',
+                      'background-position': 'left center'
+                  },
+                  '50%': {
+                      'background-size': '200% 200%',
+                      'background-position': 'right center'
+                  }
               }
             }
-          }
-        }
+          },
+        },
       }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-      /* Smooth scrolling for anchor links */
-      html {
-        scroll-behavior: smooth;
-      }
       body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        background-color: #2E004F; /* Fallback */
+        font-family: 'Montserrat', sans-serif;
+        scroll-behavior: smooth;
+        /* CRITICAL FIX 1: Ensure body takes up full height so background is visible */
+        min-height: 100vh;
+        /* CRITICAL FIX 2: Prevent horizontal scrolling on mobile */
+        overflow-x: hidden;
+        
+        /* Base Background Color (Purple) */
+        background-color: #2E004F;
+        
+        /* UPDATED: Only Pink gradient on bottom-left. Removed Gold from top-right to prevent "rotten green" mix. */
+        background-image: 
+          radial-gradient(circle at 0% 100%, rgba(244, 63, 94, 0.4) 0%, transparent 50%);
+          
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        color: white;
       }
       
-      /* Candlelight Background Effect */
-      .candlelight-bg {
-        background-color: #2E004F; /* Base Deep Purple */
-        background-image: 
-          radial-gradient(circle at 25% 25%, rgba(255, 183, 3, 0.15) 0%, transparent 50%), 
-          radial-gradient(circle at 75% 75%, rgba(255, 140, 0, 0.12) 0%, transparent 50%),
-          radial-gradient(circle at 50% 50%, rgba(219, 39, 119, 0.05) 0%, transparent 60%);
-        background-size: 200% 200%;
-        animation: candle-move 10s ease-in-out infinite;
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
       }
-
-      @keyframes candle-move {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       }
-
-      .glass-card {
-        background: rgba(255, 255, 255, 0.07);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+      .glass-panel:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(244, 63, 94, 0.4); /* Pink tint on hover */
+        box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.4);
+        transform: translateY(-5px);
       }
-      .text-shimmer {
-        background: linear-gradient(to right, #ffb703 0%, #ffd60a 20%, #fff 50%, #ffd60a 80%, #ffb703 100%);
-        background-size: 200% auto;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent; 
+      .text-glow {
+        text-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
       }
-      .delay-100 { animation-delay: 100ms; }
-      .delay-200 { animation-delay: 200ms; }
-      .delay-300 { animation-delay: 300ms; }
-      .delay-500 { animation-delay: 500ms; }
-      .delay-700 { animation-delay: 700ms; }
-      .delay-900 { animation-delay: 900ms; }
-      .delay-1000 { animation-delay: 1000ms; }
+      .bg-noise {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        width: 200%;
+        height: 200vh;
+        background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+        background-repeat: repeat;
+        animation: grain 8s steps(10) infinite;
+        opacity: 0.04; 
+        z-index: 9998; 
+        pointer-events: none;
+      }
     </style>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-royal text-white">
+  <body>
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

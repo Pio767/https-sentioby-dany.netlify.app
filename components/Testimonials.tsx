@@ -1,73 +1,93 @@
-import React from 'react';
-import { Section } from './Section';
-import { Star, Quote } from 'lucide-react';
 
-const reviews = [
-  {
-    name: "Maria Rodriguez",
-    text: "Una experiencia maravillosa. El masaje Bowen me ayudó muchísimo con mi dolor de espalda. ¡Daniela tiene unas manos mágicas!",
-    rating: 5
-  },
-  {
-    name: "Thomas Schmidt",
-    text: "Sehr professionell und entspannend. Die Atmosphäre im Studio ist traumhaft und ich fühle mich wie neu geboren. Kann ich nur empfehlen!",
-    rating: 5
-  },
-  {
-    name: "Elena García",
-    text: "Un oasis de paz en Benissa. El tratamiento personalizado fue justo lo que necesitaba para desconectar del estrés diario.",
-    rating: 5
-  }
-];
+import React, { useState } from 'react';
+import { Star, Quote, ChevronDown, ChevronUp } from 'lucide-react';
+import { TESTIMONIALS_DATA } from '../constants';
+import RevealOnScroll from './RevealOnScroll';
+import { useLanguage } from '../LanguageContext';
 
-export const Testimonials: React.FC = () => {
+const TestimonialCard: React.FC<{ testimonial: typeof TESTIMONIALS_DATA[0] }> = ({ testimonial }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const MAX_LENGTH = 150;
+  const isLongText = testimonial.text.length > MAX_LENGTH;
+
+  const displayText = isExpanded || !isLongText 
+    ? testimonial.text 
+    : `${testimonial.text.slice(0, MAX_LENGTH)}...`;
+
   return (
-    <Section id="testimonials" className="relative">
-      {/* Decorative Glow */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full bg-royal-light/10 blur-[100px] rounded-full pointer-events-none"></div>
+    <div 
+      className={`glass-panel p-6 md:p-10 rounded-2xl relative group flex flex-col transition-all duration-500 ${isExpanded ? 'h-auto' : 'h-full'}`}
+    >
+      <div className="absolute -top-6 -left-2 text-white/10 group-hover:text-white/20 transition-colors duration-700 transform group-hover:-translate-y-2">
+        <Quote size={60} className="md:w-20 md:h-20" />
+      </div>
+      
+      <div className="flex mb-6 text-gold relative z-10">
+        {[...Array(testimonial.stars)].map((_, i) => (
+          <Star key={i} size={16} fill="#D4AF37" strokeWidth={0} className="drop-shadow-md" />
+        ))}
+      </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <div className="flex justify-center mb-4">
-             <Quote className="w-10 h-10 text-gold/50" />
-          </div>
-          <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-            Lo que dicen nuestros clientes
-          </h2>
-          <p className="text-gold-light uppercase tracking-widest text-xs font-medium">
-            Client Experiences
-          </p>
+      <div className="flex-grow relative z-10 mb-6">
+        <p className="text-white/90 font-sans font-light leading-relaxed text-base md:text-lg tracking-wide transition-all duration-300">
+          "{displayText}"
+        </p>
+        
+        {isLongText && (
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="mt-2 text-gold hover:text-white text-sm font-medium uppercase tracking-wider flex items-center gap-1 transition-colors focus:outline-none"
+          >
+            {isExpanded ? (
+              <>Read Less <ChevronUp size={14} /></>
+            ) : (
+              <>Read More <ChevronDown size={14} /></>
+            )}
+          </button>
+        )}
+      </div>
+
+      <div className="flex items-center gap-4 border-t border-white/5 pt-6 mt-auto">
+        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-gold to-[#b38728] p-[2px] shadow-lg shrink-0">
+           <div className="w-full h-full rounded-full bg-royal flex items-center justify-center">
+              <span className="text-gold font-serif font-bold text-base md:text-lg">{testimonial.name.charAt(0)}</span>
+           </div>
+        </div>
+        <div>
+           <span className="text-white font-medium tracking-widest text-xs md:text-sm uppercase block">
+            {testimonial.name}
+          </span>
+          <span className="text-white/40 text-[10px] md:text-xs tracking-wider">Client</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Testimonials: React.FC = () => {
+  const { t } = useLanguage();
+
+  return (
+    <section id="testimonials" className="py-20 md:py-32 relative z-10">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12 md:mb-20">
+          <RevealOnScroll direction="down">
+            <h3 className="text-gold text-xs uppercase tracking-[0.3em] mb-4 font-medium">{t.testimonials.badge}</h3>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">{t.testimonials.title}</h2>
+            <div className="h-[1px] w-16 bg-gold/50 mx-auto mt-6"></div>
+          </RevealOnScroll>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {reviews.map((review, index) => (
-            <div 
-              key={index}
-              className="glass-card p-8 rounded-xl border-t border-white/10 hover:border-gold/30 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="flex gap-1 mb-6">
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-gold text-gold" />
-                ))}
-              </div>
-              
-              <p className="font-serif text-lg text-white/90 italic mb-6 leading-relaxed">
-                "{review.text}"
-              </p>
-              
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-magenta to-royal flex items-center justify-center text-white font-bold text-sm">
-                  {review.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="text-white font-medium text-sm">{review.name}</p>
-                  <p className="text-white/50 text-xs">Verifizierter Kunde</p>
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+          {TESTIMONIALS_DATA.map((testimonial, index) => (
+            <RevealOnScroll key={index} delay={index * 100} direction="up">
+              <TestimonialCard testimonial={testimonial} />
+            </RevealOnScroll>
           ))}
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
+
+export default Testimonials;

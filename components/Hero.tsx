@@ -1,90 +1,141 @@
-import React, { useState } from 'react';
-import { Sparkles, ChevronDown } from 'lucide-react';
-import { BookingModal } from './BookingModal';
 
-export const Hero: React.FC = () => {
+import React, { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../LanguageContext';
+import BookingModal from './BookingModal';
+import { ChevronDown } from 'lucide-react';
+
+const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { t } = useLanguage();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
+  useEffect(() => {
+    // Force video play on mount to ensure autoplay works reliably across browsers
+    if (videoRef.current) {
+        videoRef.current.play().catch(error => {
+            console.log("Video autoplay blocked by browser:", error);
+        });
+    }
+
+    const handleScroll = () => {
+      if (videoRef.current) {
+        const scrollY = window.scrollY;
+        // Limit parallax on mobile for performance
+        if (window.innerWidth > 768) {
+            const parallaxOffset = scrollY * 0.4;
+            videoRef.current.style.transform = `translateY(${parallaxOffset}px)`;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToAbout = () => {
+    const element = document.getElementById('about');
+    if (element) {
+      const navHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
-    <div className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* 1. Dynamic Background Layer with Ken Burns Effect */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <img 
-          src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1920&auto=format&fit=crop" 
-          alt="Relaxing Spa Background" 
-          className="w-full h-full object-cover opacity-50 animate-zoom-slow"
-        />
-        {/* Gradient Overlays for Atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-b from-royal/60 via-royal/40 to-royal"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-transparent via-royal/20 to-royal/90"></div>
-      </div>
-
-      {/* 2. Ethereal Floating Orbs (The "Spiritual" Energy) */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Top Left Magenta Glow */}
-        <div className="absolute top-0 -left-4 w-96 h-96 bg-magenta/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
-        {/* Bottom Right Gold Glow */}
-        <div className="absolute bottom-0 -right-4 w-96 h-96 bg-gold/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
-        {/* Center Deep Purple Pulse */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-royal-light/20 rounded-full mix-blend-overlay filter blur-[80px] animate-pulse-slow"></div>
-      </div>
-
-      {/* 3. Main Content with Staggered Entrance */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20">
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      
+      {/* Background Video Layer with Parallax */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video 
+          ref={videoRef}
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute w-full h-[120%] -top-[10%] object-cover will-change-transform"
+        >
+          <source src="https://videos.pexels.com/video-files/6187085/6187085-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
-        {/* Icon - Synced slightly before headline or with it */}
-        <div className="mb-4 opacity-0 animate-fade-in-up delay-200">
-          <div className="relative">
-            <Sparkles className="text-gold w-10 h-10 animate-pulse drop-shadow-[0_0_15px_rgba(255,183,3,0.6)]" />
-          </div>
+        {/* Radial Vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,0,79,0.0)_10%,rgba(46,0,79,0.6)_60%,rgba(46,0,79,0.95)_100%)]"></div>
+
+        {/* SPANISH MOOD: Warm Golden Hour Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-spanish-orange/20 via-transparent to-flyer-violet/20 mix-blend-soft-light"></div>
+
+        {/* Warm Pink Tint */}
+        <div className="absolute inset-0 bg-gradient-to-br from-flyer-pink/10 via-transparent to-royal/40 mix-blend-soft-light"></div>
+
+        {/* Dynamic Breathing Overlay */}
+        <div className="absolute inset-0 bg-royal mix-blend-multiply animate-slow-wave-overlay"></div>
+        
+        {/* Readability Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-royal/80 via-transparent to-royal/80"></div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10 text-center flex flex-col items-center justify-center h-full">
+        {/* Tagline */}
+        <span className="inline-block py-1.5 px-4 md:py-2 md:px-6 border border-gold/30 rounded-full text-gold text-[10px] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] mb-4 md:mb-8 backdrop-blur-md bg-white/5 shadow-[0_0_20px_rgba(212,175,55,0.1)] animate-fade-in-up opacity-0 hover:bg-white/10 transition-colors duration-500" style={{animationDelay: '0.1s', animationFillMode: 'forwards'}}>
+          {t.hero.tagline}
+        </span>
+        
+        {/* Main Headline - INCREASED SIZE significantly */}
+        <div className="relative inline-block mb-4 md:mb-6 mx-auto text-center w-full">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-royal/30 blur-3xl -z-10 rounded-full pointer-events-none"></div>
+
+          <h1 className="font-serif font-bold animate-zoom-in-luxury opacity-0 leading-[1.1] md:leading-[0.95] tracking-tight text-center mx-auto" style={{animationDelay: '0.3s', animationFillMode: 'forwards'}}>
+            {/* Part 1: "Tu Momento" */}
+            <span className="block text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] relative z-10 text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+              {t.hero.titlePart1}
+            </span>
+            
+            {/* Part 2: "de Belleza" */}
+            <span className="block mt-[-2px] md:mt-[-5px] italic text-transparent bg-clip-text bg-gradient-to-br from-[#FFFFF0] via-[#FCD34D] to-[#B45309] drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] relative z-20 pb-4 px-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+              {t.hero.titlePart2}
+            </span>
+          </h1>
         </div>
         
-        {/* Main Headline - 0.2s Delay */}
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-4 leading-tight drop-shadow-2xl opacity-0 animate-fade-in-up delay-200">
-          <span className="block">Tu Momento</span>
-          <span className="block italic text-shimmer pb-2">
-            de Belleza
-          </span>
-        </h1>
-
-        {/* Subheadline - 0.5s Delay */}
-        <h2 className="opacity-0 animate-fade-in-up delay-500 text-gold-light tracking-[0.4em] uppercase text-xs md:text-sm font-semibold mb-8 drop-shadow-md">
-          Sentio by Dany
+        {/* Subheadline - SENTIO BY DANY - DECREASED SIZE (~20%) */}
+        <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl text-white/90 font-bold mb-8 md:mb-12 tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] animate-scale-up-luxury opacity-0 flex items-center justify-center gap-2 md:gap-6 flex-wrap leading-tight" style={{animationDelay: '0.6s', animationFillMode: 'forwards'}}>
+          <span className="h-[1px] w-4 sm:w-8 md:w-12 bg-gradient-to-r from-transparent to-gold hidden sm:block"></span>
+          <span className="break-words max-w-[90vw]">{t.hero.subtitle}</span>
+          <span className="h-[1px] w-4 sm:w-8 md:w-12 bg-gradient-to-l from-transparent to-gold hidden sm:block"></span>
         </h2>
-        
-        {/* Description - Synced with Subheadline for clean flow */}
-        <p className="opacity-0 animate-fade-in-up delay-500 text-white/90 font-sans text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light tracking-wide drop-shadow-lg leading-relaxed">
-          Un santuario de paz donde el cuerpo sana y el alma descansa.
-        </p>
 
-        {/* CTA Button - 0.9s Delay */}
-        <div className="opacity-0 animate-fade-in-up delay-900">
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-8 animate-fade-in-up opacity-0 px-4 sm:px-0 w-full sm:w-auto" style={{animationDelay: '1.2s', animationFillMode: 'forwards'}}>
           <button 
             onClick={() => setIsBookingOpen(true)}
-            className="group relative inline-flex items-center justify-center px-10 py-4 overflow-hidden rounded-full shadow-[0_0_20px_rgba(255,183,3,0.2)] hover:shadow-[0_0_40px_rgba(219,39,119,0.4)] transition-all duration-500"
+            className="group relative w-full sm:w-auto px-8 md:px-16 py-5 md:py-6 bg-gradient-to-b from-[#F9D976] to-[#D4AF37] text-royal font-bold rounded-full shadow-[0_0_40px_rgba(212,175,55,0.6)] hover:shadow-[0_0_60px_rgba(212,175,55,0.9)] hover:-translate-y-1 transition-all duration-500 uppercase tracking-widest text-base md:text-lg overflow-hidden flex items-center justify-center animate-heartbeat border border-white/20"
           >
-            {/* Button Gradient Background */}
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gold via-gold-light to-gold opacity-90 group-hover:opacity-100 transition-opacity"></span>
-            {/* Button Shine Effect */}
-            <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
-            
-            <span className="relative z-10 font-bold tracking-widest uppercase text-royal-dark group-hover:text-black transition-colors">
-              Reservar Cita
+            <span className="relative z-10 flex items-center gap-2">
+              {t.hero.bookBtn}
             </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out skew-x-12"></div>
           </button>
         </div>
       </div>
 
-      {/* Scroll Indicator - Appears last */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in-up delay-1000">
-        <a href="#about" className="flex flex-col items-center gap-2 text-white/50 hover:text-gold transition-colors duration-300">
-          <span className="text-[10px] uppercase tracking-widest">Descubre</span>
-          <ChevronDown className="w-6 h-6 animate-bounce" />
-        </a>
+      {/* Scroll Down Hint */}
+      <div 
+        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 opacity-0 animate-fade-in-up cursor-pointer hidden md:block" 
+        style={{animationDelay: '2s', animationFillMode: 'forwards'}}
+        onClick={scrollToAbout}
+      >
+        <div className="animate-bounce p-2 rounded-full hover:bg-white/5 transition-colors duration-300">
+           <ChevronDown className="w-8 h-8 md:w-10 md:h-10 text-white/40 hover:text-gold transition-colors duration-500" />
+        </div>
       </div>
-
-      {/* Booking Modal */}
-      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-    </div>
+    </section>
   );
 };
+
+export default Hero;
+    

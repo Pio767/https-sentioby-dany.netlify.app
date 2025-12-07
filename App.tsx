@@ -1,50 +1,62 @@
-import React from 'react';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Services } from './components/Services';
-import { Gallery } from './components/Gallery';
-import { Testimonials } from './components/Testimonials';
-import { Footer } from './components/Footer';
-import { AudioPlayer } from './components/AudioPlayer';
+import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Services from './components/Services';
+import Gallery from './components/Gallery';
+import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
+import Footer from './components/Footer';
+import AudioPlayer from './components/AudioPlayer';
+import WelcomeScreen from './components/WelcomeScreen';
+import { LanguageProvider } from './LanguageContext';
 
 const App: React.FC = () => {
+  const [hasEntered, setHasEntered] = useState(false);
+
   return (
-    <main className="w-full min-h-screen candlelight-bg selection:bg-magenta selection:text-white">
-      <Hero />
-      <About />
-      <Services />
-      <Testimonials />
-      <Gallery />
-      <Footer />
-      
-      {/* Background Music Player */}
-      <AudioPlayer />
-      
-      {/* Sticky CTA for Mobile (WhatsApp) */}
-      <div className="fixed bottom-6 right-6 z-50 md:hidden">
-        <a 
-          href="https://wa.me/34711079714" 
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#128C7E] transition-colors border-2 border-white"
-          aria-label="Chat on WhatsApp"
-        >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="24" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-          >
-            <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-          </svg>
-        </a>
+    <LanguageProvider>
+      <div className="min-h-screen bg-transparent text-white selection:bg-flyer-pink selection:text-white relative font-sans overflow-hidden">
+        
+        {/* Welcome Screen - The "Entrance Door" */}
+        <WelcomeScreen onEnter={() => setHasEntered(true)} />
+
+        {/* 1. Global Grain/Noise Overlay - The "Film" Texture */}
+        <div className="bg-noise"></div>
+
+        {/* 2. Deep Dynamic Background Gradient - Flyer Inspired */}
+        
+        {/* REMOVED Top-Right Gradient to prevent "rotten green" mixing and satisfy "only left side" request */}
+        
+        {/* 2.1 Secondary Flyer Violet (Swoosh) Glow from Bottom Left */}
+        {/* This stays to provide the "breakthrough" on the left side */}
+        <div className="fixed inset-[-50%] z-[-2] bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-flyer-violet/60 via-transparent to-transparent animate-pulse-slow mix-blend-screen opacity-80"></div>
+
+        {/* 3. Organic Living Light Orbs (Breathing & Floating) */}
+        
+        {/* REMOVED Top-Right Pink Orb */}
+        
+        {/* Electric Violet Orb - Bottom Left - The Flyer Purple Swoosh */}
+        <div className="fixed bottom-[-10%] left-[-10%] w-[70vw] h-[70vw] md:w-[700px] md:h-[700px] bg-flyer-violet/50 rounded-full blur-[100px] pointer-events-none z-[-1] mix-blend-screen animate-blob animation-delay-2000 opacity-90"></div>
+        
+        {/* REMOVED Gold Ambient Breath (Center) - This was causing the muddy/green tint */}
+
+        <Navbar />
+        
+        <main className="relative z-10">
+          <Hero />
+          <About />
+          <Services />
+          <Gallery />
+          <Testimonials />
+          <FAQ />
+        </main>
+        <Footer />
+        
+        {/* Audio Player: Will auto-start when the user clicks "Enter" on the WelcomeScreen */}
+        <AudioPlayer />
       </div>
-    </main>
+    </LanguageProvider>
   );
 };
 

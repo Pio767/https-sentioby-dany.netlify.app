@@ -1,113 +1,91 @@
+
 import React from 'react';
-import { Section } from './Section';
-import { Sparkles, Clock } from 'lucide-react';
-import { Service, PricingTier } from '../types';
+import { SERVICES_DATA } from '../constants';
+import RevealOnScroll from './RevealOnScroll';
+import { useLanguage } from '../LanguageContext';
 
-const servicesList: Service[] = [
-  { 
-    title: "Masajes Guacha", 
-    description: "Una antigua técnica que restaura el flujo de energía y promueve una relajación profunda.\n\nEine alte Technik, die den Energiefluss wiederherstellt und tiefe Entspannung fördert." 
-  },
-  { 
-    title: "Bowen Therapy", 
-    description: "Terapia holística suave, certificada bajo el 'Bowen Therapie Konzept', que despierta la capacidad natural del cuerpo para sanar.\n\nSanfte ganzheitliche Therapie, zertifiziert nach dem 'Bowen Therapie Konzept', die die natürlichen Selbstheilungskräfte weckt.", 
-    highlight: true 
-  },
-  { 
-    title: "Relaxation Massage", 
-    description: "Suaves movimientos que disuelven el estrés e invitan a una paz absoluta.\n\nSanfte Bewegungen, die Stress abbauen und zu absoluter Ruhe einladen." 
-  },
-  { 
-    title: "Tibetan Massage", 
-    description: "Un ritual para equilibrar las energías sutiles y revitalizar el espíritu.\n\nEin Ritual zum Ausgleich subtiler Energien und zur Revitalisierung des Geistes." 
-  },
-  { 
-    title: "Personalized Treatment", 
-    description: "Cuidado experto adaptado a ti, respaldado por formación en fisioterapia alemana.\n\nFachkundige, individuell abgestimmte Betreuung mit deutscher Physiotherapie-Ausbildung." 
-  },
-];
+const Services: React.FC = () => {
+  const { t, language } = useLanguage();
 
-const pricing: PricingTier[] = [
-  { duration: "60 min", price: "50,00 €" },
-  { duration: "30 min", price: "30,00 €" },
-];
+  const getDescription = (service: any) => {
+    switch(language) {
+      case 'de': return service.descriptionDe;
+      case 'en': return service.descriptionEn;
+      default: return service.descriptionEs;
+    }
+  };
 
-export const Services: React.FC = () => {
   return (
-    <Section id="services" className="relative overflow-hidden">
-      {/* Background Bloom */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-magenta/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-light/30 rounded-full blur-[120px] pointer-events-none"></div>
+    <section id="services" className="py-20 md:py-32 relative z-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-royal-light/5 rounded-full blur-[100px] animate-breathe pointer-events-none"></div>
 
-      <div className="relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4 drop-shadow-lg">Our Services</h2>
-          <div className="flex items-center justify-center gap-3">
-            <div className="h-[1px] w-12 bg-gold"></div>
-            <p className="text-gold-light font-sans uppercase tracking-widest text-sm font-medium">Holistic Therapies</p>
-            <div className="h-[1px] w-12 bg-gold"></div>
-          </div>
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-12 md:mb-24">
+          <RevealOnScroll direction="down">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-4 md:mb-8 drop-shadow-2xl tracking-tight">
+              {t.services.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F9D976] via-[#FFF] to-[#D4AF37]">{t.services.titleHighlight}</span>
+            </h2>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up" delay={100}>
+            <div className="h-[1px] w-24 mx-auto bg-gradient-to-r from-transparent via-gold to-transparent mb-4 md:mb-8"></div>
+          </RevealOnScroll>
+          <RevealOnScroll direction="up" delay={200}>
+            <p className="text-white/70 max-w-2xl mx-auto font-light text-lg md:text-xl leading-relaxed px-4">
+              {t.services.subtitle}
+            </p>
+          </RevealOnScroll>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {servicesList.map((service, index) => (
-            <div 
-              key={index}
-              className={`
-                group relative p-8 rounded-xl transition-all duration-500 hover:-translate-y-2
-                ${service.highlight 
-                  ? 'glass-card border-gold/50 shadow-[0_0_30px_rgba(219,39,119,0.15)]' 
-                  : 'glass-card border-white/10 hover:border-magenta/50 hover:shadow-[0_0_20px_rgba(219,39,119,0.1)]'
-                }
-              `}
-            >
-              <div className={`absolute top-0 left-0 w-full h-1 rounded-t-xl transition-colors duration-500 ${service.highlight ? 'bg-gold' : 'bg-transparent group-hover:bg-magenta'}`}></div>
-              
-              <div className="absolute top-6 right-6 text-gold group-hover:text-magenta-light transition-colors duration-300">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              
-              <h3 className={`font-serif text-2xl mb-4 transition-colors ${service.highlight ? 'text-gold' : 'text-white group-hover:text-magenta-light'}`}>
-                {service.title}
-              </h3>
-              <p className="font-sans text-white/80 text-sm leading-relaxed whitespace-pre-line group-hover:text-white transition-colors">
-                {service.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+          {SERVICES_DATA.map((service, index) => {
+            const Icon = service.icon;
+            const description = getDescription(service);
 
-        {/* Pricing Section */}
-        <div className="max-w-2xl mx-auto glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden border-white/10">
-          {/* Inner Glow */}
-          <div className="absolute -right-20 -top-20 w-60 h-60 bg-gold/20 rounded-full blur-[80px]"></div>
-          <div className="absolute -left-20 -bottom-20 w-60 h-60 bg-magenta/20 rounded-full blur-[80px]"></div>
-          
-          <div className="relative z-10 text-center">
-            <h3 className="font-serif text-3xl text-white mb-10">Pricing</h3>
-            <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-20">
-              {pricing.map((tier, idx) => (
-                <div key={idx} className="flex flex-col items-center relative group">
-                  <div className="absolute inset-0 bg-gold/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="flex items-center gap-2 text-gold-light mb-3">
-                    <Clock className="w-4 h-4" />
-                    <span className="uppercase tracking-wider text-xs font-semibold">Duration</span>
+            return (
+              <RevealOnScroll key={service.id} delay={index * 200} direction="up">
+                <div 
+                  className="glass-panel rounded-3xl p-6 md:p-10 group relative overflow-hidden h-full flex flex-col justify-between"
+                >
+                  <div className="absolute inset-0 border border-white/5 rounded-3xl z-20 pointer-events-none group-hover:border-gold/30 transition-colors duration-1000"></div>
+                  <div className="absolute -top-20 -right-20 w-60 h-60 bg-gold/10 rounded-full blur-[80px] transition-all duration-1000 group-hover:bg-gold/20 group-hover:scale-150"></div>
+                  
+                  <div>
+                    <div className="flex flex-col sm:flex-row items-start justify-between mb-6 md:mb-8 relative z-10 gap-4 sm:gap-0">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gold/20 blur-xl rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
+                        <div className="relative p-4 md:p-5 bg-gradient-to-br from-[#3a1c5e] to-[#1a0b2e] rounded-2xl border border-white/10 text-white shadow-2xl transform group-hover:rotate-6 group-hover:scale-110 transition-transform duration-700 ease-out">
+                          <Icon size={28} className="md:w-8 md:h-8 group-hover:animate-pulse-slow text-white" strokeWidth={1} />
+                        </div>
+                      </div>
+
+                      <div className="text-left sm:text-right w-full sm:w-auto">
+                        <div className="text-gold font-serif font-bold text-xl md:text-2xl tracking-wide">
+                          {service.price60.toFixed(2).replace('.', ',')} € <span className="text-xs md:text-sm font-sans font-light text-white/50 uppercase tracking-wider ml-1">{t.services.per60}</span>
+                        </div>
+                        <div className="text-gold/70 text-base md:text-lg mt-1">
+                          {service.price30.toFixed(2).replace('.', ',')} € <span className="text-xs md:text-sm font-sans font-light text-white/30 uppercase tracking-wider ml-1">{t.services.per30}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl md:text-3xl font-serif text-gold mb-4 md:mb-6 group-hover:text-white transition-colors duration-500 font-medium tracking-wide">
+                      {service.title}
+                    </h3>
+                    
+                    <div className="space-y-5 relative z-10">
+                      <p className="text-gold leading-relaxed md:leading-loose text-base md:text-lg font-light tracking-wide group-hover:translate-x-2 transition-transform duration-700">
+                        {description}
+                      </p>
+                    </div>
                   </div>
-                  <span className="font-serif text-5xl md:text-6xl text-white font-medium mb-2 drop-shadow-md">
-                    {tier.price}
-                  </span>
-                  <span className="text-white/70 font-sans text-lg">{tier.duration}</span>
                 </div>
-              ))}
-            </div>
-            <div className="mt-10 pt-8 border-t border-white/10">
-              <p className="text-white/50 text-sm font-light italic">
-                * Consultations include a preliminary assessment.
-              </p>
-            </div>
-          </div>
+              </RevealOnScroll>
+            );
+          })}
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
+
+export default Services;

@@ -1,7 +1,8 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Music, Volume2 } from 'lucide-react';
 
-export const AudioPlayer: React.FC = () => {
+const AudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -9,58 +10,70 @@ export const AudioPlayer: React.FC = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // 1. Attempt immediate autoplay (works in some configs/browsers)
+    // CRITICAL: Set volume to 10% (0.1) to be extremely subtle
+    audio.volume = 0.1;
+
+    // 1. Attempt immediate autoplay
     const attemptPlay = async () => {
       try {
         await audio.play();
-        setIsPlaying(true);
       } catch (error) {
-        console.log("Autoplay blocked. Waiting for user interaction.");
+        // Autoplay blocked by browser policy (expected in many cases)
+        console.log("Autoplay waiting for interaction");
       }
     };
-
     attemptPlay();
 
-    // 2. Fallback: Play on first user interaction (Click, Touch, Keypress)
-    const handleUserInteraction = async () => {
+    // 2. Fallback: Play on first user interaction (click, scroll, touch)
+    // This makes it feel "automatic" to the user as soon as they touch the site
+    const handleInteraction = async () => {
       if (audio.paused) {
         try {
           await audio.play();
-          setIsPlaying(true);
         } catch (e) {
-          console.error("Playback failed even after interaction", e);
+          // Ignore interruption errors
         }
       }
-      // Clean up listeners once we've tried to play
-      cleanUpListeners();
+      // Clean up listeners immediately after first success
+      ['click', 'keydown', 'touchstart', 'scroll'].forEach(event => 
+        document.removeEventListener(event, handleInteraction)
+      );
     };
 
-    const cleanUpListeners = () => {
-      document.removeEventListener('click', handleUserInteraction);
-      document.removeEventListener('keydown', handleUserInteraction);
-      document.removeEventListener('touchstart', handleUserInteraction);
-    };
-
-    // Add listeners to the entire document
-    document.addEventListener('click', handleUserInteraction);
-    document.addEventListener('keydown', handleUserInteraction);
-    document.addEventListener('touchstart', handleUserInteraction);
+    ['click', 'keydown', 'touchstart', 'scroll'].forEach(event => 
+      document.addEventListener(event, handleInteraction, { once: true })
+    );
 
     return () => {
-      cleanUpListeners();
+      ['click', 'keydown', 'touchstart', 'scroll'].forEach(event => 
+        document.removeEventListener(event, handleInteraction)
+      );
     };
   }, []);
 
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
+  const toggleAudio = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    try {
+      if (audio.paused) {
+        await audio.play();
       } else {
-        audioRef.current.play().catch(e => console.log("Audio play interaction required:", e));
+        audio.pause();
       }
-      setIsPlaying(!isPlaying);
+    } catch (error) {
+      // Specifically catch AbortError which happens if play is interrupted by pause
+      if (error instanceof Error && error.name === 'AbortError') {
+         // This is expected during rapid toggling, ignore it
+         return;
+      }
+      console.error("Audio toggle error:", error);
     }
   };
+
+  // Sync state with actual audio events to prevent UI desync
+  const onPlay = () => setIsPlaying(true);
+  const onPause = () => setIsPlaying(false);
 
   return (
     <div className="fixed bottom-6 left-6 z-50 transition-transform duration-300 hover:scale-105">
@@ -68,9 +81,11 @@ export const AudioPlayer: React.FC = () => {
         ref={audioRef}
         loop
         preload="auto"
+        onPlay={onPlay}
+        onPause={onPause}
       >
-        {/* Relaxing Zen/Spa Music Source */}
-        <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
+        {/* Deep Relaxation / Spa Music */}
+        <source src="https://files.catbox.moe/go8q8l.mp3" type="audio/mpeg" />
       </audio>
       
       <button
@@ -107,3 +122,5 @@ export const AudioPlayer: React.FC = () => {
     </div>
   );
 };
+
+export default AudioPlayer;
