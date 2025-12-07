@@ -1,11 +1,12 @@
 
 import React from 'react';
-import { SERVICES_DATA } from '../constants';
+import { getServicesData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 
 const Services: React.FC = () => {
   const { t, language } = useLanguage();
+  const servicesData = getServicesData();
 
   const getDescription = (service: any) => {
     switch(language) {
@@ -37,7 +38,7 @@ const Services: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {SERVICES_DATA.map((service, index) => {
+          {servicesData.map((service, index) => {
             const Icon = service.icon;
             const description = getDescription(service);
 

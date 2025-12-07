@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
 import { Star, Quote, ChevronDown, ChevronUp } from 'lucide-react';
-import { TESTIMONIALS_DATA } from '../constants';
+import { getTestimonialsData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 
-const TestimonialCard: React.FC<{ testimonial: typeof TESTIMONIALS_DATA[0] }> = ({ testimonial }) => {
+const TestimonialCard: React.FC<{ testimonial: any }> = ({ testimonial }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const MAX_LENGTH = 150;
   const isLongText = testimonial.text.length > MAX_LENGTH;
@@ -66,6 +66,7 @@ const TestimonialCard: React.FC<{ testimonial: typeof TESTIMONIALS_DATA[0] }> = 
 
 const Testimonials: React.FC = () => {
   const { t } = useLanguage();
+  const testimonialsData = getTestimonialsData();
 
   return (
     <section id="testimonials" className="py-20 md:py-32 relative z-10">
@@ -79,7 +80,7 @@ const Testimonials: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
-          {TESTIMONIALS_DATA.map((testimonial, index) => (
+          {testimonialsData.map((testimonial, index) => (
             <RevealOnScroll key={index} delay={index * 100} direction="up">
               <TestimonialCard testimonial={testimonial} />
             </RevealOnScroll>

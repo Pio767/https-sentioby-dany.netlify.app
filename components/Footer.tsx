@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Facebook } from 'lucide-react';
-import { CONTACT_INFO } from '../constants';
+import { getContactInfo } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 import BookingModal from './BookingModal';
@@ -18,6 +18,7 @@ const Footer: React.FC = () => {
   const { t } = useLanguage();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const contactInfo = getContactInfo();
 
   useEffect(() => {
     const handleOpenPrivacy = () => {
@@ -28,7 +29,7 @@ const Footer: React.FC = () => {
   }, []);
 
   // Format phone number for WhatsApp link (remove spaces and +)
-  const waNumber = CONTACT_INFO.phoneDe.replace(/[^0-9]/g, '');
+  const waNumber = contactInfo.phoneDe.replace(/[^0-9]/g, '');
 
   return (
     <footer id="contact" className="relative pt-10 pb-10 overflow-hidden mt-10">
@@ -92,7 +93,7 @@ const Footer: React.FC = () => {
                   <div className="mt-1 p-2 rounded-full bg-white/5 group-hover:bg-gold/20 transition-colors text-gold shrink-0">
                     <MapPin size={16} className="md:w-[18px] md:h-[18px]" />
                   </div>
-                  <span className="text-gray-300 group-hover:text-white transition-colors text-center md:text-left max-w-[200px]">{CONTACT_INFO.address}</span>
+                  <span className="text-gray-300 group-hover:text-white transition-colors text-center md:text-left max-w-[200px]">{contactInfo.address}</span>
                 </li>
 
                 {/* Phone 1: Spanish (Calls) */}
@@ -102,7 +103,7 @@ const Footer: React.FC = () => {
                   </div>
                   <div className="flex flex-col text-center md:text-left">
                     <span className="text-[10px] text-gold/70 uppercase tracking-wider mb-0.5">Llamadas / Anrufe (ES)</span>
-                    <a href={`tel:${CONTACT_INFO.phoneEs.replace(/\s/g, '')}`} className="text-white hover:text-gold transition-colors text-lg">{CONTACT_INFO.phoneEs}</a>
+                    <a href={`tel:${contactInfo.phoneEs.replace(/\s/g, '')}`} className="text-white hover:text-gold transition-colors text-lg">{contactInfo.phoneEs}</a>
                   </div>
                 </li>
 
@@ -119,7 +120,7 @@ const Footer: React.FC = () => {
                       rel="noopener noreferrer" 
                       className="text-white hover:text-[#25D366] transition-colors text-lg flex items-center gap-2 justify-center md:justify-start"
                     >
-                      {CONTACT_INFO.phoneDe}
+                      {contactInfo.phoneDe}
                     </a>
                   </div>
                 </li>
@@ -129,7 +130,7 @@ const Footer: React.FC = () => {
                   <div className="p-2 rounded-full bg-white/5 group-hover:bg-gold/20 transition-colors text-gold shrink-0">
                     <Mail size={16} className="md:w-[18px] md:h-[18px]" />
                   </div>
-                  <a href={`mailto:${CONTACT_INFO.email}`} className="text-gray-300 hover:text-gold transition-colors break-all">{CONTACT_INFO.email}</a>
+                  <a href={`mailto:${contactInfo.email}`} className="text-gray-300 hover:text-gold transition-colors break-all">{contactInfo.email}</a>
                 </li>
               </ul>
             </div>
@@ -164,7 +165,7 @@ const Footer: React.FC = () => {
               <p className="text-white/30 text-xs md:text-sm font-light tracking-wider text-center md:text-left">
                 &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
               </p>
-              <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm items-center">
                 <button
                   onClick={() => setIsPrivacyOpen(true)}
                   className="text-white/50 hover:text-gold transition-colors underline"
@@ -181,6 +182,17 @@ const Footer: React.FC = () => {
                 >
                   {t.cookies.title}
                 </button>
+                {/* Ukryty przycisk Admin - kliknięcie 5x w logo */}
+                <span 
+                  className="text-white/10 hover:text-white/20 transition-colors cursor-pointer text-[8px] opacity-0 hover:opacity-100"
+                  title="Admin Panel (Ctrl+Shift+A)"
+                  onClick={() => {
+                    const event = new CustomEvent('openAdminPanel');
+                    window.dispatchEvent(event);
+                  }}
+                >
+                  Admin
+                </span>
               </div>
             </div>
           </div>

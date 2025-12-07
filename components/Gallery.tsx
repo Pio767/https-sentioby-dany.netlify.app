@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { GALLERY_IMAGES } from '../constants';
+import { getGalleryImages } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 
 const Gallery: React.FC = () => {
   const { t } = useLanguage();
+  const galleryImages = getGalleryImages();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -16,11 +17,11 @@ const Gallery: React.FC = () => {
     if (!isAutoPlaying || isLightboxOpen) return;
     
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev === GALLERY_IMAGES.length - 1 ? 0 : prev + 1));
+      setCurrentIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
     }, 5000); // Change every 5 seconds
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, isLightboxOpen]);
+  }, [isAutoPlaying, isLightboxOpen, galleryImages.length]);
 
   // Keyboard navigation for Lightbox
   useEffect(() => {
@@ -41,12 +42,12 @@ const Gallery: React.FC = () => {
   }, [isLightboxOpen]);
 
   const nextImage = () => {
-    setCurrentIndex((prev) => (prev === GALLERY_IMAGES.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
     setIsAutoPlaying(false);
   };
 
   const prevImage = () => {
-    setCurrentIndex((prev) => (prev === 0 ? GALLERY_IMAGES.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
     setIsAutoPlaying(false);
   };
 
@@ -89,7 +90,7 @@ const Gallery: React.FC = () => {
             onClick={openLightbox}
           >
             {/* Images */}
-            {GALLERY_IMAGES.map((src, index) => (
+            {galleryImages.map((src, index) => (
               <div 
                 key={index}
                 className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
@@ -158,7 +159,7 @@ const Gallery: React.FC = () => {
 
             {/* Pagination Dots */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex gap-3" onClick={(e) => e.stopPropagation()}>
-              {GALLERY_IMAGES.map((_, index) => (
+              {galleryImages.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToImage(index)}
@@ -174,7 +175,7 @@ const Gallery: React.FC = () => {
 
             {/* Current Image Indicator */}
             <div className="absolute bottom-6 right-8 z-40 text-white/80 font-serif italic text-sm md:text-lg tracking-widest hidden md:block">
-              {String(currentIndex + 1).padStart(2, '0')} <span className="text-gold mx-2">/</span> {String(GALLERY_IMAGES.length).padStart(2, '0')}
+              {String(currentIndex + 1).padStart(2, '0')} <span className="text-gold mx-2">/</span> {String(galleryImages.length).padStart(2, '0')}
             </div>
           </div>
         </RevealOnScroll>
@@ -208,7 +209,7 @@ const Gallery: React.FC = () => {
                 {/* Main Image Container */}
                 <div className="flex-1 w-full h-full relative flex items-center justify-center p-2 bg-black/20">
                    <img 
-                        src={GALLERY_IMAGES[currentIndex]} 
+                        src={galleryImages[currentIndex]} 
                         alt="Gallery Fullscreen" 
                         className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
                     />
@@ -217,7 +218,7 @@ const Gallery: React.FC = () => {
                 {/* Caption / Counter */}
                  <div className="absolute bottom-4 left-0 w-full text-center pointer-events-none">
                     <span className="bg-black/40 backdrop-blur-sm px-4 py-1 rounded-full text-white/70 text-xs font-light tracking-widest border border-white/5">
-                        {currentIndex + 1} / {GALLERY_IMAGES.length}
+                        {currentIndex + 1} / {galleryImages.length}
                     </span>
                 </div>
             </div>

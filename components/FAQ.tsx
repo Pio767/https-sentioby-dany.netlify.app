@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { FAQ_DATA } from '../constants';
+import { getFAQData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 
 const FAQ: React.FC = () => {
   const { t, language } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqData = getFAQData();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -33,7 +34,7 @@ const FAQ: React.FC = () => {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          {FAQ_DATA.map((item, index) => {
+          {faqData.map((item, index) => {
             const content = getContent(item);
             const isOpen = openIndex === index;
 

@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import AudioPlayer from './components/AudioPlayer';
 import WelcomeScreen from './components/WelcomeScreen';
 import CookieBanner from './components/CookieBanner';
+import AdminButton from './components/AdminButton';
 import { LanguageProvider } from './LanguageContext';
 
 const App: React.FC = () => {
@@ -59,6 +60,9 @@ const App: React.FC = () => {
         
         {/* Cookie Banner - GDPR Compliance */}
         <CookieBanner />
+        
+        {/* Admin Panel Button */}
+        <AdminButton />
       </div>
     </LanguageProvider>
   );
