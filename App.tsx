@@ -21,7 +21,7 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-transparent text-white selection:bg-flyer-pink selection:text-white relative font-sans overflow-hidden">
         
         {/* Welcome Screen - The "Entrance Door" */}
-        <WelcomeScreen onEnter={() => setHasEntered(true)} />
+        {!hasEntered && <WelcomeScreen onEnter={() => setHasEntered(true)} />}
 
         {/* 1. Global Grain/Noise Overlay - The "Film" Texture */}
         <div className="bg-noise"></div>
