@@ -20,8 +20,13 @@ const App: React.FC = () => {
     <LanguageProvider>
       <div className="min-h-screen bg-transparent text-white selection:bg-flyer-pink selection:text-white relative font-sans overflow-hidden">
         
-        {/* Welcome Screen - The "Entrance Door" */}
-        {!hasEntered && <WelcomeScreen onEnter={() => setHasEntered(true)} />}
+        {/* DEBUG: Test if React is rendering */}
+        <div className="fixed top-4 left-4 z-[999999] bg-red-500 text-white p-4 rounded">
+          React is working! HasEntered: {hasEntered ? 'true' : 'false'}
+        </div>
+        
+        {/* Welcome Screen - The "Entrance Door" - TEMPORARILY DISABLED FOR DEBUGGING */}
+        {/* {!hasEntered && <WelcomeScreen onEnter={() => setHasEntered(true)} />} */}
 
         {/* 1. Global Grain/Noise Overlay - The "Film" Texture */}
         <div className="bg-noise"></div>
