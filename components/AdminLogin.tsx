@@ -27,7 +27,7 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onClose }) => {
       localStorage.setItem('adminAuth', 'true');
       onSuccess();
     } else {
-      setError('Nieprawidłowe hasło');
+      setError('Falsches Passwort');
       setPassword('');
     }
     setIsLoading(false);
@@ -48,14 +48,14 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onClose }) => {
           <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-gold/30">
             <Lock className="w-8 h-8 text-gold" />
           </div>
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">Panel Administratora</h2>
-          <p className="text-white/60 text-sm">Wprowadź hasło, aby kontynuować</p>
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">Administrator-Panel</h2>
+          <p className="text-white/60 text-sm">Geben Sie das Passwort ein, um fortzufahren</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="password" className="block text-white/70 text-sm mb-2">
-              Hasło
+              Passwort
             </label>
             <input
               id="password"
@@ -87,16 +87,16 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onClose }) => {
             {isLoading ? (
               <>
                 <div className="w-5 h-5 border-2 border-royal border-t-transparent rounded-full animate-spin"></div>
-                <span>Logowanie...</span>
+                <span>Anmelden...</span>
               </>
             ) : (
-              'Zaloguj się'
+              'Anmelden'
             )}
           </button>
         </form>
 
         <p className="text-white/30 text-xs text-center mt-6">
-          Naciśnij Ctrl+Shift+A aby otworzyć panel
+          Drücken Sie Ctrl+Shift+A, um das Panel zu öffnen
         </p>
       </div>
     </div>
@@ -104,4 +104,5 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess, onClose }) => {
 };
 
 export default AdminLogin;
+
 

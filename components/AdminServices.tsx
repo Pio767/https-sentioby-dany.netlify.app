@@ -37,7 +37,7 @@ const AdminServices: React.FC = () => {
   };
 
   const handleDelete = (id: string) => {
-    if (confirm('Czy na pewno chcesz usunąć tę usługę?')) {
+    if (confirm('Sind Sie sicher, dass Sie diese Dienstleistung löschen möchten?')) {
       const updated = services.filter((s: any) => s.id !== id);
       updateSection('services', updated);
     }
@@ -63,13 +63,13 @@ const AdminServices: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-serif font-bold text-white">Zarządzanie Usługami</h2>
+        <h2 className="text-2xl font-serif font-bold text-white">Dienstleistungen verwalten</h2>
         <button
           onClick={() => setNewService(true)}
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <Plus size={16} />
-          Dodaj usługę
+          Dienstleistung hinzufügen
         </button>
       </div>
 
@@ -170,7 +170,7 @@ const ServiceEditForm: React.FC<{
     <form onSubmit={handleSubmit} className="bg-white/5 border border-gold/30 rounded-lg p-6 space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-white/70 text-sm mb-2">Tytuł (EN)</label>
+          <label className="block text-white/70 text-sm mb-2">Titel (EN)</label>
           <input
             type="text"
             value={formData.title}
@@ -180,7 +180,7 @@ const ServiceEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Ikona</label>
+          <label className="block text-white/70 text-sm mb-2">Symbol</label>
           <select
             value={formData.icon}
             onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
@@ -193,7 +193,7 @@ const ServiceEditForm: React.FC<{
           </select>
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Opis (ES)</label>
+          <label className="block text-white/70 text-sm mb-2">Beschreibung (ES)</label>
           <textarea
             value={formData.descriptionEs}
             onChange={(e) => setFormData({ ...formData, descriptionEs: e.target.value })}
@@ -203,7 +203,7 @@ const ServiceEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Opis (DE)</label>
+          <label className="block text-white/70 text-sm mb-2">Beschreibung (DE)</label>
           <textarea
             value={formData.descriptionDe}
             onChange={(e) => setFormData({ ...formData, descriptionDe: e.target.value })}
@@ -213,7 +213,7 @@ const ServiceEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Opis (EN)</label>
+          <label className="block text-white/70 text-sm mb-2">Beschreibung (EN)</label>
           <textarea
             value={formData.descriptionEn}
             onChange={(e) => setFormData({ ...formData, descriptionEn: e.target.value })}
@@ -224,7 +224,7 @@ const ServiceEditForm: React.FC<{
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-white/70 text-sm mb-2">Cena 60 min (€)</label>
+            <label className="block text-white/70 text-sm mb-2">Preis 60 min (€)</label>
             <input
               type="number"
               value={formData.price60}
@@ -234,7 +234,7 @@ const ServiceEditForm: React.FC<{
             />
           </div>
           <div>
-            <label className="block text-white/70 text-sm mb-2">Cena 30 min (€)</label>
+            <label className="block text-white/70 text-sm mb-2">Preis 30 min (€)</label>
             <input
               type="number"
               value={formData.price30}
@@ -252,14 +252,14 @@ const ServiceEditForm: React.FC<{
           className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
         >
           <X size={16} />
-          Anuluj
+          Abbrechen
         </button>
         <button
           type="submit"
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <Save size={16} />
-          {isNew ? 'Dodaj' : 'Zapisz'}
+          {isNew ? 'Hinzufügen' : 'Speichern'}
         </button>
       </div>
     </form>

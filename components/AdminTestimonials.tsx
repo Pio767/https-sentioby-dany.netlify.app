@@ -18,7 +18,7 @@ const AdminTestimonials: React.FC = () => {
   };
 
   const handleDelete = (index: number) => {
-    if (confirm('Czy na pewno chcesz usunąć tę opinię?')) {
+    if (confirm('Sind Sie sicher, dass Sie diese Bewertung löschen möchten?')) {
       const updated = testimonials.filter((_, i) => i !== index);
       updateSection('testimonials', updated);
     }
@@ -33,13 +33,13 @@ const AdminTestimonials: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-serif font-bold text-white">Zarządzanie Opiniami</h2>
+        <h2 className="text-2xl font-serif font-bold text-white">Bewertungen verwalten</h2>
         <button
           onClick={() => setNewTestimonial(true)}
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <Plus size={16} />
-          Dodaj opinię
+          Bewertung hinzufügen
         </button>
       </div>
 
@@ -124,7 +124,7 @@ const TestimonialEditForm: React.FC<{
     <form onSubmit={handleSubmit} className="bg-white/5 border border-gold/30 rounded-lg p-6 space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-white/70 text-sm mb-2">Imię i nazwisko</label>
+          <label className="block text-white/70 text-sm mb-2">Name</label>
           <input
             type="text"
             value={formData.name}
@@ -134,7 +134,7 @@ const TestimonialEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Liczba gwiazdek (1-5)</label>
+          <label className="block text-white/70 text-sm mb-2">Sterne (1-5)</label>
           <input
             type="number"
             min="1"
@@ -146,7 +146,7 @@ const TestimonialEditForm: React.FC<{
           />
         </div>
         <div className="md:col-span-2">
-          <label className="block text-white/70 text-sm mb-2">Treść opinii</label>
+          <label className="block text-white/70 text-sm mb-2">Text</label>
           <textarea
             value={formData.text}
             onChange={(e) => setFormData({ ...formData, text: e.target.value })}
@@ -163,14 +163,14 @@ const TestimonialEditForm: React.FC<{
           className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
         >
           <X size={16} />
-          Anuluj
+          Abbrechen
         </button>
         <button
           type="submit"
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <Save size={16} />
-          {isNew ? 'Dodaj' : 'Zapisz'}
+          {isNew ? 'Hinzufügen' : 'Speichern'}
         </button>
       </div>
     </form>
@@ -178,4 +178,5 @@ const TestimonialEditForm: React.FC<{
 };
 
 export default AdminTestimonials;
+
 

@@ -17,7 +17,7 @@ const AdminFAQ: React.FC = () => {
   };
 
   const handleDelete = (id: string) => {
-    if (confirm('Czy na pewno chcesz usunąć to pytanie?')) {
+    if (confirm('Sind Sie sicher, dass Sie diese Frage löschen möchten?')) {
       const updated = faq.filter((f: any) => f.id !== id);
       updateSection('faq', updated);
     }
@@ -32,13 +32,13 @@ const AdminFAQ: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-serif font-bold text-white">Zarządzanie FAQ</h2>
+        <h2 className="text-2xl font-serif font-bold text-white">FAQ verwalten</h2>
         <button
           onClick={() => setNewFAQ(true)}
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <Plus size={16} />
-          Dodaj pytanie
+          Frage hinzufügen
         </button>
       </div>
 
@@ -63,20 +63,20 @@ const AdminFAQ: React.FC = () => {
                 <div className="flex-1">
                   <div className="space-y-3">
                     <div>
-                      <h3 className="text-gold text-sm mb-1">Pytanie (ES)</h3>
+                      <h3 className="text-gold text-sm mb-1">Frage (ES)</h3>
                       <p className="text-white font-medium">{item.questionEs}</p>
                     </div>
                     <div>
-                      <h3 className="text-gold text-sm mb-1">Odpowiedź (ES)</h3>
+                      <h3 className="text-gold text-sm mb-1">Antwort (ES)</h3>
                       <p className="text-white/70">{item.answerEs}</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-4 border-t border-white/10">
                       <div>
-                        <h3 className="text-gold text-sm mb-1">Pytanie (DE)</h3>
+                        <h3 className="text-gold text-sm mb-1">Frage (DE)</h3>
                         <p className="text-white/70 text-sm">{item.questionDe}</p>
                       </div>
                       <div>
-                        <h3 className="text-gold text-sm mb-1">Pytanie (EN)</h3>
+                        <h3 className="text-gold text-sm mb-1">Frage (EN)</h3>
                         <p className="text-white/70 text-sm">{item.questionEn}</p>
                       </div>
                     </div>
@@ -131,7 +131,7 @@ const FAQEditForm: React.FC<{
     <form onSubmit={handleSubmit} className="bg-white/5 border border-gold/30 rounded-lg p-6 space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-white/70 text-sm mb-2">Pytanie (ES)</label>
+          <label className="block text-white/70 text-sm mb-2">Frage (ES)</label>
           <input
             type="text"
             value={formData.questionEs}
@@ -141,7 +141,7 @@ const FAQEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Odpowiedź (ES)</label>
+          <label className="block text-white/70 text-sm mb-2">Antwort (ES)</label>
           <textarea
             value={formData.answerEs}
             onChange={(e) => setFormData({ ...formData, answerEs: e.target.value })}
@@ -151,7 +151,7 @@ const FAQEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Pytanie (DE)</label>
+          <label className="block text-white/70 text-sm mb-2">Frage (DE)</label>
           <input
             type="text"
             value={formData.questionDe}
@@ -161,7 +161,7 @@ const FAQEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Odpowiedź (DE)</label>
+          <label className="block text-white/70 text-sm mb-2">Antwort (DE)</label>
           <textarea
             value={formData.answerDe}
             onChange={(e) => setFormData({ ...formData, answerDe: e.target.value })}
@@ -171,7 +171,7 @@ const FAQEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Pytanie (EN)</label>
+          <label className="block text-white/70 text-sm mb-2">Frage (EN)</label>
           <input
             type="text"
             value={formData.questionEn}
@@ -181,7 +181,7 @@ const FAQEditForm: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-white/70 text-sm mb-2">Odpowiedź (EN)</label>
+          <label className="block text-white/70 text-sm mb-2">Antwort (EN)</label>
           <textarea
             value={formData.answerEn}
             onChange={(e) => setFormData({ ...formData, answerEn: e.target.value })}
@@ -198,14 +198,14 @@ const FAQEditForm: React.FC<{
           className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
         >
           <X size={16} />
-          Anuluj
+          Abbrechen
         </button>
         <button
           type="submit"
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <Save size={16} />
-          {isNew ? 'Dodaj' : 'Zapisz'}
+          {isNew ? 'Hinzufügen' : 'Speichern'}
         </button>
       </div>
     </form>
@@ -213,4 +213,5 @@ const FAQEditForm: React.FC<{
 };
 
 export default AdminFAQ;
+
 

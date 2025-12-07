@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Settings } from 'lucide-react';
 import AdminLogin from './AdminLogin';
 import AdminPanel from './AdminPanel';
 
@@ -86,16 +85,6 @@ const AdminButton: React.FC = () => {
 
   return (
     <>
-      {/* Ukryty przycisk - będzie dodany do Footer */}
-      <button
-        onClick={() => setShowLogin(true)}
-        className="admin-access-button fixed bottom-4 left-4 w-10 h-10 bg-royal/30 hover:bg-royal/60 border border-gold/20 hover:border-gold/40 rounded-full flex items-center justify-center text-gold/40 hover:text-gold transition-all opacity-20 hover:opacity-100 z-50 shadow-lg backdrop-blur-sm"
-        title="Panel Administratora (Ctrl+Shift+A)"
-        aria-label="Admin Panel"
-      >
-        <Settings size={18} />
-      </button>
-
       {showLogin && (
         <AdminLogin
           onSuccess={handleLoginSuccess}

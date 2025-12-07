@@ -19,7 +19,7 @@ const AdminContact: React.FC = () => {
   };
 
   const handleReset = () => {
-    if (confirm('Czy na pewno chcesz przywrócić domyślne wartości?')) {
+    if (confirm('Sind Sie sicher, dass Sie die Standardwerte wiederherstellen möchten?')) {
       setFormData(CONTACT_INFO);
       setHasChanges(true);
     }
@@ -28,7 +28,7 @@ const AdminContact: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-serif font-bold text-white">Dane Kontaktowe</h2>
+        <h2 className="text-2xl font-serif font-bold text-white">Kontaktdaten</h2>
         <div className="flex gap-2">
           <button
             onClick={handleReset}
@@ -43,14 +43,14 @@ const AdminContact: React.FC = () => {
             className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             <Save size={16} />
-            Zapisz zmiany
+            Änderungen speichern
           </button>
         </div>
       </div>
 
       <div className="bg-white/5 border border-white/10 rounded-lg p-6 space-y-6">
         <div>
-          <label className="block text-white/70 text-sm mb-2">Adres</label>
+          <label className="block text-white/70 text-sm mb-2">Adresse</label>
           <input
             type="text"
             value={formData.address}
@@ -62,7 +62,7 @@ const AdminContact: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-white/70 text-sm mb-2">Telefon (ES) - Llamadas</label>
+            <label className="block text-white/70 text-sm mb-2">Telefon (ES) - Anrufe</label>
             <input
               type="tel"
               value={formData.phoneEs}
@@ -84,7 +84,7 @@ const AdminContact: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-white/70 text-sm mb-2">Email</label>
+          <label className="block text-white/70 text-sm mb-2">E-Mail</label>
           <input
             type="email"
             value={formData.email}
@@ -95,7 +95,7 @@ const AdminContact: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-white/70 text-sm mb-2">Notatka o rezerwacji</label>
+          <label className="block text-white/70 text-sm mb-2">Buchungsnotiz</label>
           <input
             type="text"
             value={formData.bookingNote}
@@ -108,7 +108,7 @@ const AdminContact: React.FC = () => {
 
       {hasChanges && (
         <div className="mt-4 bg-gold/20 border border-gold/50 rounded-lg p-4 text-gold text-sm">
-          Masz niezapisane zmiany. Kliknij "Zapisz zmiany" aby je zapisać.
+          Sie haben nicht gespeicherte Änderungen. Klicken Sie auf "Änderungen speichern", um sie zu speichern.
         </div>
       )}
     </div>
@@ -116,4 +116,5 @@ const AdminContact: React.FC = () => {
 };
 
 export default AdminContact;
+
 

@@ -19,10 +19,10 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   const [showSaveConfirm, setShowSaveConfirm] = useState(false);
 
   const tabs = [
-    { id: 'services' as TabType, label: 'Usługi', icon: Settings },
-    { id: 'testimonials' as TabType, label: 'Opinie', icon: MessageSquare },
+    { id: 'services' as TabType, label: 'Dienstleistungen', icon: Settings },
+    { id: 'testimonials' as TabType, label: 'Bewertungen', icon: MessageSquare },
     { id: 'faq' as TabType, label: 'FAQ', icon: HelpCircle },
-    { id: 'gallery' as TabType, label: 'Galeria', icon: Image },
+    { id: 'gallery' as TabType, label: 'Galerie', icon: Image },
     { id: 'contact' as TabType, label: 'Kontakt', icon: Phone },
   ];
 
@@ -33,7 +33,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   };
 
   const handleReset = () => {
-    if (confirm('Czy na pewno chcesz przywrócić domyślne wartości? Wszystkie zmiany zostaną utracone.')) {
+    if (confirm('Sind Sie sicher, dass Sie die Standardwerte wiederherstellen möchten? Alle Änderungen gehen verloren.')) {
       resetToDefaults();
     }
   };
@@ -48,15 +48,15 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
               <Settings className="w-5 h-5 text-gold" />
             </div>
             <div>
-              <h1 className="text-xl font-serif font-bold text-white">Panel Administratora</h1>
-              <p className="text-white/60 text-xs">Zarządzanie treścią strony</p>
+              <h1 className="text-xl font-serif font-bold text-white">Administrator-Panel</h1>
+              <p className="text-white/60 text-xs">Verwaltung des Website-Inhalts</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             {hasChanges && (
               <span className="text-xs text-gold bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
-                Niezapisane zmiany
+                Ungespeicherte Änderungen
               </span>
             )}
             <button
@@ -65,7 +65,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
               className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <Save size={16} />
-              Zapisz
+              Speichern
             </button>
             <button
               onClick={handleReset}
@@ -78,7 +78,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
               className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
             >
               <LogOut size={16} />
-              Wyloguj
+              Abmelden
             </button>
           </div>
         </div>
@@ -109,7 +109,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
           {showSaveConfirm && (
             <div className="mb-4 bg-gold/20 border border-gold/50 rounded-lg p-4 text-gold flex items-center gap-2">
               <Save size={20} />
-              <span>Zmiany zostały zapisane!</span>
+              <span>Änderungen wurden gespeichert!</span>
             </div>
           )}
 
@@ -125,4 +125,5 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
 };
 
 export default AdminPanel;
+
 

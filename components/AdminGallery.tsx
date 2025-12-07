@@ -18,7 +18,7 @@ const AdminGallery: React.FC = () => {
   };
 
   const handleDelete = (index: number) => {
-    if (confirm('Czy na pewno chcesz usunąć to zdjęcie?')) {
+    if (confirm('Sind Sie sicher, dass Sie dieses Bild löschen möchten?')) {
       const updated = gallery.filter((_, i) => i !== index);
       updateSection('gallery', updated);
     }
@@ -37,18 +37,18 @@ const AdminGallery: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-serif font-bold text-white">Zarządzanie Galerią</h2>
+        <h2 className="text-2xl font-serif font-bold text-white">Galerie verwalten</h2>
       </div>
 
       {/* Add new image */}
       <div className="bg-white/5 border border-gold/30 rounded-lg p-6 mb-6">
-        <h3 className="text-lg font-serif font-bold text-white mb-4">Dodaj nowe zdjęcie</h3>
+        <h3 className="text-lg font-serif font-bold text-white mb-4">Neues Bild hinzufügen</h3>
         <div className="flex gap-2">
           <input
             type="url"
             value={newImageUrl}
             onChange={(e) => setNewImageUrl(e.target.value)}
-            placeholder="Wklej URL zdjęcia (np. https://example.com/image.jpg)"
+            placeholder="URL des Bildes einfügen (z.B. https://example.com/image.jpg)"
             className="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-gold"
           />
           <button
@@ -57,7 +57,7 @@ const AdminGallery: React.FC = () => {
             className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             <Plus size={16} />
-            Dodaj
+            Hinzufügen
           </button>
         </div>
       </div>
@@ -80,7 +80,7 @@ const AdminGallery: React.FC = () => {
                   onClick={() => handleMove(index, 'up')}
                   disabled={index === 0}
                   className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                  title="Przenieś w górę"
+                  title="Nach oben verschieben"
                 >
                   ↑
                 </button>
@@ -88,7 +88,7 @@ const AdminGallery: React.FC = () => {
                   onClick={() => handleMove(index, 'down')}
                   disabled={index === gallery.length - 1}
                   className="px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                  title="Przenieś w dół"
+                  title="Nach unten verschieben"
                 >
                   ↓
                 </button>
@@ -110,7 +110,7 @@ const AdminGallery: React.FC = () => {
       {gallery.length === 0 && (
         <div className="text-center py-12 bg-white/5 border border-white/10 rounded-lg">
           <ImageIcon className="w-16 h-16 text-white/20 mx-auto mb-4" />
-          <p className="text-white/50">Brak zdjęć w galerii</p>
+          <p className="text-white/50">Keine Bilder in der Galerie</p>
         </div>
       )}
     </div>
@@ -118,4 +118,5 @@ const AdminGallery: React.FC = () => {
 };
 
 export default AdminGallery;
+
 

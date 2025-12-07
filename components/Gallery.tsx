@@ -109,7 +109,7 @@ const Gallery: React.FC = () => {
                   style={{ 
                     // Special cropping for the LAST image (Stones) to show the top
                     // Centered for others
-                    objectPosition: index === GALLERY_IMAGES.length - 1 ? 'center 0%' : 'center center' 
+                    objectPosition: index === galleryImages.length - 1 ? 'center 0%' : 'center center' 
                   }}
                 />
                 
