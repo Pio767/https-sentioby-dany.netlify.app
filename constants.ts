@@ -1,4 +1,3 @@
-
 import { CheckCircle, Heart, Sparkles, User } from 'lucide-react';
 
 export const CONTACT_INFO = {
@@ -34,9 +33,9 @@ export const SERVICES_DATA = [
     id: 'personalized',
     title: 'Personalized Treatment',
     icon: User,
-    descriptionEs: "Tratamiento adaptado a sus necesidades individuales, basado en una sólida formación de fisioterapia alemana.",
-    descriptionDe: "Individuell auf Ihre Bedürfnisse abgestimmte Behandlung, basierend auf fundiertem deutschen Physiotherapie-Hintergrund.",
-    descriptionEn: "Treatment adapted to your individual needs, based on a solid German physiotherapy background.",
+    descriptionEs: "Un masaje adaptado individualmente a sus necesidades, que incluye Gua Sha y ventosas.",
+    descriptionDe: "Eine individuell auf Ihre Bedürfnisse zugeschnittene Massage, inklusive Gua Sha und Schröpfen.",
+    descriptionEn: "A massage individually tailored to your needs, including Gua Sha and cupping.",
     price60: 50,
     price30: 30
   },
@@ -49,6 +48,16 @@ export const SERVICES_DATA = [
     descriptionEn: "A classic massage designed to calm the mind and relax muscles, ideal for disconnecting from daily stress.",
     price60: 50,
     price30: 30
+  },
+  {
+    id: 'lymphatic',
+    title: 'Lymphatic Massage',
+    icon: CheckCircle, // Assuming a default icon, can be changed
+    descriptionEs: "Para estimular el flujo linfático en caso de enfermedad o congestión.",
+    descriptionDe: "Zur Anregung des Lymphflusses bei Krankheit oder Stauungen.",
+    descriptionEn: "To stimulate lymph flow in case of illness or congestion.",
+    price60: 50, // Assuming default price, can be changed
+    price30: 30  // Assuming default price, can be changed
   }
 ];
 
