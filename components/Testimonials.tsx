@@ -1,18 +1,40 @@
 
 import React, { useState } from 'react';
-import { Star, Quote, ChevronDown, ChevronUp } from 'lucide-react';
+import { Star, Quote, ChevronDown, ChevronUp, Languages } from 'lucide-react';
 import { getTestimonialsData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
+import { translateText } from '../utils/translator';
 
 const TestimonialCard: React.FC<{ testimonial: any }> = ({ testimonial }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const MAX_LENGTH = 150;
-  const isLongText = testimonial.text.length > MAX_LENGTH;
+  const [translatedText, setTranslatedText] = useState<string | null>(null);
+  const [isTranslated, setIsTranslated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { language } = useLanguage();
 
+  const MAX_LENGTH = 150;
+  const originalText = testimonial.text;
+  const isLongText = originalText.length > MAX_LENGTH;
+
+  const currentText = isTranslated ? translatedText : originalText;
+  
   const displayText = isExpanded || !isLongText 
-    ? testimonial.text 
-    : `${testimonial.text.slice(0, MAX_LENGTH)}...`;
+    ? currentText 
+    : `${currentText?.slice(0, MAX_LENGTH)}...`;
+
+  const handleTranslate = async () => {
+    if (isTranslated) {
+      setIsTranslated(false);
+      return;
+    }
+    
+    setIsLoading(true);
+    const translation = await translateText(originalText, testimonial.lang, language);
+    setTranslatedText(translation);
+    setIsTranslated(true);
+    setIsLoading(false);
+  };
 
   return (
     <div 
@@ -53,12 +75,23 @@ const TestimonialCard: React.FC<{ testimonial: any }> = ({ testimonial }) => {
               <span className="text-gold font-serif font-bold text-base md:text-lg">{testimonial.name.charAt(0)}</span>
            </div>
         </div>
-        <div>
+        <div className="flex-grow">
            <span className="text-white font-medium tracking-widest text-xs md:text-sm uppercase block">
             {testimonial.name}
           </span>
           <span className="text-white/40 text-[10px] md:text-xs tracking-wider">Client</span>
         </div>
+        
+        {testimonial.lang !== language && (
+          <button 
+            onClick={handleTranslate} 
+            className="text-gold/50 hover:text-gold transition-colors text-xs uppercase tracking-widest flex items-center gap-1.5 p-2 rounded-md bg-white/5 hover:bg-white/10"
+            disabled={isLoading}
+          >
+            <Languages size={14} />
+            {isLoading ? 'Translating...' : (isTranslated ? 'Original' : 'Translate')}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -72,23 +72,31 @@ export const TESTIMONIALS_DATA = [
   {
     name: "Nicole Bruns",
     text: "Ich bin wirklich schwer begeistert! Die Massage war etwas ganz Besonderes: Es wurde mit Schröpfgläsern und einem Schaber gearbeitet – eine Technik, die ich so noch nie erlebt habe. Ich hatte erstmals das Gefühl, dass wirklich tief an meinen Faszien gearbeitet wurde. Schon während der Behandlung merkte ich, wie alles leichter wurde. Sogar meine Schmerzen im unteren Rücken sind komplett verschwunden. Eine absolut empfehlenswerte Erfahrung!",
-    stars: 5
+    stars: 5,
+    lang: 'de'
   },
   {
     name: "Jim Marks",
     text: "Massage treatment with Dany is fabulous. I am now a regular, I literally feel like I am floating when I leave and feel so much better in body and soul. I can highly recommend.",
-    stars: 5
+    stars: 5,
+    lang: 'en'
   },
   {
     name: "Inge Hennig",
     text: "Ein Erlebnis der besonderen Art. Das Ambiente ist sehr geschmackvoll und es lädt zur totalen Entspannung ein. Solch eine Massage habe ich noch nie bekommen, sehr zu empfehlen, man ist ein neuer Mensch. Werde ich direkt nächste Woche nochmal genießen. nochmal danke, liebe Dany.",
-    stars: 5
+    stars: 5,
+    lang: 'de'
   },
   {
     name: "Ron W",
     text: "Vandaag hier voor de eerste keer langs geweest, Heel goede helende massage gehad ik kan de lovende commentatoren die er tot nu waren alleen maar beamen. Deze dame heeft gouden handen, doe zo verder Dany",
-    stars: 5
+    stars: 5,
+    lang: 'nl'
   }
+];
+
+export const NEWS_DATA: any[] = [
+  // Future news items will be added here
 ];
 
 export const FAQ_DATA = [

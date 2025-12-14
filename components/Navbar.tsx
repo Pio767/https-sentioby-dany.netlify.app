@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import BookingModal from './BookingModal';
+import NewsModal from './NewsModal'; // Import the new modal
 
 // Simple elegant flag components
 const SpanishFlag = () => (
@@ -36,6 +36,7 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isNewsOpen, setIsNewsOpen] = useState(false); // State for the news modal
   const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
@@ -70,6 +71,9 @@ const Navbar: React.FC = () => {
     if (href === '#contact') {
       setIsBookingOpen(true);
       setIsOpen(false); 
+    } else if (href === '#news') {
+      setIsNewsOpen(true);
+      setIsOpen(false);
     } else {
       setIsOpen(false); 
       
@@ -99,94 +103,85 @@ const Navbar: React.FC = () => {
       {!mobileCompact && <span className="hidden lg:block text-white/80 text-xs font-medium uppercase tracking-wider hover:text-white">{lang}</span>}
     </button>
   );
-
+  
   return (
     <>
-      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-      
-      {/* Main Navbar Bar */}
-      <nav className={`fixed top-0 left-0 w-full z-[50] transition-all duration-500 ${isScrolled ? 'bg-royal/95 backdrop-blur-xl shadow-lg py-3' : 'bg-transparent py-6'}`}>
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative">
-          
-          {/* Left Side: Language Switcher */}
-          <div className="flex items-center gap-2 relative z-[60]">
-             <LanguageButton lang="es" Flag={SpanishFlag} label="Español" />
-             <LanguageButton lang="de" Flag={GermanFlag} label="Deutsch" />
-             <LanguageButton lang="en" Flag={UKFlag} label="English" />
-          </div>
+      <header 
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${isScrolled ? 'bg-royal-dark/95 backdrop-blur-xl shadow-2xl h-[70px]' : 'h-[80px]'}`}
+      >
+        <div className="container mx-auto px-6 h-full flex justify-between items-center">
+          <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="flex items-center gap-2 group">
+            <h1 className="text-white text-lg md:text-xl font-serif font-bold tracking-wider group-hover:text-gold transition-colors">
+              SENTIO <span className="text-[10px] font-sans font-light tracking-widest opacity-80">by DANY</span>
+            </h1>
+          </a>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
-                href={link.href}
+                href={link.href} 
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-white/90 hover:text-gold transition-colors text-xs lg:text-sm uppercase tracking-widest font-medium relative group py-2"
+                className="text-white/80 hover:text-white uppercase text-xs tracking-[0.15em] font-medium transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.name}
-                <span className="absolute bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
-          </div>
-
-          {/* Mobile Toggle Button (Visible when closed) */}
-          <div className="md:hidden relative z-[60] flex items-center">
-            <button 
-              className="text-white hover:text-gold transition-colors p-2" 
-              onClick={() => setIsOpen(true)}
-              aria-label="Open Menu"
+            {/* News button with animation */}
+            <a 
+              href="#news" 
+              onClick={(e) => handleLinkClick(e, '#news')}
+              className="relative text-white/80 hover:text-white uppercase text-xs tracking-[0.15em] font-medium transition-colors p-2 rounded-full animate-pulse-border"
             >
-              <Menu size={34} />
-            </button>
-          </div>
-        </div>
-      </nav>
+              {t.nav.news}
+            </a>
+          </nav>
 
-      {/* Mobile Menu FULL SCREEN OVERLAY (Completely separate layer) */}
+          <div className="hidden lg:flex items-center gap-2">
+            <LanguageButton lang="es" Flag={SpanishFlag} label="Spanish" />
+            <LanguageButton lang="de" Flag={GermanFlag} label="German" mobileCompact />
+            <LanguageButton lang="en" Flag={UKFlag} label="English" mobileCompact />
+          </div>
+
+          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-white p-2">
+            <Menu size={24} />
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 z-[10000] bg-royal/98 backdrop-blur-xl transition-all duration-500 flex flex-col md:hidden ${
-          isOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible delay-200'
-        }`}
+        className={`fixed inset-0 z-50 bg-royal-dark/95 backdrop-blur-2xl transition-transform duration-500 ease-in-out lg:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        {/* Background Decorations */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-magenta/20 rounded-full blur-[80px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold/10 rounded-full blur-[80px] pointer-events-none"></div>
-
-        {/* Close Button Area */}
-        <div className="container mx-auto px-4 py-6 flex justify-end items-center">
-           <button 
-              className="text-white hover:text-gold transition-colors p-2 transform hover:rotate-90 duration-300" 
-              onClick={() => setIsOpen(false)}
-              aria-label="Close Menu"
-            >
-              <X size={40} />
-            </button>
+        <div className="flex justify-between items-center p-6 border-b border-white/10">
+          <h2 className="text-white text-lg font-serif">Menu</h2>
+          <button onClick={() => setIsOpen(false)} className="text-white p-2">
+            <X size={24} />
+          </button>
         </div>
-
-        {/* Menu Items */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-8 overflow-y-auto">
-          {navLinks.map((link, idx) => (
+        <nav className="flex flex-col items-center justify-center h-full -mt-16 gap-8">
+          {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
-              className={`text-white text-3xl font-serif font-light tracking-wide hover:text-gold transition-all duration-500 transform ${
-                isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`}
-              style={{ transitionDelay: `${100 + (idx * 50)}ms` }}
+              className="text-white text-2xl font-serif hover:text-gold transition-colors"
             >
               {link.name}
             </a>
           ))}
-          
-          <div className={`mt-8 h-[1px] w-16 bg-gold/30 transition-all duration-500 ${isOpen ? 'w-16 opacity-100' : 'w-0 opacity-0'}`} style={{ transitionDelay: '400ms' }}></div>
-          
-          <p className={`text-white/40 text-sm uppercase tracking-widest transition-all duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '500ms' }}>
-            Sentio by Dany
-          </p>
-        </div>
+           <a 
+              href="#news" 
+              onClick={(e) => handleLinkClick(e, '#news')}
+              className="relative text-white text-2xl font-serif hover:text-gold transition-colors p-2 rounded-full animate-pulse-border"
+            >
+              {t.nav.news}
+            </a>
+        </nav>
       </div>
+      
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+      <NewsModal isOpen={isNewsOpen} onClose={() => setIsNewsOpen(false)} />
     </>
   );
 };

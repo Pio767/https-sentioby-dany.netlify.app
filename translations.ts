@@ -1,4 +1,3 @@
-
 export const translations = {
   es: {
     nav: {
@@ -7,6 +6,7 @@ export const translations = {
       services: "Servicios",
       gallery: "Galería",
       contact: "Contacto",
+      news: "Novedades"
     },
     hero: {
       tagline: "SeRenDipity Studio",
@@ -90,6 +90,10 @@ export const translations = {
       reject: "Rechazar",
       learnMore: "Más información",
       privacyPolicy: "Política de Privacidad"
+    },
+    news: {
+      title: "Novedades",
+      noNews: "No hay novedades en este momento."
     }
   },
   de: {
@@ -99,6 +103,7 @@ export const translations = {
       services: "Leistungen",
       gallery: "Galerie",
       contact: "Kontakt",
+      news: "Neuigkeiten"
     },
     hero: {
       tagline: "SeRenDipity Studio",
@@ -182,6 +187,10 @@ export const translations = {
       reject: "Ablehnen",
       learnMore: "Mehr erfahren",
       privacyPolicy: "Datenschutzerklärung"
+    },
+    news: {
+      title: "Neuigkeiten",
+      noNews: "Derzeit gibt es keine Neuigkeiten."
     }
   },
   en: {
@@ -191,6 +200,7 @@ export const translations = {
       services: "Services",
       gallery: "Gallery",
       contact: "Contact",
+      news: "News"
     },
     hero: {
       tagline: "SeRenDipity Studio",
@@ -274,6 +284,10 @@ export const translations = {
       reject: "Reject",
       learnMore: "Learn More",
       privacyPolicy: "Privacy Policy"
+    },
+    news: {
+      title: "News",
+      noNews: "There are no news at the moment."
     }
   }
 };
