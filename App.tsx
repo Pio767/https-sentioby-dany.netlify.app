@@ -31,18 +31,18 @@ const App: React.FC = () => {
         <Navbar />
         
         <main className="relative z-10">
-          <Hero />
-          <About />
-          <Services />
+      <Hero />
+      <About />
+      <Services />
           <Gallery />
-          <Testimonials />
+      <Testimonials />
           <FAQ />
         </main>
-        <Footer />
-        
+      <Footer />
+      
         {/* Audio Player */}
-        <AudioPlayer />
-        
+      <AudioPlayer />
+      
         {/* Cookie Banner - GDPR Compliance */}
         <CookieBanner />
 

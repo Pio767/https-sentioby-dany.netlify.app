@@ -242,3 +242,5 @@ Wszystkie komponenty powinny używać tego samego wzorca:
 4. **NISKIE**: Ujednolicić wzorce ładowania danych w komponentach
 
 
+
+

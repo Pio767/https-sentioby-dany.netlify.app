@@ -92,7 +92,7 @@ const About: React.FC = () => {
                         <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-tr from-gold/10 via-transparent to-transparent opacity-20 mix-blend-overlay"></div>
                         
                         <img 
-                          src="https://files.catbox.moe/1g9tcn.jpg" 
+                          src="/assets/daniela-bohme.jpeg" 
                           alt="Daniela Böhme" 
                           className="w-full h-full object-cover object-top transition-transform duration-[2000ms] ease-out group-hover:scale-105 will-change-transform"
                         />

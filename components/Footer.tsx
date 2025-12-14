@@ -163,8 +163,8 @@ const Footer: React.FC = () => {
           <div className="border-t border-white/10 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-white/30 text-xs md:text-sm font-light tracking-wider text-center md:text-left">
-                &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
-              </p>
+              &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
+            </p>
               <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm items-center">
                 <button
                   onClick={() => setIsPrivacyOpen(true)}
