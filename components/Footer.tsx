@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 import { getContactInfo } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
@@ -71,13 +71,6 @@ const Footer: React.FC = () => {
                 {t.footer.brandDesc}
               </p>
               <div className="flex justify-center md:justify-start">
-                <a 
-                  href="#" 
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-royal hover:border-gold transition-all duration-300 shadow-lg hover:shadow-gold/20"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={18} />
-                </a>
               </div>
             </div>
           </RevealOnScroll>

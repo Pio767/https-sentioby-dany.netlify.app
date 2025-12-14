@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES } from '../constants';
+import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
 import { Heart, Sparkles, User, CheckCircle } from 'lucide-react';
 
 export interface AdminData {
@@ -8,6 +8,7 @@ export interface AdminData {
   faq: typeof FAQ_DATA;
   gallery: typeof GALLERY_IMAGES;
   contact: typeof CONTACT_INFO;
+  news: typeof NEWS_DATA;
 }
 
 const STORAGE_KEY = 'sentio_admin_data';
@@ -57,6 +58,10 @@ export const loadAdminData = (): AdminData => {
         if (parsed.services) {
           parsed.services = restoreIcons(parsed.services);
         }
+        // Ensure newsData is always an array, fallback to empty if null/undefined
+        if (!parsed.news) {
+          parsed.news = []; 
+        }
         return parsed;
       } catch (e) {
         console.error('Error parsing stored admin data:', e);
@@ -73,6 +78,7 @@ export const loadAdminData = (): AdminData => {
     faq: FAQ_DATA,
     gallery: GALLERY_IMAGES,
     contact: CONTACT_INFO,
+    news: NEWS_DATA,
   };
 };
 
@@ -129,6 +135,7 @@ export const useAdminData = () => {
       faq: FAQ_DATA,
       gallery: GALLERY_IMAGES,
       contact: CONTACT_INFO,
+      news: NEWS_DATA,
     };
     saveData(defaults);
   };
@@ -144,6 +151,13 @@ export const useAdminData = () => {
     updateSection,
     saveChanges,
     resetToDefaults,
+    // Add individual setters for easier state management in admin sub-components
+    setServicesData: (value: typeof SERVICES_DATA) => updateSection('services', value),
+    setTestimonialsData: (value: typeof TESTIMONIALS_DATA) => updateSection('testimonials', value),
+    setFaqData: (value: typeof FAQ_DATA) => updateSection('faq', value),
+    setGalleryImages: (value: typeof GALLERY_IMAGES) => updateSection('gallery', value),
+    setContactInfo: (value: typeof CONTACT_INFO) => updateSection('contact', value),
+    setNewsData: (value: typeof NEWS_DATA) => updateSection('news', value),
   };
 };
 
