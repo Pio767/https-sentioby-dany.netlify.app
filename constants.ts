@@ -85,8 +85,8 @@ export const TESTIMONIALS_DATA = [
     stars: 5
   },
   {
-    name: "Fabrice Böhme",
-    text: "Hallo es war wirklich Mega sehr zuvorkommend und eine gute Atmosphäre. Kam rein und wurde auch sofort mit einem Lächeln empfangen und bin selber wieder mit einem Lächeln rausgegangen also wer wirklich sich erholen will und sich dabei wohlfühlen will sollte da mal vorbeischauen.",
+    name: "Ron W",
+    text: "Vandaag hier voor de eerste keer langs geweest, Heel goede helende massage gehad ik kan de lovende commentatoren die er tot nu waren alleen maar beamen. Deze dame heeft gouden handen, doe zo verder Dany",
     stars: 5
   }
 ];
