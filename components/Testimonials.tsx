@@ -4,37 +4,23 @@ import { Star, Quote, ChevronDown, ChevronUp, Languages } from 'lucide-react';
 import { getTestimonialsData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
-import { translateText } from '../utils/translator';
 
 const TestimonialCard: React.FC<{ testimonial: any }> = ({ testimonial }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [translatedText, setTranslatedText] = useState<string | null>(null);
-  const [isTranslated, setIsTranslated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
   const { language } = useLanguage();
 
-  const MAX_LENGTH = 150;
-  const originalText = testimonial.text;
-  const isLongText = originalText.length > MAX_LENGTH;
+  const originalText = testimonial.text[testimonial.lang];
+  const translatedText = testimonial.text[language];
 
-  const currentText = isTranslated ? translatedText : originalText;
+  const MAX_LENGTH = 150;
+  const isLongText = originalText.length > MAX_LENGTH || (translatedText && translatedText.length > MAX_LENGTH);
   
+  const currentText = showTranslation ? translatedText : originalText;
+
   const displayText = isExpanded || !isLongText 
     ? currentText 
     : `${currentText?.slice(0, MAX_LENGTH)}...`;
-
-  const handleTranslate = async () => {
-    if (isTranslated) {
-      setIsTranslated(false);
-      return;
-    }
-    
-    setIsLoading(true);
-    const translation = await translateText(originalText, testimonial.lang, language);
-    setTranslatedText(translation);
-    setIsTranslated(true);
-    setIsLoading(false);
-  };
 
   return (
     <div 
@@ -84,12 +70,11 @@ const TestimonialCard: React.FC<{ testimonial: any }> = ({ testimonial }) => {
         
         {testimonial.lang !== language && (
           <button 
-            onClick={handleTranslate} 
+            onClick={() => setShowTranslation(!showTranslation)} 
             className="text-gold/50 hover:text-gold transition-colors text-xs uppercase tracking-widest flex items-center gap-1.5 p-2 rounded-md bg-white/5 hover:bg-white/10"
-            disabled={isLoading}
           >
             <Languages size={14} />
-            {isLoading ? 'Translating...' : (isTranslated ? 'Original' : 'Translate')}
+            {showTranslation ? 'Original' : 'Translate'}
           </button>
         )}
       </div>

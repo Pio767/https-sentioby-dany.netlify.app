@@ -71,27 +71,44 @@ export const GALLERY_IMAGES = [
 export const TESTIMONIALS_DATA = [
   {
     name: "Nicole Bruns",
-    text: "Ich bin wirklich schwer begeistert! Die Massage war etwas ganz Besonderes: Es wurde mit Schröpfgläsern und einem Schaber gearbeitet – eine Technik, die ich so noch nie erlebt habe. Ich hatte erstmals das Gefühl, dass wirklich tief an meinen Faszien gearbeitet wurde. Schon während der Behandlung merkte ich, wie alles leichter wurde. Sogar meine Schmerzen im unteren Rücken sind komplett verschwunden. Eine absolut empfehlenswerte Erfahrung!",
-    stars: 5,
-    lang: 'de'
+    lang: 'de',
+    text: {
+      de: "Ich bin wirklich schwer begeistert! Die Massage war etwas ganz Besonderes: Es wurde mit Schröpfgläsern und einem Schaber gearbeitet – eine Technik, die ich so noch nie erlebt habe. Ich hatte erstmals das Gefühl, dass wirklich tief an meinen Faszien gearbeitet wurde. Schon während der Behandlung merkte ich, wie alles leichter wurde. Sogar meine Schmerzen im unteren Rücken sind komplett verschwunden. Eine absolut empfehlenswerte Erfahrung!",
+      es: "¡Estoy realmente impresionada! El masaje fue algo muy especial: se trabajó con ventosas y un raspador, una técnica que nunca antes había experimentado. Por primera vez sentí que se trabajaba profundamente en mis fascias. Ya durante el tratamiento noté cómo todo se aligeraba. Incluso mi dolor en la parte baja de la espalda ha desaparecido por completo. ¡Una experiencia absolutamente recomendable!",
+      en: "I am truly amazed! The massage was something very special: it was done with cupping glasses and a scraper – a technique I had never experienced before. For the first time, I felt that my fasciae were being worked on deeply. Even during the treatment, I noticed how everything became lighter. Even my lower back pain has completely disappeared. An absolutely recommendable experience!"
+    },
+    stars: 5
   },
   {
     name: "Jim Marks",
-    text: "Massage treatment with Dany is fabulous. I am now a regular, I literally feel like I am floating when I leave and feel so much better in body and soul. I can highly recommend.",
-    stars: 5,
-    lang: 'en'
+    lang: 'en',
+    text: {
+      en: "Massage treatment with Dany is fabulous. I am now a regular, I literally feel like I am floating when I leave and feel so much better in body and soul. I can highly recommend.",
+      de: "Die Massagebehandlung bei Dany ist fabelhaft. Ich bin jetzt Stammkunde, ich fühle mich buchstäblich, als würde ich schweben, wenn ich gehe, und fühle mich in Körper und Seele so viel besser. Ich kann es nur wärmstens empfehlen.",
+      es: "El tratamiento de masaje con Dany es fabuloso. Ahora soy un cliente habitual, literalmente siento que estoy flotando cuando me voy y me siento mucho mejor en cuerpo y alma. Lo recomiendo encarecidamente."
+    },
+    stars: 5
   },
   {
     name: "Inge Hennig",
-    text: "Ein Erlebnis der besonderen Art. Das Ambiente ist sehr geschmackvoll und es lädt zur totalen Entspannung ein. Solch eine Massage habe ich noch nie bekommen, sehr zu empfehlen, man ist ein neuer Mensch. Werde ich direkt nächste Woche nochmal genießen. nochmal danke, liebe Dany.",
-    stars: 5,
-    lang: 'de'
+    lang: 'de',
+    text: {
+      de: "Ein Erlebnis der besonderen Art. Das Ambiente ist sehr geschmackvoll und es lädt zur totalen Entspannung ein. Solch eine Massage habe ich noch nie bekommen, sehr zu empfehlen, man ist ein neuer Mensch. Werde ich direkt nächste Woche nochmal genießen. nochmal danke, liebe Dany.",
+      es: "Una experiencia de un tipo especial. El ambiente es de muy buen gusto e invita a la relajación total. Nunca he recibido un masaje así, muy recomendable, eres una persona nueva. Lo disfrutaré de nuevo la próxima semana. Gracias de nuevo, querida Dany.",
+      en: "An experience of a special kind. The ambiance is very tasteful and invites total relaxation. I have never had a massage like this before, highly recommended, you are a new person. I will enjoy it again next week. thanks again, dear Dany."
+    },
+    stars: 5
   },
   {
     name: "Ron W",
-    text: "Vandaag hier voor de eerste keer langs geweest, Heel goede helende massage gehad ik kan de lovende commentatoren die er tot nu waren alleen maar beamen. Deze dame heeft gouden handen, doe zo verder Dany",
-    stars: 5,
-    lang: 'nl'
+    lang: 'nl',
+    text: {
+      nl: "Vandaag hier voor de eerste keer langs geweest, Heel goede helende massage gehad ik kan de lovende commentatoren die er tot nu waren alleen maar beamen. Deze dame heeft gouden handen, doe zo verder Dany",
+      de: "Heute zum ersten Mal hier gewesen, eine sehr gute heilende Massage bekommen. Ich kann den bisherigen lobenden Kommentaren nur zustimmen. Diese Dame hat goldene Hände, mach weiter so Dany.",
+      es: "He estado aquí por primera vez hoy, he recibido un masaje curativo muy bueno. Solo puedo estar de acuerdo con los comentarios elogiosos que ha habido hasta ahora. Esta dama tiene manos de oro, sigue así Dany.",
+      en: "Been here for the first time today, had a very good healing massage. I can only agree with the rave reviews so far. This lady has golden hands, keep it up Dany."
+    },
+    stars: 5
   }
 ];
 
