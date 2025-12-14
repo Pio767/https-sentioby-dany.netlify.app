@@ -1,4 +1,4 @@
-import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES } from '../constants';
+import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
 import { Heart, Sparkles, User, CheckCircle } from 'lucide-react';
 
 const STORAGE_KEY = 'sentio_admin_data';
@@ -78,11 +78,32 @@ export const getGalleryImages = () => {
   return GALLERY_IMAGES;
 };
 
+export const getNewsData = () => {
+  const stored = loadAdminDataFromStorage();
+  if (stored && stored.news) {
+    return stored.news;
+  }
+  return NEWS_DATA;
+};
+
 export const getContactInfo = () => {
   const stored = loadAdminDataFromStorage();
   if (stored && stored.contact) {
     return stored.contact;
   }
   return CONTACT_INFO;
+};
+
+// Funkcja do zapisywania danych (dla panelu admina)
+export const saveAdminDataToStorage = (data: any) => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {
+    console.error('Error saving admin data to storage:', e);
+  }
 };
 
