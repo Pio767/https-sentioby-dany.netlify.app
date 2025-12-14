@@ -76,7 +76,7 @@ const About: React.FC = () => {
                         {/* Floating Glass Name Badge - Rectangular */}
                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-[85%]">
                            <div className="bg-black/60 backdrop-blur-xl border border-gold/30 p-3 md:p-4 text-center transform transition-all duration-500 hover:bg-black/80 hover:border-gold hover:-translate-y-1 shadow-lg">
-                              <span className="block font-serif italic text-gold text-lg md:text-3xl tracking-wide drop-shadow-md">Daniela Böhme</span>
+                              <span className="block font-serif italic text-gold text-lg md:text-3xl tracking-wide drop-shadow-md">Dany</span>
                               <div className="h-[1px] w-10 md:w-12 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-2"></div>
                            </div>
                         </div>
