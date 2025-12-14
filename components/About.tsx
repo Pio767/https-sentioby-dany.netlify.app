@@ -1,17 +1,14 @@
 
-import React, { useState } from 'react';
-import CertificateModal from './CertificateModal';
+import React from 'react';
 import RevealOnScroll from './RevealOnScroll';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 
 const About: React.FC = () => {
-  const [isCertificateOpen, setIsCertificateOpen] = useState(false);
   const { t } = useLanguage();
 
   return (
     <section id="about" className="py-20 md:py-32 relative z-10 overflow-hidden">
-      <CertificateModal isOpen={isCertificateOpen} onClose={() => setIsCertificateOpen(false)} />
       
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
@@ -43,27 +40,6 @@ const About: React.FC = () => {
                 </p>
               </RevealOnScroll>
 
-              {/* Certificate Button */}
-              <RevealOnScroll direction="up" delay={500}>
-                <div className="pt-4 md:pt-8 flex justify-center lg:justify-start">
-                  <button 
-                    onClick={() => setIsCertificateOpen(true)}
-                    className="group relative inline-flex items-center gap-4 md:gap-5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-gold/50 px-6 md:px-8 py-4 md:py-5 rounded-2xl transition-all duration-500 w-full md:w-auto hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] overflow-hidden"
-                  >
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    
-                    <div className="text-left relative z-10 flex-1 md:flex-initial">
-                      <span className="block text-[10px] text-gold uppercase tracking-[0.15em] mb-1 font-medium">{t.about.certBadge}</span>
-                      <span className="block text-lg md:text-xl font-serif text-white group-hover:text-gold transition-colors duration-500">
-                        {t.about.certBtn}
-                      </span>
-                    </div>
-                    <div className="ml-auto opacity-50 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-gold">
-                      <ArrowRight size={20} className="md:w-[22px] md:h-[22px]" />
-                    </div>
-                  </button>
-                </div>
-              </RevealOnScroll>
             </div>
           </div>
 
