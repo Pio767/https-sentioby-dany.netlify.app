@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
+import { CONTACT_INFO, SERVICES_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
 import { Heart, Sparkles, User, CheckCircle } from 'lucide-react';
 
 export interface AdminData {
   services: typeof SERVICES_DATA;
-  testimonials: typeof TESTIMONIALS_DATA;
+
   faq: typeof FAQ_DATA;
   gallery: typeof GALLERY_IMAGES;
   contact: typeof CONTACT_INFO;
@@ -73,8 +73,8 @@ export const loadAdminData = (): AdminData => {
   
   // Domyślne dane z constants
   return {
+
     services: SERVICES_DATA,
-    testimonials: TESTIMONIALS_DATA,
     faq: FAQ_DATA,
     gallery: GALLERY_IMAGES,
     contact: CONTACT_INFO,
@@ -131,7 +131,6 @@ export const useAdminData = () => {
   const resetToDefaults = () => {
     const defaults: AdminData = {
       services: SERVICES_DATA,
-      testimonials: TESTIMONIALS_DATA,
       faq: FAQ_DATA,
       gallery: GALLERY_IMAGES,
       contact: CONTACT_INFO,
@@ -153,7 +152,7 @@ export const useAdminData = () => {
     resetToDefaults,
     // Add individual setters for easier state management in admin sub-components
     setServicesData: (value: typeof SERVICES_DATA) => updateSection('services', value),
-    setTestimonialsData: (value: typeof TESTIMONIALS_DATA) => updateSection('testimonials', value),
+
     setFaqData: (value: typeof FAQ_DATA) => updateSection('faq', value),
     setGalleryImages: (value: typeof GALLERY_IMAGES) => updateSection('gallery', value),
     setContactInfo: (value: typeof CONTACT_INFO) => updateSection('contact', value),

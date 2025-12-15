@@ -39,11 +39,7 @@ export const translations = {
       location: "SeRenDipity Studio",
       view: "Ver",
     },
-    testimonials: {
-      badge: "Testimonios",
-      title: "Lo que dicen nuestros clientes",
-      clientRole: "Cliente",
-    },
+
     faq: {
       badge: "Dudas Comunes",
       title: "Preguntas Frecuentes",
@@ -136,11 +132,7 @@ export const translations = {
       location: "SeRenDipity Studio",
       view: "Ansicht",
     },
-    testimonials: {
-      badge: "Referenzen",
-      title: "Was unsere Kunden sagen",
-      clientRole: "Kunde",
-    },
+
     faq: {
       badge: "Häufige Fragen",
       title: "FAQ",
@@ -232,11 +224,6 @@ export const translations = {
       title: "The Studio",
       location: "SeRenDipity Studio",
       view: "View",
-    },
-    testimonials: {
-      badge: "Testimonials",
-      title: "What Our Clients Say",
-      clientRole: "Client",
     },
     faq: {
       badge: "Common Questions",

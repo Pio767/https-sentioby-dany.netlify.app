@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X, Save, RotateCcw, LogOut, Settings, Users, MessageSquare, HelpCircle, Image, Phone, Rss } from 'lucide-react';
 import { useAdminData } from '../hooks/useAdminData';
 import AdminServices from './AdminServices';
-import AdminTestimonials from './AdminTestimonials';
+
 import AdminFAQ from './AdminFAQ';
 import AdminGallery from './AdminGallery';
 import AdminContact from './AdminContact';
@@ -12,7 +12,7 @@ interface AdminPanelProps {
   onLogout: () => void;
 }
 
-type TabType = 'services' | 'testimonials' | 'faq' | 'gallery' | 'contact' | 'news';
+type TabType = 'services' | 'faq' | 'gallery' | 'contact' | 'news';
 
 const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
   const { hasChanges, saveChanges, resetToDefaults } = useAdminData();
@@ -21,7 +21,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
 
   const tabs = [
     { id: 'services' as TabType, label: 'Dienstleistungen', icon: Settings },
-    { id: 'testimonials' as TabType, label: 'Bewertungen', icon: MessageSquare },
+
     { id: 'faq' as TabType, label: 'FAQ', icon: HelpCircle },
     { id: 'gallery' as TabType, label: 'Galerie', icon: Image },
     { id: 'contact' as TabType, label: 'Kontakt', icon: Phone },
@@ -116,7 +116,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
           )}
 
           {activeTab === 'services' && <AdminServices />}
-          {activeTab === 'testimonials' && <AdminTestimonials />}
+
           {activeTab === 'faq' && <AdminFAQ />}
           {activeTab === 'gallery' && <AdminGallery />}
           {activeTab === 'contact' && <AdminContact />}

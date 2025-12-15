@@ -11,7 +11,7 @@ App.tsx (Root)
 │   ├── About
 │   ├── Services
 │   ├── Gallery
-│   ├── Testimonials
+
 │   ├── FAQ
 │   ├── Footer
 │   ├── AudioPlayer
@@ -25,7 +25,7 @@ App.tsx (Root)
 - **Lokalizacja**: `constants.ts`
 - **Zawartość**: 
   - `SERVICES_DATA` - usługi z ikonami (komponenty React)
-  - `TESTIMONIALS_DATA` - opinie klientów
+
   - `FAQ_DATA` - pytania i odpowiedzi (3 języki)
   - `GALLERY_IMAGES` - tablica URL-i obrazów
   - `CONTACT_INFO` - dane kontaktowe
@@ -37,11 +37,11 @@ App.tsx (Root)
 1. **`useAdminData` hook** (dla panelu admin)
    - Ładuje dane z localStorage
    - Używa `loadAdminData()` która sprawdza localStorage
-   - Używany przez: `AdminPanel`, `AdminServices`, `AdminTestimonials`, etc.
+   - Używany przez: `AdminPanel`, `AdminServices`, etc.
 
 2. **`dataLoader.ts`** (dla komponentów publicznych)
-   - Funkcje: `getServicesData()`, `getTestimonialsData()`, etc.
-   - Używane przez: `Services`, `Gallery`, `Testimonials`, `FAQ`, `Footer`
+   - Funkcje: `getServicesData()`, etc.
+   - Używane przez: `Services`, `Gallery`, `FAQ`, `Footer`
    - Również sprawdzają localStorage, ale niezależnie
 
 **⚠️ PROBLEM**: Te dwa systemy mogą się rozsynchronizować!
@@ -62,7 +62,7 @@ useAdminData hook
 #### D. Przepływ Danych w Komponentach Publicznych
 
 ```
-Services/Gallery/Testimonials/FAQ/Footer
+Services/Gallery/FAQ/Footer
   ↓
 getServicesData() / getGalleryImages() / etc.
   ↓
@@ -117,7 +117,7 @@ useEffect(() => {
 
 **Problem**: 
 - `getServicesData()` jest wywoływane 2 razy (initial state + useEffect)
-- Inne komponenty (`Gallery`, `Testimonials`, `FAQ`) nie używają useState, tylko bezpośrednio `getXData()`
+- Inne komponenty (`Gallery`, `FAQ`) nie używają useState, tylko bezpośrednio `getXData()`
 - Brak spójności
 
 **Konsekwencje**:

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { Plus, Trash2, Edit2, Save, X, Star } from 'lucide-react';
 import { useAdminData } from '../hooks/useAdminData';
 import { TESTIMONIALS_DATA } from '../constants';
@@ -10,30 +10,37 @@ const AdminTestimonials: React.FC = () => {
 
   const testimonials = data.testimonials || TESTIMONIALS_DATA;
 
-
-
-  const handleSave = (testimonial: any, index: number) => {
-    const updated = [...testimonials];
-    updated[index] = testimonial;
-    updateSection('testimonials', updated);
-    saveChanges();
-    setEditingId(null);
-  };
-
-  const handleDelete = (index: number) => {
-    if (confirm('Sind Sie sicher, dass Sie diese Bewertung löschen möchten?')) {
-      const updated = testimonials.filter((_, i) => i !== index);
+  const handleSave = useCallback(
+    (testimonial: any, index: number) => {
+      const updated = [...testimonials];
+      updated[index] = testimonial;
       updateSection('testimonials', updated);
       saveChanges();
-    }
-  };
+      setEditingId(null);
+    },
+    [testimonials, updateSection, saveChanges]
+  );
 
-  const handleAdd = (testimonial: any) => {
-    const updated = [...testimonials, testimonial];
-    updateSection('testimonials', updated);
-    saveChanges();
-    setNewTestimonial(false);
-  };
+  const handleDelete = useCallback(
+    (index: number) => {
+      if (confirm('Sind Sie sicher, dass Sie diese Bewertung löschen möchten?')) {
+        const updated = testimonials.filter((_, i) => i !== index);
+        updateSection('testimonials', updated);
+        saveChanges();
+      }
+    },
+    [testimonials, updateSection, saveChanges]
+  );
+
+  const handleAdd = useCallback(
+    (testimonial: any) => {
+      const updated = [...testimonials, testimonial];
+      updateSection('testimonials', updated);
+      saveChanges();
+      setNewTestimonial(false);
+    },
+    [testimonials, updateSection, saveChanges]
+  );
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -117,12 +124,8 @@ const TestimonialEditForm: React.FC<{
   onSave: (testimonial: any, index: number) => void;
   onCancel: () => void;
   isNew?: boolean;
-}> = ({ testimonial, index, onSave, onCancel, isNew = false }) => {
+}> = memo(({ testimonial, index, onSave, onCancel, isNew = false }) => {
   const [formData, setFormData] = useState(testimonial);
-
-  useEffect(() => {
-    setFormData(testimonial);
-  }, [testimonial]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -184,7 +187,7 @@ const TestimonialEditForm: React.FC<{
       </div>
     </form>
   );
-};
+});
 
 export default AdminTestimonials;
 

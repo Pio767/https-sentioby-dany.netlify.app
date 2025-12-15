@@ -1,4 +1,4 @@
-import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
+import { CONTACT_INFO, SERVICES_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
 import { Heart, Sparkles, User, CheckCircle } from 'lucide-react';
 
 const STORAGE_KEY = 'sentio_admin_data';
@@ -54,13 +54,7 @@ export const getServicesData = () => {
   return SERVICES_DATA;
 };
 
-export const getTestimonialsData = () => {
-  const stored = loadAdminDataFromStorage();
-  if (stored && stored.testimonials) {
-    return stored.testimonials;
-  }
-  return TESTIMONIALS_DATA;
-};
+
 
 export const getFAQData = () => {
   const stored = loadAdminDataFromStorage();
