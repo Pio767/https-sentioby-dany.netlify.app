@@ -123,9 +123,9 @@ const AdminNews: React.FC = () => {
       )}
 
       <div className="mt-8 space-y-4">
-        <h3 className="text-xl font-serif text-white">Istniejące newsy</h3>
+        <h3 className="text-xl font-serif text-white">Vorhandene Neuigkeiten</h3>
         {newsData.length === 0 ? (
-          <p className="text-white/60 italic">Brak newsów.</p>
+          <p className="text-white/60 italic">Keine Neuigkeiten vorhanden.</p>
         ) : (
           <ul className="space-y-2">
             {newsData.map((news: NewsItem) => (
