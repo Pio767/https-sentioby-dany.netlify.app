@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAdminData } from '../hooks/useAdminData';
-import { PlusCircle, Edit, Trash2 } from 'lucide-react';
+import { PlusCircle, Edit, Trash2, Save, X } from 'lucide-react';
 
 interface NewsItem {
   id: string;
@@ -10,7 +10,8 @@ interface NewsItem {
 }
 
 const AdminNews: React.FC = () => {
-  const { newsData, setNewsData, saveData } = useAdminData();
+  const { data, updateSection, saveChanges } = useAdminData();
+  const newsData = data.news || [];
   const [currentNews, setCurrentNews] = useState<NewsItem | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -53,8 +54,8 @@ const AdminNews: React.FC = () => {
       const newId = Date.now().toString();
       updatedNewsData = [...newsData, { id: newId, title: newTitle, content: newContent, date: newDate }];
     }
-    setNewsData(updatedNewsData);
-    saveData({ newsData: updatedNewsData });
+    updateSection('news', updatedNewsData);
+    saveChanges();
     setIsEditing(false);
     setCurrentNews(null);
   };
@@ -62,8 +63,8 @@ const AdminNews: React.FC = () => {
   const handleDeleteNews = (id: string) => {
     if (confirm('Czy na pewno chcesz usunąć ten news?')) {
       const updatedNewsData = newsData.filter((news: NewsItem) => news.id !== id);
-      setNewsData(updatedNewsData);
-      saveData({ newsData: updatedNewsData });
+      updateSection('news', updatedNewsData);
+      saveChanges();
     }
   };
 
