@@ -4,7 +4,7 @@ import { useAdminData } from '../hooks/useAdminData';
 import { TESTIMONIALS_DATA } from '../constants';
 
 const AdminTestimonials: React.FC = () => {
-  const { data, updateSection } = useAdminData();
+  const { data, updateSection, saveChanges } = useAdminData();
   const [editingId, setEditingId] = useState<number | null>(null);
   const [newTestimonial, setNewTestimonial] = useState(false);
 
@@ -14,6 +14,7 @@ const AdminTestimonials: React.FC = () => {
     const updated = [...testimonials];
     updated[index] = testimonial;
     updateSection('testimonials', updated);
+    saveChanges();
     setEditingId(null);
   };
 
@@ -21,12 +22,14 @@ const AdminTestimonials: React.FC = () => {
     if (confirm('Sind Sie sicher, dass Sie diese Bewertung löschen möchten?')) {
       const updated = testimonials.filter((_, i) => i !== index);
       updateSection('testimonials', updated);
+      saveChanges();
     }
   };
 
   const handleAdd = (testimonial: any) => {
     const updated = [...testimonials, testimonial];
     updateSection('testimonials', updated);
+    saveChanges();
     setNewTestimonial(false);
   };
 

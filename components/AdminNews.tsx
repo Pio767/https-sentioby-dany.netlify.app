@@ -61,7 +61,7 @@ const AdminNews: React.FC = () => {
   };
 
   const handleDeleteNews = (id: string) => {
-    if (confirm('Czy na pewno chcesz usunąć ten news?')) {
+    if (confirm('Sind Sie sicher, dass Sie diese Neuigkeit löschen möchten?')) {
       const updatedNewsData = newsData.filter((news: NewsItem) => news.id !== id);
       updateSection('news', updatedNewsData);
       saveChanges();
@@ -70,7 +70,7 @@ const AdminNews: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-serif text-white">Zarządzanie Aktualnościami</h2>
+      <h2 className="text-2xl font-serif text-white">Neuigkeiten verwalten</h2>
       
       {!isEditing ? (
         <button 
@@ -78,20 +78,20 @@ const AdminNews: React.FC = () => {
           className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
         >
           <PlusCircle size={16} />
-          Dodaj nowy news
+          Neue Neuigkeit hinzufügen
         </button>
       ) : (
         <div className="bg-royal-light p-6 rounded-lg shadow-inner space-y-4">
-          <h3 className="text-xl font-serif text-white">{currentNews ? 'Edytuj news' : 'Nowy news'}</h3>
+          <h3 className="text-xl font-serif text-white">{currentNews ? 'Neuigkeit bearbeiten' : 'Neue Neuigkeit'}</h3>
           <input 
             type="text" 
-            placeholder="Tytuł newsa" 
+            placeholder="Titel der Neuigkeit" 
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             className="w-full p-2 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-gold"
           />
           <textarea 
-            placeholder="Treść newsa" 
+            placeholder="Inhalt der Neuigkeit" 
             value={newContent}
             onChange={(e) => setNewContent(e.target.value)}
             rows={4}
