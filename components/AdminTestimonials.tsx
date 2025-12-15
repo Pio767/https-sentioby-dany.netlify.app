@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Edit2, Save, X, Star } from 'lucide-react';
 import { useAdminData } from '../hooks/useAdminData';
 import { TESTIMONIALS_DATA } from '../constants';
@@ -9,6 +9,8 @@ const AdminTestimonials: React.FC = () => {
   const [newTestimonial, setNewTestimonial] = useState(false);
 
   const testimonials = data.testimonials || TESTIMONIALS_DATA;
+
+
 
   const handleSave = (testimonial: any, index: number) => {
     const updated = [...testimonials];
@@ -117,6 +119,10 @@ const TestimonialEditForm: React.FC<{
   isNew?: boolean;
 }> = ({ testimonial, index, onSave, onCancel, isNew = false }) => {
   const [formData, setFormData] = useState(testimonial);
+
+  useEffect(() => {
+    setFormData(testimonial);
+  }, [testimonial]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
