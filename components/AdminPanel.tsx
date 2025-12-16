@@ -44,7 +44,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
     <div className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-md">
       <div className="h-full flex flex-col">
         {/* Header */}
-        <div className="bg-royal border-b border-gold/30 p-4 flex items-center justify-between">
+        <div className="bg-royal border-b border-gold/30 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center border border-gold/30">
               <Settings className="w-5 h-5 text-gold" />
@@ -55,7 +55,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ onLogout }) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
             {hasChanges && (
               <span className="text-xs text-gold bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
                 Ungespeicherte Änderungen
