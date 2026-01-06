@@ -7,8 +7,9 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
       server: {
-        port: 3000,
+        port: 5174,
         host: '0.0.0.0',
+        strictPort: false, // Pozwól Vite wybrać inny port jeśli 5174 jest zajęty
       },
       plugins: [react()],
       define: {
