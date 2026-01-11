@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
   const waNumber = contactInfo.phoneDe.replace(/[^0-9]/g, '');
 
   return (
-    <footer id="contact" className="relative pt-10 pb-10 overflow-hidden mt-10">
+    <footer id="contact" className="relative pt-10 pb-10 overflow-x-hidden mt-10">
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
       <PrivacyPolicy isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
 
@@ -151,45 +151,44 @@ const Footer: React.FC = () => {
           </RevealOnScroll>
         </div>
 
-        {/* Footer Bottom */}
-        <RevealOnScroll direction="up" delay={400}>
-          <div className="border-t border-white/10 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-white/30 text-xs md:text-sm font-light tracking-wider text-center md:text-left">
+        {/* Footer Bottom - Zawsze widoczny, bez RevealOnScroll dla lepszej widoczności na tabletach */}
+        <div className="border-t border-white/10 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <p className="text-white/30 text-xs md:text-sm font-light tracking-wider text-center md:text-left">
               &copy; {new Date().getFullYear()} Sentio by Dany. {t.footer.rights} | SeRenDipity Studio
             </p>
-              <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm items-center">
-                <button
-                  onClick={() => setIsPrivacyOpen(true)}
-                  className="text-white/50 hover:text-gold transition-colors underline"
-                >
-                  {t.privacy.title}
-                </button>
-                <span className="text-white/30">|</span>
-                <button
-                  onClick={() => {
-                    localStorage.removeItem('cookieConsent');
-                    window.location.reload();
-                  }}
-                  className="text-white/50 hover:text-gold transition-colors underline"
-                >
-                  {t.cookies.title}
-                </button>
-                {/* Ukryty przycisk Admin - kliknięcie 5x w logo */}
-                <span 
-                  className="text-white/10 hover:text-white/20 transition-colors cursor-pointer text-[8px] opacity-0 hover:opacity-100"
-                  title="Admin Panel (Ctrl+Shift+A)"
-                  onClick={() => {
-                    const event = new CustomEvent('openAdminPanel');
-                    window.dispatchEvent(event);
-                  }}
-                >
-                  Admin
-                </span>
-              </div>
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 text-xs md:text-sm items-center">
+              <button
+                onClick={() => setIsPrivacyOpen(true)}
+                className="text-white/50 hover:text-gold transition-colors underline whitespace-nowrap"
+              >
+                {t.privacy.title}
+              </button>
+              <span className="text-white/30 hidden md:inline">|</span>
+              <button
+                onClick={() => {
+                  localStorage.removeItem('cookieConsent');
+                  window.location.reload();
+                }}
+                className="text-white/50 hover:text-gold transition-colors underline whitespace-nowrap"
+              >
+                {t.cookies.title}
+              </button>
+              {/* Ukryty przycisk Admin - widoczny na tabletach i większych ekranach */}
+              <span className="text-white/30 hidden md:inline">|</span>
+              <span 
+                className="text-white/40 md:text-white/50 hover:text-white/80 active:text-white transition-colors cursor-pointer text-[10px] md:text-xs opacity-50 md:opacity-60 hover:opacity-80 active:opacity-100 whitespace-nowrap"
+                title="Admin Panel (Ctrl+Shift+A)"
+                onClick={() => {
+                  const event = new CustomEvent('openAdminPanel');
+                  window.dispatchEvent(event);
+                }}
+              >
+                Admin
+              </span>
             </div>
           </div>
-        </RevealOnScroll>
+        </div>
       </div>
     </footer>
   );
