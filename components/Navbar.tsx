@@ -91,16 +91,16 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const LanguageButton = ({ lang, Flag, label, mobileCompact = false }: { lang: 'es' | 'de' | 'en', Flag: React.FC, label: string, mobileCompact?: boolean }) => (
+  const LanguageButton = ({ lang, Flag, label, mobileCompact = false, mobileMenu = false }: { lang: 'es' | 'de' | 'en', Flag: React.FC, label: string, mobileCompact?: boolean, mobileMenu?: boolean }) => (
     <button 
       onClick={() => { setLanguage(lang); setIsOpen(false); }}
-      className={`group flex items-center justify-center transition-all duration-300 rounded-full ${mobileCompact ? 'p-1' : 'p-2 gap-2'}`}
+      className={`group flex items-center justify-center transition-all duration-300 rounded-full ${mobileMenu ? 'p-2' : mobileCompact ? 'p-1' : 'p-2 gap-2'}`}
       aria-label={`Switch to ${label}`}
     >
-      <div className={`rounded-full overflow-hidden border-2 transition-all duration-300 ${mobileCompact ? 'w-9 h-9' : 'w-8 h-8'} ${language === lang ? 'border-gold shadow-[0_0_10px_rgba(212,175,55,0.8)] scale-110' : 'border-white/30 opacity-70 group-hover:opacity-100 group-hover:border-white'}`}>
+      <div className={`rounded-full overflow-hidden border-2 transition-all duration-300 ${mobileMenu ? 'w-12 h-12' : mobileCompact ? 'w-9 h-9' : 'w-8 h-8'} ${language === lang ? 'border-gold shadow-[0_0_10px_rgba(212,175,55,0.8)] scale-110' : 'border-white/30 opacity-70 group-hover:opacity-100 group-hover:border-white'}`}>
         <Flag />
       </div>
-      {!mobileCompact && <span className="hidden lg:block text-white/80 text-xs font-medium uppercase tracking-wider hover:text-white">{lang}</span>}
+      {!mobileCompact && !mobileMenu && <span className="hidden lg:block text-white/80 text-xs font-medium uppercase tracking-wider hover:text-white">{lang}</span>}
     </button>
   );
   
@@ -159,7 +159,7 @@ const Navbar: React.FC = () => {
             <X size={24} />
           </button>
         </div>
-        <nav className="flex flex-col items-center justify-center h-full -mt-16 gap-8">
+        <nav className="flex flex-col items-center justify-center h-full -mt-16 gap-8 pb-20">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
@@ -177,6 +177,18 @@ const Navbar: React.FC = () => {
             >
               {t.nav.news}
             </a>
+          
+          {/* Language Selector in Mobile Menu */}
+          <div className="mt-8 pt-8 border-t border-white/10 w-full max-w-xs">
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-white/60 text-sm uppercase tracking-widest mb-2">{t.language && t.language.label ? t.language.label : 'Language'}</span>
+              <div className="flex items-center justify-center gap-4">
+                <LanguageButton lang="es" Flag={SpanishFlag} label="Español" mobileMenu={true} />
+                <LanguageButton lang="de" Flag={GermanFlag} label="Deutsch" mobileMenu={true} />
+                <LanguageButton lang="en" Flag={UKFlag} label="English" mobileMenu={true} />
+              </div>
+            </div>
+          </div>
         </nav>
       </div>
       

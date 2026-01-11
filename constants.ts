@@ -20,8 +20,8 @@ export const SERVICES_DATA = [
     price30: 30
   },
   {
-    id: 'guacha-tibetan',
-    title: 'Guacha & Tibetan Massage',
+    id: 'tibetan',
+    title: 'Tibetan Massage',
     icon: Sparkles,
     descriptionEs: "Experiencia profunda de relajación centrada en el flujo de energía y la liberación de tensiones mediante técnicas ancestrales.",
     descriptionDe: "Ein tiefes Entspannungserlebnis, das sich auf den Energiefluss und das Lösen von Verspannungen durch uralte Techniken konzentriert.",
@@ -33,9 +33,9 @@ export const SERVICES_DATA = [
     id: 'personalized',
     title: 'Personalized Treatment',
     icon: User,
-    descriptionEs: "Un masaje adaptado individualmente a sus necesidades, que incluye Gua Sha y ventosas.",
-    descriptionDe: "Eine individuell auf Ihre Bedürfnisse zugeschnittene Massage, inklusive Gua Sha und Schröpfen.",
-    descriptionEn: "A massage individually tailored to your needs, including Gua Sha and cupping.",
+    descriptionEs: "Masaje personalizado e individual adaptado a sus necesidades, incluyendo Gua Sha y ventosas.",
+    descriptionDe: "Persönlich individuelle Massage, individuell auf Ihre Bedürfnisse abgestimmte Massage, inkl. Gua Sha und Schröpfgläser.",
+    descriptionEn: "Personalized individual massage, individually tailored to your needs, including Gua Sha and cupping.",
     price60: 50,
     price30: 30
   },

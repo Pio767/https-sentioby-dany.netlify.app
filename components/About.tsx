@@ -33,13 +33,6 @@ const About: React.FC = () => {
                   {t.about.p1}
                 </p>
               </RevealOnScroll>
-              
-              <RevealOnScroll direction="up" delay={400}>
-                <p className="text-white/70">
-                  {t.about.p2}
-                </p>
-              </RevealOnScroll>
-
             </div>
           </div>
 
