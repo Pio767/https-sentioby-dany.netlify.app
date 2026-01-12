@@ -34,7 +34,7 @@ export const SERVICES_DATA = [
     title: 'Personalized Treatment',
     icon: User,
     descriptionEs: "Masaje personalizado e individual adaptado a sus necesidades, incluyendo Gua Sha y ventosas.",
-    descriptionDe: "Persönlich individuelle Massage, individuell auf Ihre Bedürfnisse abgestimmte Massage, inkl. Gua Sha und Schröpfgläser.",
+    descriptionDe: "Individuell auf Ihre Bedürfnisse abgestimmte Massage incl. Gua Sha und Schröpfgläser.",
     descriptionEn: "Personalized individual massage, individually tailored to your needs, including Gua Sha and cupping.",
     price60: 50,
     price30: 30
@@ -54,7 +54,7 @@ export const SERVICES_DATA = [
     title: 'Lymphatic Massage',
     icon: CheckCircle, // Assuming a default icon, can be changed
     descriptionEs: "Para estimular el flujo linfático en caso de enfermedad o congestión.",
-    descriptionDe: "Zur Anregung des Lymphflusses bei Krankheit oder Stauungen.",
+    descriptionDe: "zur Anregung des Lymphabflusses bei Erkrankung oder Stauung",
     descriptionEn: "To stimulate lymph flow in case of illness or congestion.",
     price60: 50, // Assuming default price, can be changed
     price30: 30  // Assuming default price, can be changed
