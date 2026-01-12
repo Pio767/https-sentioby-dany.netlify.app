@@ -60,7 +60,7 @@ const AdminNews: React.FC = () => {
   };
 
   const handleDeleteNews = (id: string) => {
-    if (confirm('Czy na pewno chcesz usunąć ten news?')) {
+    if (confirm('Sind Sie sicher, dass Sie diese Neuigkeit löschen möchten?')) {
       const updatedNewsData = newsData.filter((news: NewsItem) => news.id !== id);
       setNewsData(updatedNewsData);
     }
@@ -68,7 +68,7 @@ const AdminNews: React.FC = () => {
 
   return (
     <div className="space-y-6 min-h-[400px]">
-      <h2 className="text-2xl font-serif text-white mb-4">Zarządzanie Aktualnościami</h2>
+      <h2 className="text-2xl font-serif text-white mb-4">Neuigkeiten verwalten</h2>
       
       {!isEditing ? (
         <div className="space-y-4">
@@ -77,27 +77,27 @@ const AdminNews: React.FC = () => {
             className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
           >
             <PlusCircle size={16} />
-            Dodaj nowy news
+            Neuigkeit hinzufügen
           </button>
         </div>
       ) : (
         <div className="bg-white/10 border border-gold/30 p-6 rounded-lg shadow-xl space-y-4 relative z-10">
-          <h3 className="text-xl font-serif text-white mb-4">{currentNews ? 'Edytuj news' : 'Nowy news'}</h3>
+          <h3 className="text-xl font-serif text-white mb-4">{currentNews ? 'Neuigkeit bearbeiten' : 'Neue Neuigkeit'}</h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-white/80 text-sm mb-2">Tytuł newsa</label>
+              <label className="block text-white/80 text-sm mb-2">Titel</label>
               <input 
                 type="text" 
-                placeholder="Wprowadź tytuł..." 
+                placeholder="Titel eingeben..." 
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 className="w-full p-3 rounded-lg bg-white/20 border-2 border-white/30 text-white placeholder-white/40 focus:outline-none focus:border-gold focus:bg-white/30 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-white/80 text-sm mb-2">Treść newsa</label>
+              <label className="block text-white/80 text-sm mb-2">Inhalt</label>
               <textarea 
-                placeholder="Wprowadź treść..." 
+                placeholder="Inhalt eingeben..." 
                 value={newContent}
                 onChange={(e) => setNewContent(e.target.value)}
                 rows={6}
@@ -105,7 +105,7 @@ const AdminNews: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-white/80 text-sm mb-2">Data</label>
+              <label className="block text-white/80 text-sm mb-2">Datum</label>
               <input 
                 type="date" 
                 value={newDate}
@@ -120,7 +120,7 @@ const AdminNews: React.FC = () => {
                 className="px-6 py-3 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={18} />
-                Zapisz news
+                Speichern
               </button>
               <button 
                 onClick={() => {
@@ -133,7 +133,7 @@ const AdminNews: React.FC = () => {
                 className="px-6 py-3 bg-white/10 border-2 border-white/20 text-white rounded-lg hover:bg-white/20 hover:border-white/30 transition-colors flex items-center gap-2"
               >
                 <X size={18} />
-                Anuluj
+                Abbrechen
               </button>
             </div>
           </div>
@@ -141,9 +141,9 @@ const AdminNews: React.FC = () => {
       )}
 
       <div className="mt-8 space-y-4">
-        <h3 className="text-xl font-serif text-white">Istniejące newsy</h3>
+        <h3 className="text-xl font-serif text-white">Vorhandene Neuigkeiten</h3>
         {newsData.length === 0 ? (
-          <p className="text-white/60 italic">Brak newsów.</p>
+          <p className="text-white/60 italic">Keine Neuigkeiten vorhanden.</p>
         ) : (
           <ul className="space-y-2">
             {newsData.map((news: NewsItem) => (

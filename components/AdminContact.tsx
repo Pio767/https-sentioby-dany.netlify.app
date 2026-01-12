@@ -35,7 +35,7 @@ const AdminContact: React.FC = () => {
             className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
           >
             <RotateCcw size={16} />
-            Reset
+            Zurücksetzen
           </button>
           <button
             onClick={handleSave}
