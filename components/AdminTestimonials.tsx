@@ -121,7 +121,7 @@ const TestimonialEditForm: React.FC<{
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white/5 border border-gold/30 rounded-lg p-6 space-y-4">
+    <form onSubmit={handleSubmit} className="bg-white/10 border-2 border-gold/30 rounded-lg p-6 space-y-4 relative z-10 shadow-xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-white/70 text-sm mb-2">Name</label>
@@ -129,7 +129,7 @@ const TestimonialEditForm: React.FC<{
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-gold"
+            className="w-full px-4 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-gold focus:bg-white/30 transition-colors"
             required
           />
         </div>
@@ -141,7 +141,7 @@ const TestimonialEditForm: React.FC<{
             max="5"
             value={formData.stars}
             onChange={(e) => setFormData({ ...formData, stars: parseInt(e.target.value) || 5 })}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-gold"
+            className="w-full px-4 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-gold focus:bg-white/30 transition-colors"
             required
           />
         </div>
@@ -150,7 +150,7 @@ const TestimonialEditForm: React.FC<{
           <textarea
             value={formData.text}
             onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-gold"
+            className="w-full px-4 py-2 bg-white/20 border-2 border-white/30 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-gold focus:bg-white/30 transition-colors resize-y"
             rows={5}
             required
           />

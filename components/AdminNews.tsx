@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAdminData } from '../hooks/useAdminData';
-import { PlusCircle, Edit, Trash2 } from 'lucide-react';
+import { PlusCircle, Edit, Trash2, Save, X } from 'lucide-react';
 
 interface NewsItem {
   id: string;
@@ -10,7 +10,8 @@ interface NewsItem {
 }
 
 const AdminNews: React.FC = () => {
-  const { newsData, setNewsData, saveData } = useAdminData();
+  const { data, setNewsData } = useAdminData();
+  const newsData = data.news || [];
   const [currentNews, setCurrentNews] = useState<NewsItem | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -54,7 +55,6 @@ const AdminNews: React.FC = () => {
       updatedNewsData = [...newsData, { id: newId, title: newTitle, content: newContent, date: newDate }];
     }
     setNewsData(updatedNewsData);
-    saveData({ newsData: updatedNewsData });
     setIsEditing(false);
     setCurrentNews(null);
   };
@@ -63,60 +63,79 @@ const AdminNews: React.FC = () => {
     if (confirm('Czy na pewno chcesz usunąć ten news?')) {
       const updatedNewsData = newsData.filter((news: NewsItem) => news.id !== id);
       setNewsData(updatedNewsData);
-      saveData({ newsData: updatedNewsData });
     }
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-serif text-white">Zarządzanie Aktualnościami</h2>
+    <div className="space-y-6 min-h-[400px]">
+      <h2 className="text-2xl font-serif text-white mb-4">Zarządzanie Aktualnościami</h2>
       
       {!isEditing ? (
-        <button 
-          onClick={handleAddNews}
-          className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
-        >
-          <PlusCircle size={16} />
-          Dodaj nowy news
-        </button>
+        <div className="space-y-4">
+          <button 
+            onClick={handleAddNews}
+            className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
+          >
+            <PlusCircle size={16} />
+            Dodaj nowy news
+          </button>
+        </div>
       ) : (
-        <div className="bg-royal-light p-6 rounded-lg shadow-inner space-y-4">
-          <h3 className="text-xl font-serif text-white">{currentNews ? 'Edytuj news' : 'Nowy news'}</h3>
-          <input 
-            type="text" 
-            placeholder="Tytuł newsa" 
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            className="w-full p-2 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-gold"
-          />
-          <textarea 
-            placeholder="Treść newsa" 
-            value={newContent}
-            onChange={(e) => setNewContent(e.target.value)}
-            rows={4}
-            className="w-full p-2 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-gold"
-          />
-          <input 
-            type="date" 
-            value={newDate}
-            onChange={(e) => setNewDate(e.target.value)}
-            className="w-full p-2 rounded bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-gold"
-          />
-          <div className="flex gap-2">
-            <button 
-              onClick={handleSaveNews}
-              className="px-4 py-2 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2"
-            >
-              <Save size={16} />
-              Zapisz news
-            </button>
-            <button 
-              onClick={() => setIsEditing(false)}
-              className="px-4 py-2 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2"
-            >
-              <X size={16} />
-              Anuluj
-            </button>
+        <div className="bg-white/10 border border-gold/30 p-6 rounded-lg shadow-xl space-y-4 relative z-10">
+          <h3 className="text-xl font-serif text-white mb-4">{currentNews ? 'Edytuj news' : 'Nowy news'}</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-white/80 text-sm mb-2">Tytuł newsa</label>
+              <input 
+                type="text" 
+                placeholder="Wprowadź tytuł..." 
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+                className="w-full p-3 rounded-lg bg-white/20 border-2 border-white/30 text-white placeholder-white/40 focus:outline-none focus:border-gold focus:bg-white/30 transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-white/80 text-sm mb-2">Treść newsa</label>
+              <textarea 
+                placeholder="Wprowadź treść..." 
+                value={newContent}
+                onChange={(e) => setNewContent(e.target.value)}
+                rows={6}
+                className="w-full p-3 rounded-lg bg-white/20 border-2 border-white/30 text-white placeholder-white/40 focus:outline-none focus:border-gold focus:bg-white/30 transition-colors resize-y"
+              />
+            </div>
+            <div>
+              <label className="block text-white/80 text-sm mb-2">Data</label>
+              <input 
+                type="date" 
+                value={newDate}
+                onChange={(e) => setNewDate(e.target.value)}
+                className="w-full p-3 rounded-lg bg-white/20 border-2 border-white/30 text-white focus:outline-none focus:border-gold focus:bg-white/30 transition-colors"
+              />
+            </div>
+            <div className="flex gap-3 pt-2">
+              <button 
+                onClick={handleSaveNews}
+                disabled={!newTitle || !newContent || !newDate}
+                className="px-6 py-3 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Save size={18} />
+                Zapisz news
+              </button>
+              <button 
+                onClick={() => {
+                  setIsEditing(false);
+                  setCurrentNews(null);
+                  setNewTitle('');
+                  setNewContent('');
+                  setNewDate('');
+                }}
+                className="px-6 py-3 bg-white/10 border-2 border-white/20 text-white rounded-lg hover:bg-white/20 hover:border-white/30 transition-colors flex items-center gap-2"
+              >
+                <X size={18} />
+                Anuluj
+              </button>
+            </div>
           </div>
         </div>
       )}
