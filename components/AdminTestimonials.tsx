@@ -121,7 +121,7 @@ const TestimonialEditForm: React.FC<{
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white/10 border-2 border-gold/30 rounded-lg p-6 space-y-4 relative z-10 shadow-xl">
+    <form onSubmit={handleSubmit} className="bg-white/15 border-2 border-gold/40 rounded-lg p-6 space-y-4 relative z-10 shadow-xl backdrop-blur-sm">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-white/70 text-sm mb-2">Name</label>

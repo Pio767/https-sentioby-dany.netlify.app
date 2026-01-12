@@ -81,7 +81,7 @@ const AdminNews: React.FC = () => {
           </button>
         </div>
       ) : (
-        <div className="bg-white/10 border border-gold/30 p-6 rounded-lg shadow-xl space-y-4 relative z-10">
+        <div className="bg-white/15 border-2 border-gold/40 p-6 rounded-lg shadow-xl space-y-4 relative z-10 backdrop-blur-sm">
           <h3 className="text-xl font-serif text-white mb-4">{currentNews ? 'Neuigkeit bearbeiten' : 'Neue Neuigkeit'}</h3>
           <div className="space-y-4">
             <div>
