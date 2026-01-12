@@ -103,35 +103,23 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ isOpen, onClose }) => {
           sections: [
             {
               title: "1. Responsable del Tratamiento",
-              content: `El responsable del tratamiento de datos es:\n\n${CONTACT_INFO.address}\nCorreo electrónico: ${CONTACT_INFO.email}\nTeléfono: ${CONTACT_INFO.phoneEs} / ${CONTACT_INFO.phoneDe}`
+              content: `Los datos personales recogidos a través de este sitio web serán tratados por:\n\n• Responsable: Daniela Böhme Albrecht\n• NIF/NIE: Z2422641 X\n• Domicilio: Carrer Mossen Francisco Cabrera 5, 03720 Benissa, Alicante\n• Email de contacto: sentio.wohlfuehlen@gmail.com`
             },
             {
-              title: "2. Datos Recopilados",
-              content: "Recopilamos los siguientes datos personales:\n\n• Nombre y datos de contacto (correo electrónico, teléfono) al contactarnos\n• Dirección IP e información del navegador (automáticamente mediante registros del servidor)\n• Cookies y tecnologías similares (consulte la Política de Cookies)"
+              title: "2. Finalidad del Tratamiento",
+              content: "La recogida y tratamiento de los datos personales tiene como finalidad:\n\n• Gestionar las consultas planteadas a través del formulario de contacto.\n• La prestación de los servicios contratados por el usuario."
             },
             {
-              title: "3. Finalidad del Tratamiento",
-              content: "Sus datos se utilizan para:\n\n• Procesar consultas y reservas de citas\n• Comunicación por correo electrónico, teléfono o WhatsApp\n• Mejorar nuestro sitio web y servicios\n• Cumplimiento legal"
+              title: "3. Legitimación",
+              content: "La base legal para el tratamiento de sus datos es el consentimiento. Al rellenar los formularios de la web y marcar la casilla de aceptación, el usuario da su consentimiento expreso para el tratamiento de sus datos personales."
             },
             {
-              title: "4. Base Legal",
-              content: "El tratamiento se basa en:\n\n• Su consentimiento (Art. 6.1.a RGPD)\n• Ejecución de contrato (Art. 6.1.b RGPD)\n• Intereses legítimos (Art. 6.1.f RGPD)"
+              title: "4. Destinatarios",
+              content: "Los datos no se cederán a terceros, salvo obligación legal."
             },
             {
-              title: "5. Compartir Datos",
-              content: "Sus datos no se venden a terceros. Podemos compartir datos con:\n\n• Proveedores de servicios (alojamiento, servicio de correo) bajo estrictos acuerdos de confidencialidad\n• Autoridades cuando sea legalmente requerido"
-            },
-            {
-              title: "6. Conservación de Datos",
-              content: "Los datos se conservan solo durante el tiempo necesario para los fines indicados o según lo requiera la ley."
-            },
-            {
-              title: "7. Sus Derechos",
-              content: "Usted tiene los siguientes derechos:\n\n• Derecho de acceso (Art. 15 RGPD)\n• Derecho de rectificación (Art. 16 RGPD)\n• Derecho de supresión (Art. 17 RGPD)\n• Derecho de limitación (Art. 18 RGPD)\n• Derecho a la portabilidad (Art. 20 RGPD)\n• Derecho de oposición (Art. 21 RGPD)\n• Derecho a presentar una reclamación ante una autoridad de control"
-            },
-            {
-              title: "8. Contacto",
-              content: `Para consultas sobre privacidad, contáctenos:\n\nCorreo electrónico: ${CONTACT_INFO.email}\nDirección: ${CONTACT_INFO.address}`
+              title: "5. Derechos",
+              content: "El usuario tiene derecho a acceder a sus datos personales, así como a solicitar la rectificación de los datos inexactos o, en su caso, solicitar su supresión cuando, entre otros motivos, los datos ya no sean necesarios para los fines que fueron recogidos. Para ejercer estos derechos, puede enviar un correo electrónico a: sentio.wohlfuehlen@gmail.com"
             }
           ]
         };

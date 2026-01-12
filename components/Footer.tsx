@@ -6,6 +6,8 @@ import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
 import BookingModal from './BookingModal';
 import PrivacyPolicy from './PrivacyPolicy';
+import LegalNotice from './LegalNotice';
+import CookiePolicy from './CookiePolicy';
 
 // Custom WhatsApp Icon Component for brand consistency
 const WhatsAppIcon = () => (
@@ -15,9 +17,11 @@ const WhatsAppIcon = () => (
 );
 
 const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isLegalOpen, setIsLegalOpen] = useState(false);
+  const [isCookiePolicyOpen, setIsCookiePolicyOpen] = useState(false);
   const contactInfo = getContactInfo();
 
   useEffect(() => {
@@ -35,6 +39,8 @@ const Footer: React.FC = () => {
     <footer id="contact" className="relative pt-10 pb-10 overflow-x-hidden mt-10">
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
       <PrivacyPolicy isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+      <LegalNotice isOpen={isLegalOpen} onClose={() => setIsLegalOpen(false)} />
+      <CookiePolicy isOpen={isCookiePolicyOpen} onClose={() => setIsCookiePolicyOpen(false)} />
 
       <div className="absolute inset-0 bg-black/30 backdrop-blur-xl border-t border-white/10"></div>
       
@@ -159,6 +165,13 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 text-xs md:text-sm items-center">
               <button
+                onClick={() => setIsLegalOpen(true)}
+                className="text-white/50 hover:text-gold transition-colors underline whitespace-nowrap"
+              >
+                {language === 'de' ? 'Impressum' : language === 'en' ? 'Legal Notice' : 'Aviso Legal'}
+              </button>
+              <span className="text-white/30 hidden md:inline">|</span>
+              <button
                 onClick={() => setIsPrivacyOpen(true)}
                 className="text-white/50 hover:text-gold transition-colors underline whitespace-nowrap"
               >
@@ -166,10 +179,7 @@ const Footer: React.FC = () => {
               </button>
               <span className="text-white/30 hidden md:inline">|</span>
               <button
-                onClick={() => {
-                  localStorage.removeItem('cookieConsent');
-                  window.location.reload();
-                }}
+                onClick={() => setIsCookiePolicyOpen(true)}
                 className="text-white/50 hover:text-gold transition-colors underline whitespace-nowrap"
               >
                 {t.cookies.title}
