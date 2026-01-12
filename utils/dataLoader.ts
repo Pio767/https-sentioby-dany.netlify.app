@@ -45,11 +45,25 @@ const loadAdminDataFromStorage = () => {
   return null;
 };
 
-// Helper do ładowania danych - najpierw z localStorage (jeśli są), potem z constants
+// Helper do ładowania danych - zawsze używa najnowszych danych z constants.ts
+// localStorage jest używane tylko jeśli dane zostały faktycznie zmienione przez panel admina
 export const getServicesData = () => {
+  // Zawsze używamy najnowszych danych z constants.ts jako źródła prawdy
+  // Jeśli w localStorage są zmiany z panelu admina (np. dodano/usunięto usługi), używamy ich
   const stored = loadAdminDataFromStorage();
-  if (stored && stored.services) {
-    return restoreIcons(stored.services);
+  if (stored && stored.services && stored.services.length > 0) {
+    const storedServices = restoreIcons(stored.services);
+    // Sprawdź czy struktura się różni (dodano/usunięto usługi przez panel)
+    const structureChanged = storedServices.length !== SERVICES_DATA.length ||
+      !storedServices.every((s: any, i: number) => s.id === SERVICES_DATA[i]?.id);
+    
+    if (structureChanged) {
+      // Jeśli struktura się różni (np. dodano/usunięto usługi przez panel), użyj localStorage
+      return storedServices;
+    }
+    // Jeśli struktura jest taka sama, zawsze używaj najnowszych danych z constants.ts
+    // To zapewnia, że zmiany w constants.ts są zawsze widoczne
+    return SERVICES_DATA;
   }
   return SERVICES_DATA;
 };
