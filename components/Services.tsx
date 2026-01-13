@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getServicesData } from '../utils/dataLoader';
 import RevealOnScroll from './RevealOnScroll';
 import { useLanguage } from '../LanguageContext';
+import { Home } from 'lucide-react';
 
 const Services: React.FC = () => {
   const { t, language } = useLanguage();
@@ -11,7 +12,27 @@ const Services: React.FC = () => {
   
   useEffect(() => {
     // Reload data when component mounts to get latest from localStorage
-    setServicesData(getServicesData());
+    const data = getServicesData();
+    
+    // Dodajemy usługę Mobile Massage jeśli jej nie ma
+    const mobileService = {
+      id: 'mobile',
+      title: 'Mobile Massage',
+      icon: Home,
+      descriptionEs: "Masaje a domicilio. Disfrute de un masaje profesional en la comodidad de su propio hogar. Por favor, llámeme o escríbame para concretar los detalles.",
+      descriptionDe: "Hausbesuche (Mobile Massage). Genießen Sie eine professionelle Massage ganz bequem bei Ihnen zu Hause. Bitte rufen Sie mich an oder schreiben Sie mir, um die Details zu besprechen.",
+      descriptionEn: "Mobile Massage (Home Visits). Enjoy a professional massage in the comfort of your own home. Please call or text me to discuss the details.",
+      price60: 50,
+      price30: 30
+    };
+    
+    // Sprawdź czy usługa już istnieje
+    const hasMobile = data.some((s: any) => s.id === 'mobile');
+    if (!hasMobile) {
+      setServicesData([...data, mobileService]);
+    } else {
+      setServicesData(data);
+    }
   }, []);
 
   const getDescription = (service: any) => {
