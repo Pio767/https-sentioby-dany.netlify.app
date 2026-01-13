@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Trash2, Edit2, Save, X } from 'lucide-react';
 import { useAdminData } from '../hooks/useAdminData';
 import { SERVICES_DATA } from '../constants';
-import { Heart, Sparkles, User, CheckCircle } from 'lucide-react';
+import { Heart, Sparkles, User, CheckCircle, Home } from 'lucide-react';
 
 const AdminServices: React.FC = () => {
   const { data, updateSection } = useAdminData();
@@ -16,6 +16,7 @@ const AdminServices: React.FC = () => {
     'Sparkles': Sparkles,
     'User': User,
     'CheckCircle': CheckCircle,
+    'Home': Home,
   };
 
   const handleSave = (service: any) => {

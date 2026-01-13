@@ -1,4 +1,4 @@
-import { CheckCircle, Heart, Sparkles, User } from 'lucide-react';
+import { CheckCircle, Heart, Sparkles, User, Home } from 'lucide-react';
 
 export const CONTACT_INFO = {
   address: "Carrer Mossen Francisco Cabrera 5, 03720 Benissa",
@@ -58,6 +58,16 @@ export const SERVICES_DATA = [
     descriptionEn: "To stimulate lymph flow in case of illness or congestion.",
     price60: 50, // Assuming default price, can be changed
     price30: 30  // Assuming default price, can be changed
+  },
+  {
+    id: 'mobile',
+    title: 'Mobile Massage',
+    icon: Home,
+    descriptionEs: "Masaje a domicilio. Disfrute de un masaje profesional en la comodidad de su propio hogar. Por favor, llámeme o escríbame para concretar los detalles.",
+    descriptionDe: "Hausbesuche (Mobile Massage). Genießen Sie eine professionelle Massage ganz bequem bei Ihnen zu Hause. Bitte rufen Sie mich an oder schreiben Sie mir, um die Details zu besprechen.",
+    descriptionEn: "Mobile Massage (Home Visits). Enjoy a professional massage in the comfort of your own home. Please call or text me to discuss the details.",
+    price60: 50,
+    price30: 30
   }
 ];
 

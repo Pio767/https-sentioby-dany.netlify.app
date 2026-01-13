@@ -1,5 +1,5 @@
 import { CONTACT_INFO, SERVICES_DATA, TESTIMONIALS_DATA, FAQ_DATA, GALLERY_IMAGES, NEWS_DATA } from '../constants';
-import { Heart, Sparkles, User, CheckCircle } from 'lucide-react';
+import { Heart, Sparkles, User, CheckCircle, Home } from 'lucide-react';
 
 const STORAGE_KEY = 'sentio_admin_data';
 
@@ -9,6 +9,7 @@ const iconMap: Record<string, any> = {
   'Sparkles': Sparkles,
   'User': User,
   'CheckCircle': CheckCircle,
+  'Home': Home,
 };
 
 // Funkcja do przywracania ikon z nazw stringowych
