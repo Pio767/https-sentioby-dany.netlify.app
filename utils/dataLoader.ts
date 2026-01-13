@@ -49,23 +49,40 @@ const loadAdminDataFromStorage = () => {
 // Helper do ładowania danych - zawsze używa najnowszych danych z constants.ts
 // localStorage jest używane tylko jeśli dane zostały faktycznie zmienione przez panel admina
 export const getServicesData = () => {
-  // Zawsze używamy najnowszych danych z constants.ts jako źródła prawdy
-  // Jeśli w localStorage są zmiany z panelu admina (np. dodano/usunięto usługi), używamy ich
+  // Zawsze zaczynamy od najnowszych danych z constants.ts jako źródła prawdy
   const stored = loadAdminDataFromStorage();
+  
   if (stored && stored.services && stored.services.length > 0) {
     const storedServices = restoreIcons(stored.services);
-    // Sprawdź czy struktura się różni (dodano/usunięto usługi przez panel)
-    const structureChanged = storedServices.length !== SERVICES_DATA.length ||
-      !storedServices.every((s: any, i: number) => s.id === SERVICES_DATA[i]?.id);
     
-    if (structureChanged) {
-      // Jeśli struktura się różni (np. dodano/usunięto usługi przez panel), użyj localStorage
-      return storedServices;
-    }
-    // Jeśli struktura jest taka sama, zawsze używaj najnowszych danych z constants.ts
-    // To zapewnia, że zmiany w constants.ts są zawsze widoczne
-    return SERVICES_DATA;
+    // Tworzymy mapę usług z localStorage po ID
+    const storedMap = new Map(storedServices.map((s: any) => [s.id, s]));
+    
+    // Zaczynamy od SERVICES_DATA i aplikujemy zmiany z localStorage
+    const mergedServices = SERVICES_DATA.map((service) => {
+      const storedService = storedMap.get(service.id);
+      if (storedService) {
+        // Jeśli usługa istnieje w localStorage, używamy jej (ale zachowujemy ikonę z constants.ts)
+        return {
+          ...storedService,
+          icon: service.icon, // Zawsze używamy ikony z constants.ts
+        };
+      }
+      // Jeśli usługa nie istnieje w localStorage, używamy z constants.ts
+      return service;
+    });
+    
+    // Dodajemy usługi z localStorage, których nie ma w constants.ts (dodane przez panel)
+    storedServices.forEach((storedService: any) => {
+      if (!SERVICES_DATA.find(s => s.id === storedService.id)) {
+        mergedServices.push(restoreIcons([storedService])[0]);
+      }
+    });
+    
+    return mergedServices;
   }
+  
+  // Jeśli nie ma danych w localStorage, używamy SERVICES_DATA
   return SERVICES_DATA;
 };
 
