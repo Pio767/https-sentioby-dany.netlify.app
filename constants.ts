@@ -139,11 +139,11 @@ export const FAQ_DATA = [
   {
     id: 'wear',
     questionEs: "¿Qué debo llevar puesto?",
-    answerEs: "Para la mayoría de los masajes, se le proporcionará privacidad para desvestirse hasta su nivel de comodidad. Para la Terapia Bowen, se recomienda ropa ligera y cómoda.",
+    answerEs: "En la mayoría de los masajes, tiene la posibilidad de desvestirse según su preferencia.",
     questionDe: "Was soll ich anziehen?",
     answerDe: "Bei den meisten Massagen haben Sie die Möglichkeit, sich nach Belieben zu entkleiden.",
     questionEn: "What should I wear?",
-    answerEn: "For most massages, you will be provided privacy to undress to your comfort level. For Bowen Therapy, light, comfortable clothing is recommended."
+    answerEn: "For most massages, you have the option to undress according to your preference."
   },
   {
     id: 'payment',
