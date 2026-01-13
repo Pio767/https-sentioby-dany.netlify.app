@@ -14,6 +14,21 @@ const Services: React.FC = () => {
     // Reload data when component mounts to get latest from localStorage
     const data = getServicesData();
     
+    // Usuwamy duplikaty i usługi z "Guacha" w tytule
+    const filteredData = data.filter((service: any) => {
+      const title = service.title?.toLowerCase() || '';
+      // Usuwamy usługi zawierające "Guacha" w tytule
+      if (title.includes('guacha')) {
+        return false;
+      }
+      return true;
+    });
+    
+    // Usuwamy duplikaty po ID
+    const uniqueData = filteredData.filter((service: any, index: number, self: any[]) => 
+      index === self.findIndex((s: any) => s.id === service.id)
+    );
+    
     // Dodajemy usługę Mobile Massage jeśli jej nie ma
     const mobileService = {
       id: 'mobile',
@@ -27,11 +42,11 @@ const Services: React.FC = () => {
     };
     
     // Sprawdź czy usługa już istnieje
-    const hasMobile = data.some((s: any) => s.id === 'mobile');
+    const hasMobile = uniqueData.some((s: any) => s.id === 'mobile');
     if (!hasMobile) {
-      setServicesData([...data, mobileService]);
+      setServicesData([...uniqueData, mobileService]);
     } else {
-      setServicesData(data);
+      setServicesData(uniqueData);
     }
   }, []);
 
