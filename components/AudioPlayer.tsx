@@ -10,8 +10,8 @@ const AudioPlayer: React.FC = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    // CRITICAL: Set volume to 10% (0.1) to be extremely subtle
-    audio.volume = 0.1;
+    // CRITICAL: Set volume to 5% (0.05) to be extremely subtle
+    audio.volume = 0.05;
 
     // 1. Attempt immediate autoplay
     const attemptPlay = async () => {
