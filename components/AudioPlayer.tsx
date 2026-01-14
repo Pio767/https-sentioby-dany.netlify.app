@@ -85,7 +85,7 @@ const AudioPlayer: React.FC = () => {
         onPause={onPause}
       >
         {/* Deep Relaxation / Spa Music */}
-        <source src="https://files.catbox.moe/go8q8l.mp3" type="audio/mpeg" />
+        <source src="/assets/chill-melodic-lofi-401088.mp3" type="audio/mpeg" />
       </audio>
       
       <button
