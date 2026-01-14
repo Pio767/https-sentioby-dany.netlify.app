@@ -72,10 +72,10 @@ export const SERVICES_DATA = [
 ];
 
 export const GALLERY_IMAGES = [
-  "https://files.catbox.moe/ykhk9r.JPG",
-  "https://files.catbox.moe/dbqn1r.JPG",
-  "https://files.catbox.moe/otb5am.JPG",
-  "https://files.catbox.moe/b4tf9y.JPG"
+  "/assets/galerry1.JPG",
+  "/assets/galerry2.JPG",
+  "/assets/galerry3.JPG",
+  "/assets/gallery4.JPG"
 ];
 
 export const TESTIMONIALS_DATA = [
