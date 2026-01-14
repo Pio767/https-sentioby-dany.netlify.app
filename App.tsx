@@ -15,7 +15,7 @@ import { LanguageProvider } from './LanguageContext';
 const App: React.FC = () => {
   return (
     <LanguageProvider>
-      <div className="min-h-screen bg-transparent text-white selection:bg-flyer-pink selection:text-white relative font-sans overflow-hidden">
+      <div className="min-h-screen bg-transparent text-white selection:bg-flyer-pink selection:text-white relative font-sans overflow-x-hidden">
         
         {/* 1. Global Grain/Noise Overlay - The "Film" Texture */}
         <div className="bg-noise"></div>
@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
         {/* 3. Organic Living Light Orbs (Breathing & Floating) */}
         {/* Electric Violet Orb - Bottom Left - The Flyer Purple Swoosh */}
-        <div className="fixed bottom-[-10%] left-[-10%] w-[70vw] h-[70vw] md:w-[700px] md:h-[700px] bg-flyer-violet/50 rounded-full blur-[100px] pointer-events-none z-[-1] mix-blend-screen animate-blob animation-delay-2000 opacity-90"></div>
+        <div className="fixed bottom-[-5%] left-[-10%] w-[70vw] h-[70vw] md:w-[700px] md:h-[700px] bg-flyer-violet/50 rounded-full blur-[100px] pointer-events-none z-[-1] mix-blend-screen animate-blob animation-delay-2000 opacity-90"></div>
 
         <Navbar />
         

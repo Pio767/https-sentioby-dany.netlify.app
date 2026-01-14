@@ -45,7 +45,7 @@ const Footer: React.FC = () => {
       <div className="absolute inset-0 bg-black/30 backdrop-blur-xl border-t border-white/10"></div>
       
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent"></div>
-      <div className="absolute bottom-[-10%] right-[-5%] w-[300px] h-[300px] bg-magenta/20 rounded-full blur-[80px] pointer-events-none"></div>
+      <div className="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] bg-magenta/20 rounded-full blur-[80px] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         
