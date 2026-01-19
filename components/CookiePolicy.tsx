@@ -115,3 +115,4 @@ const CookiePolicy: React.FC<CookiePolicyProps> = ({ isOpen, onClose }) => {
 
 export default CookiePolicy;
 
+

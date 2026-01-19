@@ -139,3 +139,4 @@ const LegalNotice: React.FC<LegalNoticeProps> = ({ isOpen, onClose }) => {
 
 export default LegalNotice;
 
+

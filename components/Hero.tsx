@@ -8,15 +8,38 @@ const Hero: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { t } = useLanguage();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [hasConsent, setHasConsent] = useState(false);
+
+  // Check cookie consent on mount
+  useEffect(() => {
+    const checkConsent = () => {
+      const consent = localStorage.getItem('cookieConsent');
+      if (consent === 'accepted') {
+        setHasConsent(true);
+        // Load and play video only after consent
+        if (videoRef.current) {
+          videoRef.current.load();
+          videoRef.current.play().catch(error => {
+            console.log("Video play error:", error);
+          });
+        }
+      }
+    };
+
+    checkConsent();
+
+    // Listen for cookie consent events
+    const handleCookieConsent = () => {
+      checkConsent();
+    };
+
+    window.addEventListener('cookieConsentAccepted', handleCookieConsent);
+    return () => {
+      window.removeEventListener('cookieConsentAccepted', handleCookieConsent);
+    };
+  }, []);
 
   useEffect(() => {
-    // Force video play on mount to ensure autoplay works reliably across browsers
-    if (videoRef.current) {
-        videoRef.current.play().catch(error => {
-            console.log("Video autoplay blocked by browser:", error);
-        });
-    }
-
     const handleScroll = () => {
       if (videoRef.current) {
         const scrollY = window.scrollY;
@@ -53,10 +76,10 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video 
           ref={videoRef}
-          autoPlay 
           loop 
           muted 
           playsInline
+          preload="none"
           className="absolute w-full h-[120%] -top-[10%] object-cover will-change-transform"
         >
           <source src="https://videos.pexels.com/video-files/6187085/6187085-hd_1920_1080_25fps.mp4" type="video/mp4" />

@@ -5,55 +5,47 @@ import { Music, Volume2 } from 'lucide-react';
 const AudioPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [hasConsent, setHasConsent] = useState(false);
+
+  useEffect(() => {
+    const checkConsent = () => {
+      const consent = localStorage.getItem('cookieConsent');
+      return consent === 'accepted';
+    };
+
+    const consent = checkConsent();
+    setHasConsent(consent);
+
+    // Listen for cookie consent events
+    const handleCookieConsent = () => {
+      if (checkConsent()) {
+        setHasConsent(true);
+      }
+    };
+
+    window.addEventListener('cookieConsentAccepted', handleCookieConsent);
+    return () => {
+      window.removeEventListener('cookieConsentAccepted', handleCookieConsent);
+    };
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !hasConsent) return;
 
     // CRITICAL: Set volume to 5% (0.05) to be extremely subtle
     audio.volume = 0.05;
-
-    // 1. Attempt immediate autoplay
-    const attemptPlay = async () => {
-      try {
-        await audio.play();
-      } catch (error) {
-        // Autoplay blocked by browser policy (expected in many cases)
-        console.log("Autoplay waiting for interaction");
-      }
-    };
-    attemptPlay();
-
-    // 2. Fallback: Play on first user interaction (click, scroll, touch)
-    // This makes it feel "automatic" to the user as soon as they touch the site
-    const handleInteraction = async () => {
-      if (audio.paused) {
-        try {
-          await audio.play();
-        } catch (e) {
-          // Ignore interruption errors
-        }
-      }
-      // Clean up listeners immediately after first success
-      ['click', 'keydown', 'touchstart', 'scroll'].forEach(event => 
-        document.removeEventListener(event, handleInteraction)
-      );
-    };
-
-    ['click', 'keydown', 'touchstart', 'scroll'].forEach(event => 
-      document.addEventListener(event, handleInteraction, { once: true })
-    );
-
-    return () => {
-      ['click', 'keydown', 'touchstart', 'scroll'].forEach(event => 
-        document.removeEventListener(event, handleInteraction)
-      );
-    };
-  }, []);
+  }, [hasConsent]);
 
   const toggleAudio = async () => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    // Check consent before playing
+    const consent = localStorage.getItem('cookieConsent');
+    if (consent !== 'accepted') {
+      return;
+    }
 
     try {
       if (audio.paused) {
@@ -80,7 +72,7 @@ const AudioPlayer: React.FC = () => {
       <audio
         ref={audioRef}
         loop
-        preload="auto"
+        preload="none"
         onPlay={onPlay}
         onPause={onPause}
       >

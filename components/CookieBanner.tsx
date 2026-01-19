@@ -19,6 +19,9 @@ const CookieBanner: React.FC = () => {
     localStorage.setItem('cookieConsent', 'accepted');
     localStorage.setItem('cookieConsentDate', new Date().toISOString());
     setIsVisible(false);
+    
+    // Dispatch event to notify other components
+    window.dispatchEvent(new CustomEvent('cookieConsentAccepted'));
   };
 
   const rejectCookies = () => {
