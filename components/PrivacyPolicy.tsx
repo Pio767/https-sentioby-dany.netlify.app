@@ -18,108 +18,96 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ isOpen, onClose }) => {
       case 'de':
         return {
           title: "Datenschutzerklärung (DSGVO)",
-          lastUpdated: "Letzte Aktualisierung",
-          intro: "Wir respektieren Ihre Privatsphäre und verpflichten uns, Ihre persönlichen Daten gemäß der Datenschutz-Grundverordnung (DSGVO) zu schützen.",
+          lastUpdated: "Stand",
+          intro: "Stand: Januar 2026\n\nWir respektieren Ihre Privatsphäre und verarbeiten Ihre Daten gemäß der EU-Datenschutz-Grundverordnung (DSGVO) sowie dem spanischen Organgesetz 3/2018 über den Schutz personenbezogener Daten (LOPD-GDD).",
           sections: [
             {
-              title: "1. Verantwortlicher",
-              content: `Verantwortlich für die Datenverarbeitung ist:\n\n${CONTACT_INFO.address}\nE-Mail: ${CONTACT_INFO.email}\nTelefon: ${CONTACT_INFO.phoneEs} / ${CONTACT_INFO.phoneDe}`
+              title: "1. Verantwortlicher für die Datenverarbeitung",
+              content: `Daniela Böhme Albrecht\nCarrer Mossen Francisco Cabrera 5, 03720 Benissa (Alicante), Spanien\nE-Mail: sentio.wohlfuehlen@gmail.com`
             },
             {
-              title: "2. Erhobene Daten",
-              content: "Wir erheben folgende personenbezogene Daten:\n\n• Name und Kontaktdaten (E-Mail, Telefonnummer) bei Kontaktaufnahme\n• IP-Adresse und Browser-Informationen (automatisch durch Server-Logs)\n• Cookies und ähnliche Technologien (siehe Cookie-Richtlinie)"
+              title: "2. Welche Daten wir erfassen und warum",
+              content: `A. Kontaktanfragen (E-Mail, Telefon)\n\nWenn Sie uns kontaktieren, verarbeiten wir Ihren Namen, Ihre E-Mail-Adresse oder Telefonnummer zur Bearbeitung Ihrer Anfrage und für mögliche Anschlussfragen.\n\nRechtsgrundlage: Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).\n\nB. Technische Daten (Server-Logs)\n\nBeim Besuch der Website werden automatisch technische Daten erfasst (IP-Adresse, Browser, Uhrzeit). Diese Daten sind notwendig, um die Sicherheit und Stabilität der Website zu gewährleisten.\n\nRechtsgrundlage: Berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).\n\nC. WhatsApp\n\nWenn Sie uns über WhatsApp kontaktieren, nutzen Sie einen Dienst der Meta Platforms Ireland Ltd. Dabei werden Daten (z. B. Ihre Mobilnummer) an Meta übermittelt und ggf. auf Servern in den USA verarbeitet. Wir nutzen WhatsApp Business ausschließlich zur Kommunikation auf Ihren Wunsch hin.\n\nRechtsgrundlage: Ihre Einwilligung durch aktive Kontaktaufnahme (Art. 6 Abs. 1 lit. a DSGVO).`
             },
             {
-              title: "3. Zweck der Datenverarbeitung",
-              content: "Ihre Daten werden verwendet für:\n\n• Bearbeitung von Anfragen und Terminbuchungen\n• Kommunikation per E-Mail, Telefon oder WhatsApp\n• Verbesserung unserer Website und Services\n• Rechtliche Compliance"
+              title: "3. Internationale Datenübermittlung & Hosting (Cloudflare)",
+              content: `Diese Website wird sicher bereitgestellt und geschützt durch Cloudflare, Inc. (USA). Cloudflare fungiert als Content Delivery Network (CDN) und Sicherheitsdienst. Dabei werden Ihre Daten (insb. IP-Adresse) über Server weltweit, auch in den USA, geleitet.\n\nDatenschutz-Garantie: Cloudflare ist unter dem EU-U.S. Data Privacy Framework (DPF) zertifiziert, was laut EU-Kommission ein angemessenes Datenschutzniveau garantiert. Zusätzlich bestehen Standardvertragsklauseln (SCC).`
             },
             {
-              title: "4. Rechtsgrundlage",
-              content: "Die Verarbeitung erfolgt auf Grundlage von:\n\n• Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)\n• Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO)\n• Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO)"
+              title: "4. Speicherdauer",
+              content: `Ihre Daten werden gelöscht, sobald sie für den Zweck der Erhebung nicht mehr erforderlich sind (z. B. nach abgeschlossener Anfrage), sofern keine gesetzlichen Aufbewahrungspflichten in Spanien (z. B. steuerliche Pflichten) bestehen.`
             },
             {
-              title: "5. Datenweitergabe",
-              content: "Ihre Daten werden nicht an Dritte verkauft. Wir können Daten weitergeben an:\n\n• Dienstleister (Hosting, E-Mail-Service) unter strikten Vertraulichkeitsvereinbarungen\n• Behörden bei gesetzlicher Verpflichtung"
+              title: "5. Ihre Rechte",
+              content: `Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit. Zur Ausübung Ihrer Rechte wenden Sie sich an: sentio.wohlfuehlen@gmail.com.`
             },
             {
-              title: "6. Datenspeicherung",
-              content: "Daten werden nur so lange gespeichert, wie es für die angegebenen Zwecke erforderlich ist oder gesetzlich vorgeschrieben ist."
-            },
-            {
-              title: "7. Ihre Rechte",
-              content: "Sie haben folgende Rechte:\n\n• Recht auf Auskunft (Art. 15 DSGVO)\n• Recht auf Berichtigung (Art. 16 DSGVO)\n• Recht auf Löschung (Art. 17 DSGVO)\n• Recht auf Einschränkung (Art. 18 DSGVO)\n• Recht auf Datenübertragbarkeit (Art. 20 DSGVO)\n• Widerspruchsrecht (Art. 21 DSGVO)\n• Recht auf Beschwerde bei einer Aufsichtsbehörde"
-            },
-            {
-              title: "8. Kontakt",
-              content: `Bei Fragen zum Datenschutz kontaktieren Sie uns:\n\nE-Mail: ${CONTACT_INFO.email}\nAdresse: ${CONTACT_INFO.address}`
+              title: "6. Beschwerderecht",
+              content: `Sollten Sie der Ansicht sein, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, haben Sie das Recht auf Beschwerde bei der zuständigen spanischen Aufsichtsbehörde: Agencia Española de Protección de Datos (AEPD)\nWebsite: www.aepd.es`
             }
           ]
         };
       case 'en':
         return {
           title: "Privacy Policy (GDPR)",
-          lastUpdated: "Last Updated",
-          intro: "We respect your privacy and are committed to protecting your personal data in accordance with the General Data Protection Regulation (GDPR).",
+          lastUpdated: "Status",
+          intro: "Status: January 2026\n\nWe respect your privacy and process your data in accordance with the EU General Data Protection Regulation (GDPR) and the Spanish Organic Law 3/2018 on the Protection of Personal Data (LOPD-GDD).",
           sections: [
             {
               title: "1. Data Controller",
-              content: `The data controller is:\n\n${CONTACT_INFO.address}\nEmail: ${CONTACT_INFO.email}\nPhone: ${CONTACT_INFO.phoneEs} / ${CONTACT_INFO.phoneDe}`
+              content: `Daniela Böhme Albrecht\nCarrer Mossen Francisco Cabrera 5, 03720 Benissa (Alicante), Spain\nEmail: sentio.wohlfuehlen@gmail.com`
             },
             {
-              title: "2. Data Collected",
-              content: "We collect the following personal data:\n\n• Name and contact details (email, phone) when you contact us\n• IP address and browser information (automatically via server logs)\n• Cookies and similar technologies (see Cookie Policy)"
+              title: "2. What Data We Collect and Why",
+              content: `A. Contact Inquiries (Email, Phone)\n\nWhen you contact us, we process your name, email address or phone number to handle your inquiry and for possible follow-up questions.\n\nLegal Basis: Performance of pre-contractual measures (Art. 6(1)(b) GDPR).\n\nB. Technical Data (Server Logs)\n\nWhen visiting the website, technical data is automatically collected (IP address, browser, time). This data is necessary to ensure the security and stability of the website.\n\nLegal Basis: Legitimate interest (Art. 6(1)(f) GDPR).\n\nC. WhatsApp\n\nWhen you contact us via WhatsApp, you use a service of Meta Platforms Ireland Ltd. In this process, data (e.g., your mobile number) is transmitted to Meta and may be processed on servers in the USA. We use WhatsApp Business exclusively for communication at your request.\n\nLegal Basis: Your consent through active contact (Art. 6(1)(a) GDPR).`
             },
             {
-              title: "3. Purpose of Processing",
-              content: "Your data is used for:\n\n• Processing inquiries and appointment bookings\n• Communication via email, phone, or WhatsApp\n• Improving our website and services\n• Legal compliance"
+              title: "3. International Data Transfer & Hosting (Cloudflare)",
+              content: `This website is securely provided and protected by Cloudflare, Inc. (USA). Cloudflare acts as a Content Delivery Network (CDN) and security service. In this process, your data (especially IP address) is routed through servers worldwide, including in the USA.\n\nData Protection Guarantee: Cloudflare is certified under the EU-U.S. Data Privacy Framework (DPF), which according to the EU Commission guarantees an adequate level of data protection. In addition, Standard Contractual Clauses (SCC) are in place.`
             },
             {
-              title: "4. Legal Basis",
-              content: "Processing is based on:\n\n• Your consent (Art. 6(1)(a) GDPR)\n• Contract performance (Art. 6(1)(b) GDPR)\n• Legitimate interests (Art. 6(1)(f) GDPR)"
+              title: "4. Storage Duration",
+              content: `Your data will be deleted as soon as it is no longer required for the purpose of collection (e.g., after the inquiry has been completed), unless statutory retention obligations in Spain (e.g., tax obligations) exist.`
             },
             {
-              title: "5. Data Sharing",
-              content: "Your data is not sold to third parties. We may share data with:\n\n• Service providers (hosting, email service) under strict confidentiality agreements\n• Authorities when legally required"
+              title: "5. Your Rights",
+              content: `You have the right to information, rectification, erasure, restriction of processing and data portability. To exercise your rights, contact: sentio.wohlfuehlen@gmail.com.`
             },
             {
-              title: "6. Data Retention",
-              content: "Data is only stored for as long as necessary for the stated purposes or as required by law."
-            },
-            {
-              title: "7. Your Rights",
-              content: "You have the following rights:\n\n• Right of access (Art. 15 GDPR)\n• Right to rectification (Art. 16 GDPR)\n• Right to erasure (Art. 17 GDPR)\n• Right to restriction (Art. 18 GDPR)\n• Right to data portability (Art. 20 GDPR)\n• Right to object (Art. 21 GDPR)\n• Right to lodge a complaint with a supervisory authority"
-            },
-            {
-              title: "8. Contact",
-              content: `For privacy inquiries, contact us:\n\nEmail: ${CONTACT_INFO.email}\nAddress: ${CONTACT_INFO.address}`
+              title: "6. Right to Complain",
+              content: `If you believe that the processing of your data violates data protection law, you have the right to file a complaint with the competent Spanish supervisory authority: Agencia Española de Protección de Datos (AEPD)\nWebsite: www.aepd.es`
             }
           ]
         };
       default: // es
         return {
           title: "Política de Privacidad (RGPD)",
-          lastUpdated: "Última actualización",
-          intro: "Respetamos su privacidad y nos comprometemos a proteger sus datos personales de acuerdo con el Reglamento General de Protección de Datos (RGPD).",
+          lastUpdated: "Estado",
+          intro: "Estado: Enero 2026\n\nRespetamos su privacidad y procesamos sus datos de acuerdo con el Reglamento General de Protección de Datos de la UE (RGPD) y la Ley Orgánica 3/2018 española sobre Protección de Datos Personales (LOPD-GDD).",
           sections: [
             {
               title: "1. Responsable del Tratamiento",
-              content: `Los datos personales recogidos a través de este sitio web serán tratados por:\n\n• Responsable: Daniela Böhme Albrecht\n• NIF/NIE: Z2422641 X\n• Domicilio: Carrer Mossen Francisco Cabrera 5, 03720 Benissa, Alicante\n• Email de contacto: sentio.wohlfuehlen@gmail.com`
+              content: `Daniela Böhme Albrecht\nCarrer Mossen Francisco Cabrera 5, 03720 Benissa (Alicante), España\nCorreo electrónico: sentio.wohlfuehlen@gmail.com`
             },
             {
-              title: "2. Finalidad del Tratamiento",
-              content: "La recogida y tratamiento de los datos personales tiene como finalidad:\n\n• Gestionar las consultas planteadas a través del formulario de contacto.\n• La prestación de los servicios contratados por el usuario."
+              title: "2. Qué Datos Recopilamos y Por Qué",
+              content: `A. Consultas de Contacto (Correo, Teléfono)\n\nCuando nos contacta, procesamos su nombre, dirección de correo electrónico o número de teléfono para manejar su consulta y para posibles preguntas de seguimiento.\n\nBase Legal: Ejecución de medidas precontractuales (Art. 6(1)(b) RGPD).\n\nB. Datos Técnicos (Logs del Servidor)\n\nAl visitar el sitio web, se recopilan automáticamente datos técnicos (dirección IP, navegador, hora). Estos datos son necesarios para garantizar la seguridad y estabilidad del sitio web.\n\nBase Legal: Interés legítimo (Art. 6(1)(f) RGPD).\n\nC. WhatsApp\n\nCuando nos contacta a través de WhatsApp, utiliza un servicio de Meta Platforms Ireland Ltd. En este proceso, se transmiten datos (p. ej., su número móvil) a Meta y pueden procesarse en servidores en los EE. UU. Utilizamos WhatsApp Business exclusivamente para comunicación a su solicitud.\n\nBase Legal: Su consentimiento mediante contacto activo (Art. 6(1)(a) RGPD).`
             },
             {
-              title: "3. Legitimación",
-              content: "La base legal para el tratamiento de sus datos es el consentimiento. Al rellenar los formularios de la web y marcar la casilla de aceptación, el usuario da su consentimiento expreso para el tratamiento de sus datos personales."
+              title: "3. Transferencia Internacional de Datos y Alojamiento (Cloudflare)",
+              content: `Este sitio web se proporciona de forma segura y está protegido por Cloudflare, Inc. (EE. UU.). Cloudflare actúa como una Red de Distribución de Contenido (CDN) y servicio de seguridad. En este proceso, sus datos (especialmente la dirección IP) se enrutan a través de servidores en todo el mundo, incluso en los EE. UU.\n\nGarantía de Protección de Datos: Cloudflare está certificado bajo el Marco de Privacidad de Datos UE-EE. UU. (DPF), que según la Comisión Europea garantiza un nivel adecuado de protección de datos. Además, existen Cláusulas Contractuales Estándar (SCC).`
             },
             {
-              title: "4. Destinatarios",
-              content: "Los datos no se cederán a terceros, salvo obligación legal."
+              title: "4. Duración del Almacenamiento",
+              content: `Sus datos se eliminarán tan pronto como ya no sean necesarios para el propósito de recopilación (p. ej., después de completar la consulta), a menos que existan obligaciones legales de retención en España (p. ej., obligaciones fiscales).`
             },
             {
-              title: "5. Derechos",
-              content: "El usuario tiene derecho a acceder a sus datos personales, así como a solicitar la rectificación de los datos inexactos o, en su caso, solicitar su supresión cuando, entre otros motivos, los datos ya no sean necesarios para los fines que fueron recogidos. Para ejercer estos derechos, puede enviar un correo electrónico a: sentio.wohlfuehlen@gmail.com"
+              title: "5. Sus Derechos",
+              content: `Tiene derecho a información, rectificación, supresión, limitación del procesamiento y portabilidad de datos. Para ejercer sus derechos, comuníquese con: sentio.wohlfuehlen@gmail.com.`
+            },
+            {
+              title: "6. Derecho a Presentar una Queja",
+              content: `Si considera que el procesamiento de sus datos viola la ley de protección de datos, tiene derecho a presentar una queja ante la autoridad de supervisión española competente: Agencia Española de Protección de Datos (AEPD)\nSitio web: www.aepd.es`
             }
           ]
         };
@@ -132,12 +120,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 overflow-y-auto">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={onClose}></div>
       
-      <div className="relative w-full max-w-4xl max-h-[90vh] bg-royal border border-gold/30 rounded-2xl shadow-2xl overflow-hidden animate-fade-in-up">
+      <div className="relative w-full max-w-4xl max-h-[90vh] bg-royal border border-gold/30 rounded-2xl shadow-2xl overflow-hidden animate-fade-in-up flex flex-col">
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-royal to-royal-light p-6 border-b border-gold/20 flex justify-between items-center z-10">
+        <div className="bg-gradient-to-r from-royal to-royal-light p-6 border-b border-gold/20 flex justify-between items-center flex-shrink-0">
           <div>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-white">{content.title}</h2>
-            <p className="text-white/60 text-sm mt-1">{content.lastUpdated}: {new Date().toLocaleDateString(language === 'de' ? 'de-DE' : language === 'en' ? 'en-GB' : 'es-ES')}</p>
           </div>
           <button 
             onClick={onClose}
@@ -149,21 +136,23 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="p-6 md:p-8 overflow-y-auto max-h-[calc(90vh-100px)]">
-          <p className="text-white/80 mb-8 leading-relaxed">{content.intro}</p>
-          
-          {content.sections.map((section, index) => (
-            <div key={index} className="mb-8">
-              <h3 className="text-xl font-serif font-bold text-gold mb-4">{section.title}</h3>
-              <div className="text-white/70 leading-relaxed whitespace-pre-line">
-                {section.content}
+        <div className="flex-1 overflow-y-auto min-h-0">
+          <div className="p-6 md:p-8 pb-24">
+            <p className="text-white/80 mb-8 leading-relaxed whitespace-pre-line">{content.intro}</p>
+            
+            {content.sections.map((section, index) => (
+              <div key={index} className="mb-8">
+                <h3 className="text-xl font-serif font-bold text-gold mb-4">{section.title}</h3>
+                <div className="text-white/70 leading-relaxed whitespace-pre-line">
+                  {section.content}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-royal/95 backdrop-blur-md p-6 border-t border-gold/20">
+        <div className="bg-royal/95 backdrop-blur-md p-6 border-t border-gold/20 flex-shrink-0">
           <button
             onClick={onClose}
             className="w-full py-3 bg-gold text-royal font-bold rounded-lg hover:bg-gold/90 transition-colors"
